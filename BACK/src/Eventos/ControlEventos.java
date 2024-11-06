@@ -1,3 +1,6 @@
+package CMPCD.BACK.src.Eventos;
+
+import CMPCD.BACK.src.Connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,7 +52,7 @@ public class ControlEventos {
     }
 
     public void alterarEventoTitulo(Evento evento) {
-        String sql = "update Evento set titulo = ? where id = ?";
+        String sql = "update Evento set titulo = ? where codigo = ?";
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
@@ -145,7 +148,7 @@ public class ControlEventos {
     }
 
     // mostrar os eventos
-    public List<Evento> listarEvento() {
+    public List<Evento> listarEventos() {
         String sql = "Select * from Evento";
         conn = new Conexao().connect();
         try {
@@ -165,8 +168,8 @@ public class ControlEventos {
     }
 
     // barra de pesquisa para eventos
-    public void pesquisarEvento(String pesquisa) {
-        String sql = "select * from Evento where titulo like %?%";
+    public List<Evento> pesquisarEvento(String pesquisa) {
+        String sql = "";
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
@@ -181,6 +184,7 @@ public class ControlEventos {
         } catch (SQLException erro) {
             // TODO: handle exception
         }
+        return eventos;
     }
 
     // Detalhes do Evento todo

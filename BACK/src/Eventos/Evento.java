@@ -1,3 +1,4 @@
+package CMPCD.BACK.src.Eventos;
 
 public class Evento {
     private String codigo;

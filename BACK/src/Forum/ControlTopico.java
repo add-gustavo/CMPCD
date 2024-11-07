@@ -58,7 +58,7 @@ public class ControlTopico {
         }
     }
 
-    public List<Postagem> getTopico(Topico topico) {
+    public List<Postagem> getTopicoPostagens(Topico topico) {
         String sql = "";
         conn = new Conexao().connect();
         try {
@@ -68,8 +68,7 @@ public class ControlTopico {
 
             while (rs.next()) {
                 Postagem postagem = new Postagem(rs.getInt("codigo"), rs.getString("comentario"),
-                        rs.getString("datetime"), new Usuario(rs.getInt("codigoAutor"), null),
-                        rs.getInt("codigoTopico"));
+                        rs.getString("datetime"), new Usuario(rs.getInt("codigoAutor"), null), topico);
                 postagens.add(postagem);
             }
 

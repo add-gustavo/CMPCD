@@ -16,13 +16,13 @@ public class ControlForum {
     PreparedStatement pstm;
     List<Topico> topicos = new ArrayList<>();
 
-    public void adicionarTopico(Topico topico) {
+    public void adicionarTopico(String titulo, Usuario autor) {
         String sql = "insert into Topico (titulo, autor) values (?,?)";
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, topico.getTitulo());
-            pstm.setInt(2, topico.getAutor().getCodigo());
+            pstm.setString(1, titulo);
+            pstm.setInt(2, autor.getCodigo());
             pstm.execute();
             pstm.close();
 

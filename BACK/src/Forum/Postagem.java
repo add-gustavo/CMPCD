@@ -7,19 +7,19 @@ public class Postagem {
     private String comentario;
     private String datetime;
     private Usuario autor;
-    private int codigoTopico;
+    private Topico topico;
 
     public Postagem(String comentario, Usuario autor) {
         this.comentario = comentario;
         this.autor = autor;
     }
 
-    public Postagem(int codigo, String comentario, String datetime, Usuario autor, int codigoTopico) {
+    public Postagem(int codigo, String comentario, String datetime, Usuario autor, Topico topico) {
         this.codigo = codigo;
         this.comentario = comentario;
         this.autor = autor;
         this.datetime = datetime;
-        this.codigoTopico = codigoTopico;
+        this.topico = topico;
     }
 
     public int getCodigo() {
@@ -54,11 +54,11 @@ public class Postagem {
         this.datetime = datetime;
     }
 
-    public int getCodigoTopico() {
-        return codigoTopico;
+    public Topico getCodigoTopico() {
+        return topico;
     }
 
-    public void setCodigoTopico(int codigoTopico) {
-        this.codigoTopico = codigoTopico;
+    public void setCodigoTopico(Topico topico) {
+        this.topico = topico;
     }
 }

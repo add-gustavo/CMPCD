@@ -43,7 +43,7 @@ public class ControlEventos {
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, evento.getCodigo());
+            pstm.setInt(1, evento.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -57,7 +57,7 @@ public class ControlEventos {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, evento.getTitulo());
-            pstm.setString(2, evento.getCodigo());
+            pstm.setInt(2, evento.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -73,7 +73,7 @@ public class ControlEventos {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, evento.getDescrição());
-            pstm.setString(2, evento.getCodigo());
+            pstm.setInt(2, evento.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -88,7 +88,7 @@ public class ControlEventos {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, evento.getTexto());
-            pstm.setString(2, evento.getCodigo());
+            pstm.setInt(2, evento.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -103,7 +103,7 @@ public class ControlEventos {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, evento.getKeywords());
-            pstm.setString(2, evento.getCodigo());
+            pstm.setInt(2, evento.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -119,7 +119,7 @@ public class ControlEventos {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, evento.getImagens().getImagemPrincipal());
-            pstm.setString(2, evento.getCodigo());
+            pstm.setInt(2, evento.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -138,7 +138,7 @@ public class ControlEventos {
             pstm.setString(1, evento.getImagens().getImagemSecundaria1());
             pstm.setString(2, evento.getImagens().getImagemSecundaria2());
             pstm.setString(3, evento.getImagens().getImagemSecundaria3());
-            pstm.setString(2, evento.getCodigo());
+            pstm.setInt(2, evento.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -156,7 +156,7 @@ public class ControlEventos {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Evento evento = new Evento(rs.getString("codigo"), rs.getString("titulo"), rs.getString("descricao"),
+                Evento evento = new Evento(rs.getInt("codigo"), rs.getString("titulo"), rs.getString("descricao"),
                         rs.getString("keywords"), new Imagem(rs.getString("imagemPrincipal")));
                 eventos.add(evento);
             }
@@ -177,7 +177,7 @@ public class ControlEventos {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Evento evento = new Evento(rs.getString("codigo"), rs.getString("titulo"), rs.getString("descricao"),
+                Evento evento = new Evento(rs.getInt("codigo"), rs.getString("titulo"), rs.getString("descricao"),
                         rs.getString("keywords"), new Imagem(rs.getString("imagemPrincipal")));
                 eventos.add(evento);
             }
@@ -193,7 +193,7 @@ public class ControlEventos {
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, evento.getCodigo());
+            pstm.setInt(1, evento.getCodigo());
             rs = pstm.executeQuery();
 
             evento.setDate(rs.getString("data"));

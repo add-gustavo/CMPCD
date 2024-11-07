@@ -1,7 +1,7 @@
 package CMPCD.BACK.src.Eventos;
 
 public class Evento {
-    private String codigo;
+    private int codigo;
     private String titulo;
     private String descrição;
     private String keywords;
@@ -9,7 +9,7 @@ public class Evento {
     private String texto = null;
     private String date = null;
 
-    public Evento(String codigo, String titulo, String descricao, String keywords, Imagem imagens) {
+    public Evento(int codigo, String titulo, String descricao, String keywords, Imagem imagens) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.descrição = descricao;
@@ -25,11 +25,11 @@ public class Evento {
         this.imagens = imagens;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

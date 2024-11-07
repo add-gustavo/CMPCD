@@ -1,6 +1,8 @@
 package CMPCD.BACK.src.Eventos;
 
 public class Imagem {
+    private int codigo;
+
     private String ImagemPrincipal;
     private String ImagemSecundaria1 = null;
     private String ImagemSecundaria2 = null;
@@ -8,6 +10,14 @@ public class Imagem {
 
     public Imagem(String ImagemPrincipal) {
         this.ImagemPrincipal = ImagemPrincipal;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getImagemPrincipal() {

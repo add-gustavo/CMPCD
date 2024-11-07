@@ -43,7 +43,7 @@ public class ControlUsuario {
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, usuario.getCodigo());
+            pstm.setInt(1, usuario.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -57,7 +57,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEmail());
-            pstm.setString(2, usuario.getCodigo());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -72,7 +72,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getSenha());
-            pstm.setString(2, usuario.getCodigo());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -86,7 +86,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getNomeCompleto());
-            pstm.setString(2, usuario.getCodigo());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -100,7 +100,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getDataNascimento());
-            pstm.setString(2, usuario.getDataNascimento());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -114,7 +114,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getTelefone());
-            pstm.setString(2, usuario.getCodigo());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -128,7 +128,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getCpf());
-            pstm.setString(2, usuario.getCodigo());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
@@ -142,7 +142,7 @@ public class ControlUsuario {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getTipoDeficiencia());
-            pstm.setString(2, usuario.getCodigo());
+            pstm.setInt(2, usuario.getCodigo());
             pstm.execute();
             pstm.close();
 
@@ -159,9 +159,7 @@ public class ControlUsuario {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Usuario usuario = new Usuario(rs.getString("senha"), rs.getString("nomelogin"),
-                        rs.getString("nomeCompleto"), rs.getString("email"), rs.getString("cpf"));
-                usuario.setCodigo("codigo");
+                Usuario usuario = new Usuario(rs.getInt("codigo"), rs.getString("nomelogin"));
                 usuarios.add(usuario);
             }
         } catch (SQLException erro) {
@@ -180,9 +178,7 @@ public class ControlUsuario {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Usuario usuario = new Usuario(rs.getString("senha"), rs.getString("nomelogin"),
-                        rs.getString("nomeCompleto"), rs.getString("email"), rs.getString("cpf"));
-                usuario.setCodigo("codigo");
+                Usuario usuario = new Usuario(rs.getInt("codigo"), rs.getString("nomelogin"));
                 usuarios.add(usuario);
             }
         } catch (SQLException erro) {
@@ -197,14 +193,33 @@ public class ControlUsuario {
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, usuario.getCodigo());
+            pstm.setInt(1, usuario.getCodigo());
             rs = pstm.executeQuery();
+            usuario.setEmail(rs.getString("email"));
+            usuario.setNomeCompleto(rs.getString("nomeCompleto"));
+            usuario.setCpf(rs.getString("cpf"));
             usuario.setDataNascimento("dataNascimento");
             usuario.setTelefone("telefone");
             usuario.setTipoDeficiencia("tipoDeficiencia");
 
         } catch (SQLException erro) {
             // TODO: handle exception
+        }
+    }
+
+    public ResultSet authentificacaoUsuario(Usuario usuario) {
+        String sql = "Select * from Usuario where email = ? and senha = ?";
+        conn = new Conexao().connect();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, usuario.getEmail());
+            pstm.setString(2, usuario.getSenha());
+
+            ResultSet rs = pstm.executeQuery();
+            return rs;
+
+        } catch (SQLException erro) {
+            return null;
         }
     }
 }

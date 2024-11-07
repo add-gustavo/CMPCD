@@ -15,13 +15,14 @@ public class ControlAdministrador {
     ResultSet rs;
     List<Usuario> administradores = new ArrayList<>();
 
-    public void adicionarAdministrador(String nomelogin, String senha) {
+    public void adicionarAdministrador(String nomelogin, String senha, String email) {
         String sql = "";
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, nomelogin);
             pstm.setString(2, senha);
+            pstm.setString(3, email);
 
             pstm.execute();
             pstm.close();
@@ -37,7 +38,7 @@ public class ControlAdministrador {
         conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, admin.getCodigo());
+            pstm.setInt(1, admin.getCodigo());
 
             pstm.execute();
             pstm.close();
@@ -53,7 +54,23 @@ public class ControlAdministrador {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, admin.getNomelogin());
-            pstm.setString(2, admin.getCodigo());
+            pstm.setInt(2, admin.getCodigo());
+
+            pstm.execute();
+            pstm.close();
+
+        } catch (SQLException erro) {
+            // TODO: handle exception
+        }
+    }
+
+    public void alterarAdministradorEmail(Administrador admin) {
+        String sql = "";
+        conn = new Conexao().connect();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, admin.getEmail());
+            pstm.setInt(2, admin.getCodigo());
 
             pstm.execute();
             pstm.close();
@@ -69,10 +86,25 @@ public class ControlAdministrador {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, admin.getSenha());
-            pstm.setString(2, admin.getCodigo());
+            pstm.setInt(2, admin.getCodigo());
         } catch (SQLException erro) {
             // TODO: handle exception
         }
     }
 
+    public ResultSet authentificacaoAdmin(Administrador admin) {
+        String sql = "Select * from Administrador where nomelogin = ? and senha = ?";
+        conn = new Conexao().connect();
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, admin.getNomelogin());
+            pstm.setString(2, admin.getSenha());
+
+            ResultSet rs = pstm.executeQuery();
+            return rs;
+
+        } catch (SQLException erro) {
+            return null;
+        }
+    }
 }

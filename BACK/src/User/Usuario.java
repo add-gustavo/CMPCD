@@ -1,27 +1,34 @@
 package CMPCD.BACK.src.User;
 
+import java.sql.ResultSet;
+
 public class Usuario extends User {
 
-    protected String nomeCompleto;
-    protected String cpf;
-    protected String email;
-    protected String dataNascimento = null;
-    protected String telefone = null;
-    protected String tipoDeficiencia = null;
+    private String nomeCompleto = null;
+    private String cpf = null;
+    private String dataNascimento = null;
+    private String telefone = null;
+    private String tipoDeficiencia = null;
 
-    public Usuario(String senha, String nomelogin, String nomeCompleto, String email, String cpf) {
-        super(nomelogin, senha);
-        this.nomeCompleto = nomeCompleto;
-        this.email = email;
-        this.cpf = cpf;
+    public Usuario(int codigo, String nomelogin) {
+        super(codigo, nomelogin);
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public void loginAuthenticacao(Usuario usuario) {
+        try {
+            ControlUsuario objuser = new ControlUsuario();
+            ResultSet rsusuario = objuser.authentificacaoUsuario(usuario);
 
-    public void setEmail(String email) {
-        this.email = email;
+            if (rsusuario.next()) {
+
+            } else {
+
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
 
     public String getNomeCompleto() {

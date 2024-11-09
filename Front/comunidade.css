@@ -26,6 +26,7 @@ header {
 
 .primeiro-header {
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
@@ -68,14 +69,14 @@ button:hover {
 footer {
     width: 100%;
     background-color: rgb(201, 174, 40);
-    align-content: center;
+    align-items: center;
 }
 
 .ordem-footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    align-items: center;
+    width: 100%;
 }
 
 .align {
@@ -88,16 +89,86 @@ footer {
 }
 
 section {
-    width: 100%;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    gap: 20px
 }
 
 .ordem-section {
-    grid-template-rows: 10% 20% 70%;
+    display: grid;
+    grid-template-rows: 30% 70%;
     grid-template-areas:
         "search-bar"
-        "box-criartopico"
-        "topicos-forum";
+        "box-criartopico";
     gap: 20px;
+}
 
+.search-bar {
+    background-color: #ede5e1;
+    width: 80%;
+    padding: 12px;
+    border-radius: 90px;
+    margin: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 90% 10%;
+}
+
+#fpesquisa {
+    border: transparent;
+    background-color: transparent;
+    width: 95%;
+    padding: 5px;
+
+}
+
+.box-criartopico {
+    display: grid;
+    border-radius: 20px;
+    background-color: rgb(70, 80, 76);
+    padding: 20px;
+    width: 80%;
+    grid-template-rows: 70% 30%;
+    grid-template-areas: "criar-topico" "enviar-topico";
+    gap: 3px;
+}
+
+#criar-topico {
+    border: transparent;
+    background-color: transparent;
+    width: 95%;
+    padding: 15px;
+    font-size: 20px;
+}
+
+.enviar-topico {
+    display: grid;
+    justify-content: end;
+    width: 90%;
+}
+
+fieldset {
+    border: transparent;
+}
+
+.topicos-forum {
+    width: 100%;
+    justify-items: center;
+}
+
+.topico {
+    background-color: rgb(70, 80, 76);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    height: 100px;
+    grid-template-rows: 70% 30%;
+}
+
+.options-topico {
+    display: grid;
+    justify-content: end;
+    width: 90%;
 }

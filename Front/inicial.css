@@ -26,6 +26,7 @@ header {
 
 .primeiro-header {
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
@@ -68,14 +69,14 @@ button:hover {
 footer {
     width: 100%;
     background-color: rgb(201, 174, 40);
-    align-content: center;
+    align-items: center;
 }
 
 .ordem-footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    align-items: center;
+    width: 100%;
 }
 
 .align {
@@ -88,16 +89,37 @@ footer {
 }
 
 section {
-    width: 100%;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    gap: 20px
 }
 
 .ordem-section {
-    grid-template-rows: 10% 20% 70%;
-    grid-template-areas:
-        "search-bar"
-        "box-criartopico"
-        "topicos-forum";
+    display: grid;
+    grid-template-rows: 20% 80%;
     gap: 20px;
+}
 
+.search-bar {
+    background-color: #ede5e1;
+    width: 80%;
+    padding: 12px;
+    border-radius: 90px;
+    margin: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 90% 10%;
+}
+
+#fpesquisa {
+    border: transparent;
+    background-color: transparent;
+    width: 95%;
+    padding: 5px;
+
+}
+
+fieldset {
+    border: transparent;
 }

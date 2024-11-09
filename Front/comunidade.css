@@ -30,9 +30,16 @@ header {
     gap: 20px;
 }
 
-.container-direita {
-    display: flex;
-    justify-content: center;
+.ordem-perfil-button {
+    display: grid;
+    align-items: center;
+    justify-content: end;
+    width: 90%;
+}
+
+.perfil-button {
+    width: 110px;
+    height: 40px;
 }
 
 .segunda-header {
@@ -48,7 +55,7 @@ header {
 
 button {
     padding: 10px;
-    text-align: justify;
+    text-align: center;
     cursor: default;
     transition: all 0.5 ease;
 }
@@ -68,7 +75,7 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    height: 100%;
+    align-items: center;
 }
 
 .align {
@@ -82,8 +89,15 @@ footer {
 
 section {
     width: 100%;
+    align-items: center;
 }
 
 .ordem-section {
     grid-template-rows: 10% 20% 70%;
+    grid-template-areas:
+        "search-bar"
+        "box-criartopico"
+        "topicos-forum";
+    gap: 20px;
+
 }

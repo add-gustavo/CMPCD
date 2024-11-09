@@ -30,10 +30,9 @@ header {
     gap: 20px;
 }
 
-.perfil {
-    display: grid;
+.container-direita {
+    display: flex;
     justify-content: center;
-    place-items: center;
 }
 
 .segunda-header {

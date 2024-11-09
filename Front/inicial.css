@@ -16,12 +16,11 @@ header {
 
 .ordem-header {
     display: grid;
+    align-items: center;
     grid-template-areas:
         "primeira-header"
         "segunda-header";
     gap: 20px;
-    height: 90%;
-    grid-template-rows: 70% 30%;
 }
 
 .primeiro-header {
@@ -30,10 +29,10 @@ header {
     gap: 20px;
 }
 
-.perfil {
+.perfil-button {
     display: grid;
-    justify-content: center;
-    place-items: center;
+    width: 50%;
+
 }
 
 .segunda-header {
@@ -47,7 +46,7 @@ header {
     width: 50%;
 }
 
-button {
+.header-button {
     padding: 10px;
     text-align: justify;
     cursor: default;
@@ -62,14 +61,14 @@ button:hover {
 footer {
     width: 100%;
     background-color: rgb(201, 174, 40);
-    align-content: center;
+    align-items: center;
 }
 
 .ordem-footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    height: 100%;
+    align-items: center;
 }
 
 .align {
@@ -86,5 +85,10 @@ section {
 }
 
 .ordem-section {
-    grid-template-rows: 10% 20% 70%;
+    grid-template-areas:
+        "search-bar"
+        "box-criartopico"
+        "topicos-forum";
+    gap: 20px;
+    align-items: center;
 }

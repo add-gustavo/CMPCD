@@ -1,0 +1,82 @@
+body {
+    display: grid;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #F8F3EA;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    height: 33%;
+    align-content: center;
+    background-color: rgb(201, 174, 40);
+
+}
+
+.ordem-header {
+    display: grid;
+    grid-template-rows: 60% 40%;
+    grid-template-areas:
+        "primeira-header"
+        "segunda-header";
+    gap: 20px;
+}
+
+.primeiro-header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.perfil {
+    display: grid;
+    justify-content: end;
+    width: 90%;
+}
+
+.segunda-header {
+    background-color: antiquewhite;
+}
+
+.ordem-template-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 50%;
+}
+
+button {
+    padding: 10px;
+    text-align: justify;
+    cursor: default;
+    transition: all 0.5 ease;
+}
+
+button:hover {
+    background-color: rgb(149, 169, 219);
+    transform: scale(1.05);
+}
+
+footer {
+    width: 100%;
+    height: 30%;
+    background-color: rgb(201, 174, 40);
+    align-content: center;
+    margin-top: auto;
+}
+
+.ordem-footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.align {
+    display: grid;
+    place-items: center;
+}
+
+.align-text {
+    text-align: center;
+}

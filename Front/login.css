@@ -15,7 +15,6 @@ header {
 
 .ordem-header {
     display: grid;
-    grid-template-rows: 60% 40%;
     height: 100%;
 }
 
@@ -38,17 +37,6 @@ header {
 .perfil-button {
     width: 110px;
     height: 40px;
-}
-
-.segunda-header {
-    background-color: antiquewhite;
-}
-
-.ordem-template-header {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 50%;
 }
 
 button {
@@ -121,36 +109,6 @@ section {
 
 .justify {
     text-align: justify;
-}
-
-#fpesquisa {
-    border: transparent;
-    background-color: transparent;
-    width: 95%;
-    padding: 5px;
-
-}
-
-.carrossel {
-    display: grid;
-    grid-template-columns: repeat(3, 3fr);
-    gap: 20px;
-    width: 90%;
-    height: 300px;
-}
-
-.box-anuncio {
-    background-color: blue;
-    width: 95%;
-    height: 100%;
-    border-radius: 10px;
-
-}
-
-.section-text-box {
-    background-color: rgb(133, 133, 117);
-    width: 90%;
-    height: 200px;
 }
 
 fieldset {

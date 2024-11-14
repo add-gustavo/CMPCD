@@ -11,9 +11,6 @@
         <div class="ordem-header">
             <div class="primeiro-header">
                 <h1 class="align">Lorem ipsum dolor</h1>
-                <div class="ordem-perfil-button">
-                    <button class="perfil-button">Entrar</button>
-                </div>
             </div>
         </div>
 
@@ -21,20 +18,68 @@
 
     <section class="align">
 
-        <div class="section-template align">
-            <h2>Cadastro</h2>
+        <div class="section-Titulo">
+            <h2>Cadastre-se</h2>
+            <div class="Titulo-login">
+                <label id="labelbtt-login">Já tem Cadastro</label>
+                <input id="btt-login" type="button" name="btt-login" value="Entre aqui">
+            </div>
+        </div>
+
+        <div class="section-template centerY">
             <div class="formulario">
-                <div class="ordem-formulario align">
-                    <label for="email">email</label>
-                    <label for="senha">senha</label>
+                <label for="nome">Nome Completo:</label>
+                <input>
+                <div>
+                    <div class="ordem-formulario">
+                        <label for="dataNascimento">Data de Nascimento</label>
+                        <label for="telefone">Telefone</label>
+                    </div>
+                    <div class="ordem-formulario">
+                        <input type="date" name="dataNascimento">
+                        <input type="tel" name="telefone">
+                    </div>
                 </div>
-                <div class="ordem-formulario align">
-                    <input type="text" name="email" id="email" required autofocus>
-                    <input type="password" name="senha " id="senha">
+                <span>Endereço</span>
+                <label for="nome">Rua</label>
+                <input>
+                <div>
+                    <div class="ordem-formulario">
+                        <label for="dataNascimento">Bairro</label>
+                        <label for="telefone">Numero</label>
+                    </div>
+                    <div class="ordem-formulario">
+                        <input>
+                        <input>
+                    </div>
+                </div>
+                <label>Complemento</label>
+                <input>
+                <label>Ocupação</label>
+                <select>
+                    <otion></otion>
+                </select>
+                <label>Tipo de Deficiência / Necessidade especial</label>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+                <label>Possui Responsável</label>
+                <div>
+                    <input type="checkbox" value="SIM">
+                    <label>Sim</label>
+                </div>
+                <div>
+                    <input type="">
+                    <label>Não</label>
                 </div>
 
             </div>
-            <button>esqueceu a senha</button>
+            <div class="align">
+                <button>Enviar</button>
+            </div>
+
+        </div>
 
     </section>
     <footer class="align">

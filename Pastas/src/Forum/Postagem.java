@@ -1,20 +1,20 @@
-package CMPCD.BACK.src.Forum;
+package CMPCD.Pastas.src.Forum;
 
-import CMPCD.BACK.src.User.Usuario;
+import CMPCD.BACK.src.DTO.Pessoa;
 
 public class Postagem {
     private int codigo;
     private String comentario;
     private String datetime;
-    private Usuario autor;
+    private Pessoa autor;
     private Topico topico;
 
-    public Postagem(String comentario, Usuario autor) {
+    public Postagem(String comentario, Pessoa autor) {
         this.comentario = comentario;
         this.autor = autor;
     }
 
-    public Postagem(int codigo, String comentario, String datetime, Usuario autor, Topico topico) {
+    public Postagem(int codigo, String comentario, String datetime, Pessoa autor, Topico topico) {
         this.codigo = codigo;
         this.comentario = comentario;
         this.autor = autor;
@@ -38,11 +38,11 @@ public class Postagem {
         this.comentario = comentario;
     }
 
-    public Usuario getAutor() {
+    public Pessoa getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(Pessoa autor) {
         this.autor = autor;
     }
 

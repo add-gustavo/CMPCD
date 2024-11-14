@@ -1,23 +1,43 @@
-package CMPCD.BACK.src.User;
+package CMPCD.BACK.src.DTO;
 
-public class User {
+import java.sql.ResultSet;
+import CMPCD.BACK.src.DAO.ControlAdministrador;
+
+public class Usuario {
 
     protected int codigo;
     protected String email;
     protected String nomelogin;
     protected String senha;
 
-    public User(int codigo, String nomelogin) {
+    public Usuario(int codigo, String nomelogin, String email) {
         this.codigo = codigo;
         this.nomelogin = nomelogin;
+        this.email = email;
     }
 
-    public User(int codigo) {
+    public Usuario(int codigo, String nomelogin, String email, String senha) {
+        this.codigo = codigo;
+        this.nomelogin = nomelogin;
+        this.email = email;
+        this.senha = senha;
 
     }
 
-    public void loginAuthenticacao(User user) {
+    public void loginAuthenticacao(Usuario user) {
+        try {
+            ControlAdministrador objuser = new ControlAdministrador();
+            ResultSet rsusuario = objuser.authentificacaoAdmin(user);
 
+            if (rsusuario.next()) {
+
+            } else {
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getEmail() {

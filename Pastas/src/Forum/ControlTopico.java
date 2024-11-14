@@ -1,4 +1,4 @@
-package CMPCD.BACK.src.Forum;
+package CMPCD.Pastas.src.Forum;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CMPCD.BACK.src.Connection.Conexao;
-import CMPCD.BACK.src.User.Usuario;
+import CMPCD.BACK.src.DTO.Pessoa;
 
 public class ControlTopico {
     Connection conn;
@@ -16,7 +16,7 @@ public class ControlTopico {
     PreparedStatement pstm;
     List<Postagem> postagens = new ArrayList<>();
 
-    public void adicionarpostagem(String comentario, Usuario autor, Topico topico) {
+    public void adicionarpostagem(String comentario, Pessoa autor, Topico topico) {
         String sql = "insert into Postagem (comentario, codigoautor, codigoTopico) values (?, ?, ?)";
         conn = new Conexao().connect();
         try {
@@ -68,7 +68,7 @@ public class ControlTopico {
 
             while (rs.next()) {
                 Postagem postagem = new Postagem(rs.getInt("codigo"), rs.getString("comentario"),
-                        rs.getString("datetime"), new Usuario(rs.getInt("codigoAutor"), null), topico);
+                        rs.getString("datetime"), new Pessoa(rs.getInt("codigoAutor"), null), topico);
                 postagens.add(postagem);
             }
 

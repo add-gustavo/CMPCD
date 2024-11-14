@@ -1,15 +1,15 @@
-package CMPCD.BACK.src.Forum;
+package CMPCD.Pastas.src.Forum;
 
-import CMPCD.BACK.src.User.Usuario;
+import CMPCD.BACK.src.DTO.Pessoa;
 
 public class Topico {
     private int codigo;
     private String titulo;
     private String descricao;
     private String datetime;
-    private Usuario autor;
+    private Pessoa autor;
 
-    public Topico(int codigo, String titulo, Usuario autor) {
+    public Topico(int codigo, String titulo, Pessoa autor) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.autor = autor;
@@ -47,11 +47,11 @@ public class Topico {
         this.datetime = datetime;
     }
 
-    public Usuario getAutor() {
+    public Pessoa getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(Pessoa autor) {
         this.autor = autor;
     }
 }

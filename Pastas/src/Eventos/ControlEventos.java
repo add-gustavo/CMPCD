@@ -1,4 +1,4 @@
-package CMPCD.BACK.src.Eventos;
+package CMPCD.Pastas.src.Eventos;
 
 import CMPCD.BACK.src.Connection.Conexao;
 import java.sql.Connection;

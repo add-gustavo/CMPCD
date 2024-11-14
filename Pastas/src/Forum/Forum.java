@@ -1,4 +1,4 @@
-package CMPCD.BACK.src.Forum;
+package CMPCD.Pastas.src.Forum;
 
 public class Forum {
     private int codigo;

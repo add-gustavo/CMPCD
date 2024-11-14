@@ -1,4 +1,4 @@
-package CMPCD.BACK.src.Eventos;
+package CMPCD.Pastas.src.Eventos;
 
 public class Evento {
     private int codigo;

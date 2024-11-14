@@ -1,7 +1,7 @@
-package CMPCD.BACK.src.Forum;
+package CMPCD.Pastas.src.Forum;
 
 import CMPCD.BACK.src.Connection.Conexao;
-import CMPCD.BACK.src.User.Usuario;
+import CMPCD.BACK.src.DTO.Pessoa;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class ControlForum {
     PreparedStatement pstm;
     List<Topico> topicos = new ArrayList<>();
 
-    public void adicionarTopico(String titulo, Usuario autor) {
+    public void adicionarTopico(String titulo, Pessoa autor) {
         String sql = "insert into Topico (titulo, autor) values (?,?)";
         conn = new Conexao().connect();
         try {
@@ -66,7 +66,7 @@ public class ControlForum {
 
             while (rs.next()) {
                 Topico topico = new Topico(rs.getInt("codigo"), rs.getString("titulo"),
-                        new Usuario(rs.getInt("codigoAutor"), null));
+                        new Pessoa(rs.getInt("codigoAutor"), null));
                 topicos.add(topico);
 
             }
@@ -87,7 +87,7 @@ public class ControlForum {
 
             while (rs.next()) {
                 Topico topico = new Topico(rs.getInt("codigo"), rs.getString("titulo"),
-                        new Usuario(rs.getInt("codigoAutor"), null));
+                        new Pessoa(rs.getInt("codigoAutor"), null));
                 topicos.add(topico);
             }
         } catch (SQLException erro) {

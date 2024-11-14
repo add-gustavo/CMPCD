@@ -1,4 +1,4 @@
-package CMPCD.BACK.src.User;
+package CMPCD.BACK.src.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import CMPCD.BACK.src.Connection.Conexao;
+import CMPCD.BACK.src.DTO.Usuario;
 
 public class ControlAdministrador {
 
@@ -28,12 +29,12 @@ public class ControlAdministrador {
             pstm.close();
 
         } catch (SQLException erro) {
-            // TODO: handle exception
+            erro.printStackTrace();
         }
 
     }
 
-    public void excluirAdministrador(Administrador admin) {
+    public void excluirAdministrador(Usuario admin) {
         String sql = "";
         conn = new Conexao().connect();
         try {
@@ -44,11 +45,11 @@ public class ControlAdministrador {
             pstm.close();
 
         } catch (SQLException erro) {
-            // TODO: handle exception
+            erro.printStackTrace();
         }
     }
 
-    public void alterarAdministradorNomeLogin(Administrador admin) {
+    public void alterarAdministradorNomeLogin(Usuario admin) {
         String sql = "";
         conn = new Conexao().connect();
         try {
@@ -60,11 +61,11 @@ public class ControlAdministrador {
             pstm.close();
 
         } catch (SQLException erro) {
-            // TODO: handle exception
+            erro.printStackTrace();
         }
     }
 
-    public void alterarAdministradorEmail(Administrador admin) {
+    public void alterarAdministradorEmail(Usuario admin) {
         String sql = "";
         conn = new Conexao().connect();
         try {
@@ -76,11 +77,11 @@ public class ControlAdministrador {
             pstm.close();
 
         } catch (SQLException erro) {
-            // TODO: handle exception
+            erro.printStackTrace();
         }
     }
 
-    public void alterarAdministradorSenha(Administrador admin) {
+    public void alterarAdministradorSenha(Usuario admin) {
         String sql = "";
         conn = new Conexao().connect();
         try {
@@ -88,11 +89,11 @@ public class ControlAdministrador {
             pstm.setString(1, admin.getSenha());
             pstm.setInt(2, admin.getCodigo());
         } catch (SQLException erro) {
-            // TODO: handle exception
+            erro.printStackTrace();
         }
     }
 
-    public ResultSet authentificacaoAdmin(Administrador admin) {
+    public ResultSet authentificacaoAdmin(Usuario admin) {
         String sql = "Select * from Administrador where nomelogin = ? and senha = ?";
         conn = new Conexao().connect();
         try {
@@ -104,7 +105,8 @@ public class ControlAdministrador {
             return rs;
 
         } catch (SQLException erro) {
-            return null;
+            erro.printStackTrace();
         }
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 body {
     display: grid;
-    grid-row: auto;
+    grid-template-rows: 20% 70% 10%;
     background-color: #F8F3EA;
     min-height: 100vh;
     width: 100%;
@@ -74,37 +74,36 @@ section {
     row-gap: 20px;
 }
 
-.search-bar {
-    background-color: #ede5e1;
-    width: 80%;
-    padding: 12px;
-    border-radius: 90px;
-
-    display: grid;
-    grid-template-columns: 90% 10%;
-}
 
 .section-template {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 20% 50% 30%;
     gap: 10px;
-    width: 90%;
-    background-color: rgb(202, 202, 155);
+    width: 30%;
+    height: 70%;
+    background-color: rgb(199, 199, 18);
     padding: 20px;
     border-radius: 10px;
 }
 
-.ordem-texto {
-    display: grid;
-    grid-template-rows: 30% 70%;
-    gap: 10px;
-    height: 80%;
+
+input {
+    border: transparent;
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
 }
 
-#img-section-template {
-    width: 90%;
-    height: 90%;
-    border-radius: 10px;
+.formulario {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 10px;
+    width: 80%;
+}
+
+.ordem-formulario {
+    display: grid;
+    row-gap: 10px;
 }
 
 .justify {

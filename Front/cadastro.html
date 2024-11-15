@@ -30,7 +30,8 @@
             <form class="formulario centerX" action="" method="POST" autocomplete="on">
                 <div class="ordem-row">
                     <label for="name">Nome Completo:</label>
-                    <input type="text" name="name" id="name" placeholder="Insira seu nome..." required>
+                    <input class="input align-self" type="text" name="name" id="name" placeholder="Insira seu nome..."
+                        required>
                 </div>
 
                 <div>
@@ -46,16 +47,17 @@
                 </div>
                 <div class="ordem-row">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" name="endereco" id="endereco" required
+                    <input class="input align-self" type="text" name="endereco" id="endereco" required
                         placeholder="Insira seu endereço completo...">
                 </div>
                 <div class="ordem-row">
                     <label for="ocupacao">Ocupação:</label>
-                    <input type="text" name="ocupacao" required placeholder="Insira sua ocupação...">
+                    <input class="input align-self" type="text" name="ocupacao" required
+                        placeholder="Insira sua ocupação...">
                 </div>
-                <div>
+                <div class="ordem-row">
                     <label for="deficiencia">Insira sua deficiência / Necessidade especial: </label>
-                    <select id="deficiencia" name="deficiencia[]">
+                    <select class="input align-self" id="deficiencia" name="deficiencia[]">
                         <option value="def">DEF1</option>
                         <option value="def">DEF2</option>
                         <option value="def">DEF3</option>
@@ -65,7 +67,7 @@
                 </div>
                 <div class="ordem-row">
                     <label for="responsavel">Tem responsável:</label>
-                    <div>
+                    <div class="align-self">
                         <input type="radio" name="responsavel" value="Sim"> Sim
                         <input type="radio" name="responsavel" value="Não"> Não
                     </div>

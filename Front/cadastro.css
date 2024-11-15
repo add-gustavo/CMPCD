@@ -66,7 +66,7 @@ section {
     grid-template-rows: 80% 20%;
     gap: 10px;
     width: 60%;
-    height: 90%;
+    height: 80%;
     background-color: rgb(199, 199, 18);
     padding: 20px;
     border-radius: 10px;
@@ -102,15 +102,27 @@ section {
 }
 
 .formulario {
-    display: grid;
-    grid-template-rows: auto;
-    width: 90%;
-    gap: 5px;
+    width: 100%;
+    height: 100%;
+
 }
 
 .ordem-row {
     display: grid;
     grid-template-columns: 30% 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 100%;
+    height: 20px;
+}
+
+.align-self {
+    justify-self: center;
+    align-self: center;
+
 }
 
 .ordem-formulario {

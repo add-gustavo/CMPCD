@@ -16,67 +16,63 @@
 
     </header>
 
-    <section class="align">
+    <section class="centerY">
 
         <div class="section-Titulo">
             <h2>Cadastre-se</h2>
             <div class="Titulo-login">
-                <label id="labelbtt-login">Já tem Cadastro</label>
-                <input id="btt-login" type="button" name="btt-login" value="Entre aqui">
+                <span id="labelbtt-login">Já tem Cadastro</span>
+                <button id="btt-login">Entre aqui</button>
             </div>
         </div>
 
         <div class="section-template centerY">
-            <div class="formulario">
-                <label for="nome">Nome Completo:</label>
-                <input>
-                <div>
-                    <div class="ordem-formulario">
-                        <label for="dataNascimento">Data de Nascimento</label>
-                        <label for="telefone">Telefone</label>
-                    </div>
-                    <div class="ordem-formulario">
-                        <input type="date" name="dataNascimento">
-                        <input type="tel" name="telefone">
-                    </div>
-                </div>
-                <span>Endereço</span>
-                <label for="nome">Rua</label>
-                <input>
-                <div>
-                    <div class="ordem-formulario">
-                        <label for="dataNascimento">Bairro</label>
-                        <label for="telefone">Numero</label>
-                    </div>
-                    <div class="ordem-formulario">
-                        <input>
-                        <input>
-                    </div>
-                </div>
-                <label>Complemento</label>
-                <input>
-                <label>Ocupação</label>
-                <select>
-                    <otion></otion>
-                </select>
-                <label>Tipo de Deficiência / Necessidade especial</label>
-                <select>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-                <label>Possui Responsável</label>
-                <div>
-                    <input type="checkbox" value="SIM">
-                    <label>Sim</label>
-                </div>
-                <div>
-                    <input type="">
-                    <label>Não</label>
+            <form class="formulario centerX" action="" method="POST" autocomplete="on">
+                <div class="ordem-row">
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" name="name" id="name" placeholder="Insira seu nome..." required>
                 </div>
 
-            </div>
+                <div>
+                    <div class="ordem-formulario">
+                        <label for="dataNascimento">Data de Nascimento:</label>
+                        <label for="telefone">Telefone:</label>
+                    </div>
+                    <div class="ordem-formulario">
+                        <input type="date" name="dataNascimento" id="dataNascimento" required min="1924-01-01"
+                            max="2024-11-01">
+                        <input type="tel" name="telefone" id="telefone" required placeholder="Insira seu telefone...">
+                    </div>
+                </div>
+                <div class="ordem-row">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" name="endereco" id="endereco" required
+                        placeholder="Insira seu endereço completo...">
+                </div>
+                <div class="ordem-row">
+                    <label for="ocupacao">Ocupação:</label>
+                    <input type="text" name="ocupacao" required placeholder="Insira sua ocupação...">
+                </div>
+                <div>
+                    <label for="deficiencia">Insira sua deficiência / Necessidade especial: </label>
+                    <select id="deficiencia" name="deficiencia[]">
+                        <option value="def">DEF1</option>
+                        <option value="def">DEF2</option>
+                        <option value="def">DEF3</option>
+                        <option value="def">DEF4</option>
+                        <option value="def">DEF5</option>
+                    </select>
+                </div>
+                <div class="ordem-row">
+                    <label for="responsavel">Tem responsável:</label>
+                    <div>
+                        <input type="radio" name="responsavel" value="Sim"> Sim
+                        <input type="radio" name="responsavel" value="Não"> Não
+                    </div>
+                </div>
+            </form>
             <div class="align">
-                <button>Enviar</button>
+                <input type="submit" value="Cadastrar">
             </div>
 
         </div>

@@ -57,20 +57,10 @@ footer {
 }
 
 section {
-    gap: 5px;
-}
-
-
-.section-template {
     display: grid;
-    grid-template-rows: 80% 20%;
-    gap: 10px;
-    width: 60%;
-    height: 80%;
-    background-color: rgb(199, 199, 18);
-    padding: 20px;
-    border-radius: 10px;
+    grid-template-rows: 5% 95%;
 }
+
 
 #btt-login {
     width: 60%;
@@ -101,22 +91,21 @@ section {
     gap: 5px;
 }
 
+.section-template {
+    display: grid;
+    grid-template-rows: 90% 10%;
+    gap: 10px;
+    width: 60%;
+    height: 90%;
+    background-color: rgb(199, 199, 18);
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .formulario {
     width: 100%;
     height: 100%;
 
-}
-
-.ordem-row {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.input {
-    width: 100%;
-    height: 20px;
 }
 
 .align-self {
@@ -129,6 +118,8 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .justify {

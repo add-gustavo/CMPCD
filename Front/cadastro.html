@@ -16,7 +16,7 @@
 
     </header>
 
-    <section class="centerY">
+    <section class="align">
 
         <div class="section-Titulo">
             <h2>Cadastre-se</h2>
@@ -26,12 +26,11 @@
             </div>
         </div>
 
-        <div class="section-template centerY">
-            <form class="formulario centerX" action="" method="POST" autocomplete="on">
-                <div class="ordem-row">
+        <div class="section-template align">
+            <form class="formulario" action="" method="POST" autocomplete="on">
+                <div class="ordem-formulario">
                     <label for="name">Nome Completo:</label>
-                    <input class="input align-self" type="text" name="name" id="name" placeholder="Insira seu nome..."
-                        required>
+                    <input type="text" name="name" id="name" placeholder="Insira seu nome..." required>
                 </div>
 
                 <div>
@@ -45,19 +44,18 @@
                         <input type="tel" name="telefone" id="telefone" required placeholder="Insira seu telefone...">
                     </div>
                 </div>
-                <div class="ordem-row">
+                <div class="ordem-formulario">
                     <label for="endereco">Endereço:</label>
-                    <input class="input align-self" type="text" name="endereco" id="endereco" required
+                    <input type="text" name="endereco" id="endereco" required
                         placeholder="Insira seu endereço completo...">
                 </div>
-                <div class="ordem-row">
+                <div class="ordem-formulario">
                     <label for="ocupacao">Ocupação:</label>
-                    <input class="input align-self" type="text" name="ocupacao" required
-                        placeholder="Insira sua ocupação...">
+                    <input type="text" name="ocupacao" required placeholder="Insira sua ocupação...">
                 </div>
-                <div class="ordem-row">
+                <div class="ordem-formulario">
                     <label for="deficiencia">Insira sua deficiência / Necessidade especial: </label>
-                    <select class="input align-self" id="deficiencia" name="deficiencia[]">
+                    <select id="deficiencia" name="deficiencia[]">
                         <option value="def">DEF1</option>
                         <option value="def">DEF2</option>
                         <option value="def">DEF3</option>
@@ -65,7 +63,7 @@
                         <option value="def">DEF5</option>
                     </select>
                 </div>
-                <div class="ordem-row">
+                <div class="ordem-formulario">
                     <label for="responsavel">Tem responsável:</label>
                     <div class="align-self">
                         <input type="radio" name="responsavel" value="Sim"> Sim

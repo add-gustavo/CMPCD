@@ -14,7 +14,7 @@ public class Conexao {
             conn = DriverManager.getConnection(url);
 
         } catch (SQLException erro) {
-            // TODO: handle exception
+            erro.printStackTrace();
         }
         return conn;
     }

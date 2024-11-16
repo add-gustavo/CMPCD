@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8">
+
+<Context>
+<Resource name="jdbc/Mysql" auth="" type="javax.sql.DataSource" minIdle="20" maxIdle="100" maxWait="30000" username="" password ="" driverClassName="" url=""
+/></Context> 

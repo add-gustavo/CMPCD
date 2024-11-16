@@ -24,6 +24,11 @@ public class Usuario {
 
     }
 
+    public Usuario(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
+
     public void loginAuthenticacao(Usuario user) {
         try {
             ControlAdministrador objuser = new ControlAdministrador();

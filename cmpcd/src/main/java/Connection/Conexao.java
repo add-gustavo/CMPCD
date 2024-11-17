@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    private static String resource = "java:/comp/env/jdbc/Mysql";
+    // private static String resource = "java:/comp/env/jdbc/Mysql";
 
     public Connection connect() {
         Connection conn = null;

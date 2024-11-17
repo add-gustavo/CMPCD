@@ -1,7 +1,7 @@
 <html>
 
 <body>
-    <h2>Teste</h2>
+    <jsp:include page="/pagina/inicial.html" />
 </body>
 
 </html>

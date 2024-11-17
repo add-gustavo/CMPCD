@@ -34,7 +34,7 @@ public class Pessoa extends Usuario {
 
     }
 
-    public Pessoa(int codigo, String nomelogin, String email) {
+    public Pessoa(String nomelogin, String email) {
         super(codigo, nomelogin, email);
     }
 

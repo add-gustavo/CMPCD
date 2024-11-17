@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.ArrayList;
 import Connection.Conexao;
 import DTO.Pessoa;
+import DTO.Usuario;
 
 public class ControlUsuario {
 
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
-    List<Pessoa> usuarios = new ArrayList<>();
+    List<Usuario> usuarios = new ArrayList<>();
 
     public void adicionarUsuario(Pessoa usuario) {
         String sql = "insert into Usuario (email, senha, nomelogin, nomeCompleto, dataNascimento, telefone, endereco, ocupacao, tipoDeficiencia, EnderecoBairro, Enderecorua, EnderecoNumeroRua, EnderecoComplemento) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -240,7 +241,7 @@ public class ControlUsuario {
         }
     }
 
-    public List<Pessoa> listarUsuarios() {
+    public List<Usuario> listarUsuarios() {
         String sql = "Select * from Usuario";
         conn = new Conexao().connect();
         try {
@@ -248,7 +249,7 @@ public class ControlUsuario {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Pessoa usuario = new Pessoa(rs.getInt("codigo"), rs.getString("nomelogin"), rs.getString("email"));
+                Usuario usuario = new Usuario(rs.getInt("codigo"), rs.getString("nomelogin"), rs.getString("email"));
                 usuarios.add(usuario);
             }
         } catch (SQLException erro) {
@@ -258,7 +259,7 @@ public class ControlUsuario {
         return usuarios;
     }
 
-    public List<Pessoa> pesquisarUsuario(String pesquisa) {
+    public List<Usuario> pesquisarUsuario(String pesquisa) {
         String sql = "";
         conn = new Conexao().connect();
         try {
@@ -267,7 +268,7 @@ public class ControlUsuario {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Pessoa usuario = new Pessoa(rs.getInt("codigo"), rs.getString("nomelogin"), rs.getString("email"));
+                Usuario usuario = new Usuario(rs.getInt("codigo"), rs.getString("nomelogin"), rs.getString("email"));
                 usuarios.add(usuario);
             }
         } catch (SQLException erro) {
@@ -301,7 +302,7 @@ public class ControlUsuario {
         }
     }
 
-    public ResultSet authentificacaoUsuario(Pessoa usuario) {
+    public ResultSet authentificacaoUsuario(Usuario usuario) {
         String sql = "Select * from Usuario where email = ? and senha = ?";
         conn = new Conexao().connect();
         try {

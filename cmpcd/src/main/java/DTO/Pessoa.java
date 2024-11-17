@@ -34,10 +34,6 @@ public class Pessoa extends Usuario {
 
     }
 
-    public Pessoa(String nomelogin, String email) {
-        super(codigo, nomelogin, email);
-    }
-
     public void loginAuthenticacao(Pessoa usuario) {
         try {
             ControlUsuario objuser = new ControlUsuario();
@@ -50,7 +46,6 @@ public class Pessoa extends Usuario {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }

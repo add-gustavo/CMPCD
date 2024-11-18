@@ -58,13 +58,31 @@ footer {
 }
 
 section {
-    row-gap: 20px;
+    display: grid;
+    grid-template-rows: 5% 95%;
+
+}
+
+.section-titulo {
+    justify-items: end;
+    width: 60%;
+}
+
+.section-cadastro {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    width: 70%;
+}
+
+.text-cadastro {
+    text-align: end;
 }
 
 
 .section-template {
     display: grid;
-    grid-template-rows: 20% 40% 20% 10%;
+    grid-template-rows: 20% 40% 20%;
     gap: 10px;
     width: 30%;
     height: 70%;
@@ -110,4 +128,8 @@ fieldset {
 
 .centerY {
     justify-items: center;
+}
+
+.centerX {
+    align-self: center;
 }

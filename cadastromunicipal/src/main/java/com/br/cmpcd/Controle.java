@@ -59,7 +59,7 @@ public class Controle extends HttpServlet {
     };
 
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/login/login.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/login.html");
         dispatcher.forward(request, response);
 
     };

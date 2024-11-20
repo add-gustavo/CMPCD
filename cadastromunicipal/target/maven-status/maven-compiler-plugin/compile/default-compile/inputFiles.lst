@@ -1,6 +1,8 @@
-/home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/com/br/cmpcd/Controle.java
+/home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/com/br/cmpcd/ControleJsp.java
 /home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/DAO/ControlUsuario.java
 /home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/DTO/Usuario.java
 /home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/Connection/Conexao.java
+/home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/com/br/cmpcd/ControleBd.java
 /home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/DAO/ControlAdministrador.java
+/home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/com/br/cmpcd/dao/util/Conexao.java
 /home/gustavo/Documentos/GITHUB/CMPCD/cadastromunicipal/src/main/java/DTO/Pessoa.java

@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class Conexao {
-    private static final String RESOURCE = "java:/comp/env/jdbc/Mysql";
+    private static final String RESOURCE = "java:comp/env/jdbc/MariaDB";
 
     public static Connection getConexao() {
         try {

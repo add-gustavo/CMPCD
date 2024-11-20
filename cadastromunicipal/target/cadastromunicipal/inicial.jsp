@@ -10,16 +10,16 @@
     <header>
         <div class="ordem-header">
             <div class="primeiro-header">
-                <h1 class="align">Lorem ipsum dolor</h1>
+                <a class="align">Lorem ipsum dolor</a>
                 <div class="ordem-perfil-button">
                     <a class="perfil-button" href="/cadastromunicipal/controle?acao=login">Entrar</a>
                 </div>
             </div>
             <div class="segunda-header align">
                 <div class="ordem-template-header align">
-                    <button class="header-button">Comunidade</button>
-                    <button class="header-button">Sobre</button>
-                    <button class="header-button">Ajuda</button>
+                    <a class="header-button">Comunidade</a>
+                    <a class="header-button">Sobre</a>
+                    <a class="header-button">Ajuda</a>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <img id="img-section-template"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3YznLlPf_Cgc7I7h7bGdx4GS-6hhEcO_4oQ&s">
             <div class=" ordem-texto">
-                <span class="align">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                <a class="align">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
                 <p id="text-section-template" class="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Asperiores quis
                     libero aliquid, cumque
@@ -48,15 +48,15 @@
         <fieldset class="carrossel align">
             <div class="box-anuncio align">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3YznLlPf_Cgc7I7h7bGdx4GS-6hhEcO_4oQ&s">
-                <span>Lorem ipsum</span>
+                <a>Lorem ipsum</a>
             </div>
             <div class="box-anuncio align">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3YznLlPf_Cgc7I7h7bGdx4GS-6hhEcO_4oQ&s">
-                <span>Lorem ipsum</span>
+                <a>Lorem ipsum</a>
             </div>
             <div class="box-anuncio align">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3YznLlPf_Cgc7I7h7bGdx4GS-6hhEcO_4oQ&s">
-                <span>Lorem ipsum</span>
+                <a>Lorem ipsum</a>
             </div>
 
         </fieldset>

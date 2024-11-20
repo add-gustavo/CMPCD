@@ -15,12 +15,21 @@
   </welcome-file-list>
 
   <servlet>
-    <servlet-name>controle</servlet-name>
-    <servlet-class>com.br.cmpcd.Controle</servlet-class>
+    <servlet-name>controleJsp</servlet-name>
+    <servlet-class>com.br.cmpcd.ControleJsp</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>controle</servlet-name>
+    <servlet-name>controleJsp</servlet-name>
     <url-pattern>/controle</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>controlebanco</servlet-name>
+    <servlet-class>com.br.cmpcd.ControleBd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>controlebanco</servlet-name>
+    <url-pattern>/controlebd</url-pattern>
   </servlet-mapping>
 
   <servlet>

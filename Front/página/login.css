@@ -57,12 +57,6 @@ footer {
     text-align: center;
 }
 
-section {
-    display: grid;
-    grid-template-rows: 5% 95%;
-
-}
-
 .section-titulo {
     justify-items: end;
     width: 60%;
@@ -101,7 +95,7 @@ input {
 
 .formulario {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 25% 75%;
     gap: 10px;
     width: 80%;
 }

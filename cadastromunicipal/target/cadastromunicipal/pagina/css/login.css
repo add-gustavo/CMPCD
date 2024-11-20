@@ -1,0 +1,135 @@
+body {
+    display: grid;
+    grid-template-rows: 20% 70% 10%;
+    background-color: #F8F3EA;
+    min-height: 100vh;
+    width: 100%;
+    gap: 20px;
+}
+
+header {
+    position: relative;
+    background-color: rgb(201, 174, 40);
+    height: 150px;
+}
+
+.ordem-header {
+    display: grid;
+    height: 100%;
+}
+
+.primeiro-header {
+    display: grid;
+    width: 100%;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+button {
+    padding: 10px;
+    text-align: center;
+    cursor: default;
+    transition: all 0.5 ease;
+}
+
+button:hover {
+    background-color: rgb(149, 169, 219);
+    transform: scale(1.05);
+}
+
+footer {
+    margin-top: auto;
+    background-color: rgb(201, 174, 40);
+    padding: 20px;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.align {
+    display: grid;
+    place-items: center;
+}
+
+.align-text {
+    text-align: center;
+}
+
+section {
+    display: grid;
+    grid-template-rows: 5% 95%;
+
+}
+
+.section-titulo {
+    justify-items: end;
+    width: 60%;
+}
+
+.section-cadastro {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    width: 70%;
+}
+
+.text-cadastro {
+    text-align: end;
+}
+
+
+.section-template {
+    display: grid;
+    grid-template-rows: 20% 40% 20%;
+    gap: 10px;
+    width: 30%;
+    height: 70%;
+    background-color: rgb(199, 199, 18);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+input {
+    border: transparent;
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 10px;
+    width: 80%;
+}
+
+#btt-esquecersenha {
+    background-color: transparent;
+    border: transparent;
+    width: 40%;
+    padding: 0;
+}
+
+.ordem-formulario {
+    display: grid;
+    row-gap: 10px;
+}
+
+.justify {
+    text-align: justify;
+}
+
+fieldset {
+    border: transparent;
+}
+
+.centerY {
+    justify-items: center;
+}
+
+.centerX {
+    align-self: center;
+}

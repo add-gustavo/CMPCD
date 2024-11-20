@@ -2,11 +2,14 @@ package com.br.cmpcd;
 
 import java.io.IOException;
 
+import java.sql.Connection;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.br.cmpcd.dao.util.Conexao;
 
 public class ControleJsp extends HttpServlet {
 
@@ -50,6 +53,12 @@ public class ControleJsp extends HttpServlet {
     };
 
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection conexaoJDBC = Conexao.getConexao();
+        if (conexaoJDBC != null) {
+            System.out.println("Conexao aberta");
+        } else {
+            System.out.println("Sem conexao");
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/login.jsp");
         dispatcher.forward(request, response);
 

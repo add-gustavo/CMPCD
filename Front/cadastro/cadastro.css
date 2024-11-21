@@ -1,15 +1,35 @@
 body {
     display: grid;
-    grid-template-rows: 15% 80% 5%;
-    background-color: #F8F3EA;
+    grid-row: auto;
+    background-color: #F3F3F3;
     min-height: 100vh;
     width: 100%;
-    gap: 20px;
+    gap: 30px;
 }
 
 header {
     position: relative;
     background-color: rgb(201, 174, 40);
+    min-height: 140px;
+}
+
+a {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    transform: scale(1.10);
+}
+
+li {
+    list-style-type: none;
+}
+
+.logo {
+    text-shadow: #000000;
+    font-size: 30px;
 }
 
 .ordem-header {
@@ -78,6 +98,20 @@ section {
     width: 100%;
 }
 
+input {
+    border: transparent;
+    background-color: #CECECE;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+select {
+    border: transparent;
+    padding: 5px;
+    background-color: #CECECE;
+    border-radius: 5px;
+}
+
 .section-Titulo {
     display: flex;
     grid-template-columns: 60% 40%;
@@ -93,18 +127,31 @@ section {
 
 .section-template {
     display: grid;
-    grid-template-rows: 90% 10%;
-    gap: 10px;
-    width: 60%;
-    height: 90%;
-    background-color: rgb(199, 199, 18);
+    grid-row: auto;
+    width: 70%;
+    background-color: #FFFFFF;
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btt {
+    padding: 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.submit-btt:hover {
+    transform: scale(1.10);
 }
 
 .formulario {
-    width: 100%;
+    display: grid;
+    width: 95%;
     height: 100%;
+    gap: 8px;
 
 }
 
@@ -136,4 +183,24 @@ fieldset {
 
 .centerX {
     align-items: center;
+}
+
+.blue-color {
+    background-color: #264653;
+}
+
+.green-color {
+    background-color: #549b71;
+}
+
+.yellow-color {
+    background-color: #e9c46a;
+}
+
+.orange-color {
+    background-color: #f4a261;
+}
+
+.red-color {
+    background-color: #e76f51;
 }

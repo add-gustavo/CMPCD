@@ -1,8 +1,5 @@
 package DTO;
 
-import java.sql.ResultSet;
-import DAO.ControlAdministrador;
-
 public class Usuario {
 
     protected int codigo;
@@ -27,22 +24,6 @@ public class Usuario {
     public Usuario(String email, String senha) {
         this.email = email;
         this.senha = senha;
-    }
-
-    public void loginAuthenticacao(Usuario user) {
-        try {
-            ControlAdministrador objuser = new ControlAdministrador();
-            ResultSet rsusuario = objuser.authentificacaoAdmin(user);
-
-            if (rsusuario.next()) {
-
-            } else {
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public String getEmail() {

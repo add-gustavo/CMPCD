@@ -1,15 +1,17 @@
 package com.br.cmpcd;
 
 import java.io.IOException;
-
+import java.sql.Connection;
+import java.sql.ResultSet;
 import DAO.ControlUsuario;
-import DTO.Pessoa;
 import DTO.Usuario;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.br.cmpcd.dao.util.Conexao;
 
 public class ControleBd extends HttpServlet {
     @Override
@@ -46,10 +48,23 @@ public class ControleBd extends HttpServlet {
 
     private void fazerLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Connection conexaoJDBC = Conexao.getConexao();
         Usuario usuario = new Usuario(request.getParameter("email"), request.getParameter("senha"));
-        ControlUsuario control = new ControlUsuario();
-        control.authentificacaoUsuario(usuario);
-        System.out.println("Email:" + request.getParameter("email") + "senha: " + request.getParameter("senha"));
+
+        ControlUsuario objuser = new ControlUsuario(conexaoJDBC);
+        ResultSet rsusuario = objuser.authentificacaoUsuario(usuario);
+
+        try {
+            if (rsusuario.next()) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/login.jsp");
+                dispatcher.forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     };
 

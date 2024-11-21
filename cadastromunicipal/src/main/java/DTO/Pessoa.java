@@ -1,8 +1,5 @@
 package DTO;
 
-import java.sql.ResultSet;
-import DAO.ControlUsuario;
-
 public class Pessoa extends Usuario {
 
     private String nomeCompleto;
@@ -31,22 +28,6 @@ public class Pessoa extends Usuario {
         this.Enderecorua = Enderecorua;
         this.EndereconumeroCasa = EndereconumeroCasa;
         this.Enderecocomplemento = Enderecocomplemento;
-
-    }
-
-    public void loginAuthenticacao(Pessoa usuario) {
-        try {
-            ControlUsuario objuser = new ControlUsuario();
-            ResultSet rsusuario = objuser.authentificacaoUsuario(usuario);
-
-            if (rsusuario.next()) {
-
-            } else {
-
-            }
-
-        } catch (Exception e) {
-        }
 
     }
 

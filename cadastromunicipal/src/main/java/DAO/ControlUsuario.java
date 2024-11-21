@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
-import Connection.Conexao;
 import DTO.Pessoa;
 import DTO.Usuario;
 
@@ -17,9 +16,12 @@ public class ControlUsuario {
     ResultSet rs;
     List<Usuario> usuarios = new ArrayList<>();
 
+    public ControlUsuario(Connection conn) {
+        this.conn = conn;
+    }
+
     public void adicionarUsuario(Pessoa usuario) {
         String sql = "insert into Usuario (email, senha, nomelogin, nomeCompleto, dataNascimento, telefone, endereco, ocupacao, tipoDeficiencia, EnderecoBairro, Enderecorua, EnderecoNumeroRua, EnderecoComplemento) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEmail());
@@ -45,7 +47,6 @@ public class ControlUsuario {
 
     public void excluirUsuario(Pessoa usuario) {
         String sql = "delete from Usuario where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, usuario.getCodigo());
@@ -58,7 +59,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioEmail(Pessoa usuario) {
         String sql = "update Usuario set email = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEmail());
@@ -73,7 +73,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioNomelogin(Pessoa usuario) {
         String sql = "update Usuario set nomelogin = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getNomelogin());
@@ -88,7 +87,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioSenha(Pessoa usuario) {
         String sql = "update Usuario set senha = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getSenha());
@@ -102,7 +100,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioNomeCompleto(Pessoa usuario) {
         String sql = "update Usuario set nomeCompleto = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getNomeCompleto());
@@ -116,7 +113,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioDataNascimento(Pessoa usuario) {
         String sql = "update Usuario set dataNascimento = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getDataNascimento());
@@ -130,7 +126,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioTelefone(Pessoa usuario) {
         String sql = "update Usuario set telefone = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getTelefone());
@@ -144,7 +139,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioCpf(Pessoa usuario) {
         String sql = "update Usuario set cpf = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getCpf());
@@ -158,7 +152,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioOcupacao(Pessoa usuario) {
         String sql = "update Usuario set ocupacao = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getOcupacao());
@@ -172,7 +165,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioEnderecoRua(Pessoa usuario) {
         String sql = "update Usuario set EnderecoRua = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEnderecorua());
@@ -186,7 +178,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioEnderecoBairro(Pessoa usuario) {
         String sql = "update Usuario set EnderecoBairro = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEnderecobairro());
@@ -200,7 +191,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioEnderecoNumeroCasa(Pessoa usuario) {
         String sql = "update Usuario set EnderecoNumeroCasa = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, usuario.getEndereconumeroCasa());
@@ -214,7 +204,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioEnderecoComplemento(Pessoa usuario) {
         String sql = "update Usuario set EnderecoComplemento = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEnderecocomplemento());
@@ -228,7 +217,6 @@ public class ControlUsuario {
 
     public void alterarUsuarioTipoDeficiencia(Pessoa usuario) {
         String sql = "update Usuario set tipoDeficiente = ? where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getTipoDeficiencia());
@@ -243,7 +231,6 @@ public class ControlUsuario {
 
     public List<Usuario> listarUsuarios() {
         String sql = "Select * from Usuario";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
@@ -261,7 +248,6 @@ public class ControlUsuario {
 
     public List<Usuario> pesquisarUsuario(String pesquisa) {
         String sql = "";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, pesquisa);
@@ -280,7 +266,6 @@ public class ControlUsuario {
 
     public void getInformacoesUsuario(Pessoa usuario) {
         String sql = "Select * from Evento where codigo = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, usuario.getCodigo());
@@ -304,7 +289,6 @@ public class ControlUsuario {
 
     public ResultSet authentificacaoUsuario(Usuario usuario) {
         String sql = "Select * from Usuario where email = ? and senha = ?";
-        conn = new Conexao().connect();
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, usuario.getEmail());

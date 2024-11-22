@@ -6,13 +6,11 @@ import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.br.cmpcd.dao.util.Conexao;
 
-@WebServlet("/controle")
 public class ControleJsp extends HttpServlet {
 
     public ControleJsp() {

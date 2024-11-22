@@ -39,6 +39,8 @@ a:hover {
 .logo {
     text-shadow: #000000;
     font-size: 30px;
+    display: inline-block;
+    gap: 5px;
 }
 
 .segunda-header {
@@ -242,6 +244,26 @@ footer {
 .pre-btn:hover img,
 .nxt-btn:hover img {
     opacity: 1;
+}
+
+.blue-text {
+    color: #264653;
+}
+
+.green-text {
+    color: #549b71;
+}
+
+.yellow-text {
+    color: #e9c46a;
+}
+
+.orange-text {
+    color: #f4a261;
+}
+
+.red-text {
+    color: #e76f51;
 }
 
 .blue-color {

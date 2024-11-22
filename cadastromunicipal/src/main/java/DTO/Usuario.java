@@ -24,6 +24,12 @@ public class Usuario {
 
     }
 
+    public Usuario(String nomelogin, String email, String senha) {
+        this.nomelogin = nomelogin;
+        this.email = email;
+        this.senha = senha;
+    }
+
     public Usuario(String email, String senha) {
         this.email = email;
         this.senha = senha;

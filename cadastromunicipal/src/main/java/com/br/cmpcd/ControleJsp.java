@@ -44,6 +44,8 @@ public class ControleJsp extends HttpServlet {
                 case "cadastro":
                     UsuarioPCD(request, response);
                     break;
+                case "perfil":
+                    Perfil(request, response);
                 default:
                     break;
             }
@@ -64,9 +66,21 @@ public class ControleJsp extends HttpServlet {
 
     };
 
+    private void Perfil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection conexaoJDBC = Conexao.getConexao();
+        if (conexaoJDBC != null) {
+            System.out.println("Conexao aberta");
+        } else {
+            System.out.println("Sem conexao");
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/login.jsp");
+        dispatcher.forward(request, response);
+
+    };
+
     private void UsuarioPCD(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/cadastrop1.jsp");
         dispatcher.forward(request, response);
 
     };

@@ -1,0 +1,166 @@
+body {
+    display: grid;
+    grid-template-rows: 20% 70% 10%;
+    background-color: #F3F3F3;
+    min-height: 100vh;
+    width: 100%;
+    gap: 20px;
+}
+
+a {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+a:hover {
+    transform: scale(1.10);
+}
+
+header {
+    position: relative;
+    height: 150px;
+}
+
+.ordem-header {
+    display: grid;
+    height: 100%;
+}
+
+.primeiro-header {
+    display: grid;
+    width: 100%;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.logo {
+    text-shadow: #000000;
+    font-size: 30px;
+}
+
+footer {
+    margin-top: auto;
+    padding: 20px;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.align {
+    display: grid;
+    place-items: center;
+}
+
+.align-text {
+    text-align: center;
+}
+
+.section-titulo {
+    justify-items: end;
+    width: 60%;
+}
+
+.section-cadastro {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    width: 70%;
+}
+
+.text-cadastro {
+    text-align: end;
+}
+
+
+.section-template {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    gap: 10px;
+    width: 30%;
+    height: 60%;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btt-section-template {
+    padding: 15px;
+    border-radius: 15px;
+}
+
+input {
+    border: transparent;
+    background-color: #CECECE;
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 10px;
+    width: 90%;
+}
+
+form {
+    display: grid;
+    grid-row: auto;
+    gap: 20px;
+}
+
+#btt-esquecersenha {
+    background-color: transparent;
+    border: transparent;
+    width: 40%;
+    padding: 0;
+}
+
+.ordem-formulario {
+    display: grid;
+    row-gap: 10px;
+}
+
+.justify {
+    text-align: justify;
+}
+
+fieldset {
+    border: transparent;
+}
+
+.centerY {
+    justify-items: center;
+}
+
+.centerX {
+    align-self: center;
+}
+
+.blue-color {
+    background-color: #264653;
+}
+
+.green-color {
+    background-color: #549b71;
+}
+
+.yellow-color {
+    background-color: #e9c46a;
+}
+
+.orange-color {
+    background-color: #f4a261;
+}
+
+.red-color {
+    background-color: #e76f51;
+}

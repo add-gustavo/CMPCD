@@ -1,3 +1,5 @@
+<%@ page language="java contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,6 +13,7 @@
 </head>
 
 <body>
+
     <header>
         <div class="ordem-header">
             <div class="primeiro-header">
@@ -22,17 +25,7 @@
                     </div>
                 </a>
                 <div class="ordem-perfil-button">
-                    <!-- Condicional para exibir "Entrar" caso o nome_usuario esteja vazio -->
-                    <c:if test="${empty nome_usuario}">
-                        <a class="perfil-button align entrar-button"
-                            href="/cadastromunicipal/controle?acao=login">Entrar</a>
-                    </c:if>
-
-                    <!-- Condicional para exibir o nome do usuário caso nome_usuario não esteja vazio -->
-                    <c:if test="${not empty nome_usuario}">
-                        <a class="perfil-button align"
-                            href="/cadastromunicipal/perfil?login=${nome_usuario}">${nome_usuario}</a>
-                    </c:if>
+                    <a class="perfil-button align" href="/cadastromunicipal/pagina/login.jsp">Entrar</a>
                 </div>
 
             </div>
@@ -55,10 +48,12 @@
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3YznLlPf_Cgc7I7h7bGdx4GS-6hhEcO_4oQ&s">
             <div class=" ordem-texto">
                 <a class="align">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
-                <p id="text-section-template" class="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <p id="text-section-template" class="justify">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit.
                     Asperiores quis
                     libero aliquid, cumque
-                    dolores fuga reiciendis iste quo nemo dolor molestiae, rem aspernatur nostrum maxime vel, alias
+                    dolores fuga reiciendis iste quo nemo dolor molestiae, rem aspernatur nostrum maxime vel,
+                    alias
                     suscipit porro! Hic!</p>
             </div>
         </section>
@@ -160,10 +155,12 @@
             </div>
         </section>
         <section class="section-text-box align">
-            <p class="text-section-text-box align-text">Registre-se no sistema e mantenha seu perfil atualizado para que
+            <p class="text-section-text-box align-text">Registre-se no sistema e mantenha seu perfil atualizado
+                para que
                 possamos entender
                 suas necessidades e
-                oferecer os serviços mais adequados. O cadastro é simples e seguro, e você pode incluir informações como
+                oferecer os serviços mais adequados. O cadastro é simples e seguro, e você pode incluir
+                informações como
                 tipo de deficiência, necessidades específicas, e preferências de atendimento.</p>
         </section>
     </main>

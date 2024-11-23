@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Página de Perfil</title>
+    <title>Perfil</title>
     <link rel="stylesheet" type="text/css" href="/cadastromunicipal/pagina/css/perfil.css">
     <link rel="stylesheet" type="text/css" href="/cadastromunicipal/pagina/css/perfilGlobal.css">
 </head>
@@ -12,177 +12,120 @@
     <header class="green-color">
         <div class="ordem-header">
             <div class="primeiro-header">
-                <a class="logo align">CMPCD</a>
+                <a href="/cadastromunicipal/principal.jsp" class="logo align">Lorem ipsum dolor</a>
             </div>
         </div>
     </header>
 
-    <section class="align">
+    <section class=" align">
         <div class="section-Titulo">
-            <h2>Perfil de Usuário</h2>
+            <h2>Perfil do Usuário</h2>
         </div>
+        <form class="formulario align">
+            <div class="section-template">
+                <h3>Informações Pessoais</h3>
+                <label>Nome Completo:</label>
+                <input type="text" value="${usuarioPcd.nomeCompleto}" readonly><br>
+                <label>Nome Login:</label>
+                <input type="text" name="usuarioPcd.nomeLogin" value="${usuarioPcd.nomeLogin}" readonly><br>
+                <label>Email:</label>
+                <input type="email" value="${usuarioPcd.email}" readonly><br>
+                <label>Estado Civil:</label>
+                <input type="text" value="${usuarioPcd.estadoCivil}" readonly><br>
+                <label>Sexo:</label>
+                <input type="text" value="${usuarioPcd.sexo}" readonly><br>
+                <label>Data de Nascimento:</label>
+                <input type="text" value="${usuarioPcd.dataNascimento}" readonly><br>
+                <label>CPF:</label>
+                <input type="text" value="${usuarioPcd.cpf}" readonly><br>
+            </div>
 
-        <div class="section-template align">
-            <form class="formulario" action="/cadastromunicipal/controlebd?acao=atualizar-perfil" method="POST"
-                autocomplete="on">
+            <!-- Contato -->
+            <div class="section-template">
+                <h3>Contato</h3>
+                <label>Endereço:</label>
+                <input type="text" value="${contato.endereco}" readonly><br>
+                <label>Telefone:</label>
+                <input type="text" value="${contato.telefone}" readonly><br>
+            </div>
 
-                <!-- Nome de Login -->
-                <div class="ordem-formulario">
-                    <label for="nomelogin">Nome de login:</label>
-                    <input type="text" name="nomelogin" id="nomelogin" value="${usuario.nomelogin}" readonly>
-                </div>
+            <!-- Informações Sociais -->
+            <div class="section-template">
+                <h3>Social</h3>
+                <label>Ocupação:</label>
+                <input type="text" value="${social.ocupacao}" readonly><br>
+                <label>Nível de Escolaridade:</label>
+                <input type="text" value="${social.nivelEscolaridade}" readonly><br>
+                <label>Renda Familiar per Capita:</label>
+                <input type="text" value="${social.rendaFamiliarPcapita}" readonly><br>
+                <label>Programa de Assistência Social:</label>
+                <input type="text" value="${social.programaAssistenciaSocial}" readonly><br>
+            </div>
 
-                <!-- E-mail -->
-                <div class="ordem-formulario">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" id="email" value="${usuario.email}" readonly>
-                </div>
+            <!-- Informações Médicas -->
+            <div class="section-template">
+                <h3>Medicação e Saúde</h3>
+                <label>Faz uso de medicação:</label>
+                <input type="text" value="${medico.usoMedicacao ? 'Sim' : 'Não'}" readonly><br>
+                <label>Descrição:</label>
+                <input type="text" value="${medico.explicacaoUsoMedicacao}" readonly><br>
+                <label>Atendimento com Especialista:</label>
+                <input type="text" value="${medico.atendimentoEspecialista ? 'Sim' : 'Não'}" readonly><br>
+                <label>Descrição:</label>
+                <input type="text" value="${medico.explicacaoAtendimentoEspecialista}" readonly><br>
+                <label>Histórico Médico:</label>
+                <input type="text" value="${medico.historicoMedicoRelevante}" readonly><br>
+            </div>
 
-                <!-- Nome Completo -->
-                <div class="ordem-formulario">
-                    <label for="nomecompleto">Nome Completo:</label>
-                    <input type="text" name="nomecompleto" id="nomecompleto" value="${usuario.nomeCompleto}" readonly>
-                </div>
+            <!-- Aspectos da Deficiência -->
+            <div class="section-template">
+                <h3>Aspectos da Deficiência</h3>
+                <label>Deficiência:</label>
+                <input type="text" value="${deficiencia.tipoDeficiencia}" readonly><br>
+                <label>Necessita de Equipamento:</label>
+                <input type="text" value="${deficiencia.necessidadeEquipamento ? 'Sim' : 'Não'}" readonly><br>
+                <label>Descrição:</label>
+                <input type="text" value="${deficiencia.explicacaoNecessidadeEquipamento}" readonly><br>
+                <label>Necessita de Transporte Adaptado:</label>
+                <input type="text" value="${deficiencia.necessidadeAdaptacao ? 'Sim' : 'Não'}" readonly><br>
+                <label>Descrição:</label>
+                <input type="text" value="${deficiencia.explicacaoNecessidadeAdaptacao}" readonly><br>
+                <label>Necessita de Adaptação no local de atendimento:</label>
+                <input type="text" value="${deficiencia.necessidadeAdaptacaoLocalAtendimento ? 'Sim' : 'Não'}"
+                    readonly><br>
+                <label>Descrição:</label>
+                <input type="text" value="${deficiencia.explicacaoNecessidadeAdaptacaoLocalAtendimento}" readonly><br>
+                <label>Necesita de apoio Educacional:</label>
+                <input type="text" value="${deficiencia.necessidadeEducacional}" readonly><br>
 
-                <!-- CPF -->
-                <div class="ordem-formulario">
-                    <label for="cpf">CPF:</label>
-                    <input type="text" name="cpf" id="cpf" value="${usuario.cpf}" readonly>
-                </div>
+            </div>
 
-                <!-- Deficiência -->
-                <div class="ordem-formulario">
-                    <label for="tipoDeficiencia">Deficiência / Necessidade Especial:</label>
-                    <input type="text" name="tipoDeficiencia" id="tipoDeficiencia" value="${usuario.tipoDeficiencia}"
-                        readonly>
-                </div>
+            <!-- Informações do Responsável -->
+            <div class="section-template">
+                <h3>Responsável</h3>
+                <label>Nome Completo:</label>
+                <input type="text" value="${responsavel.nomeCompleto}" readonly><br>
+                <label>Email:</label>
+                <input type="email" value="${responsavel.email}" readonly><br>
+                <label>Endereço:</label>
+                <input type="text" value="${responsavel.endereco}" readonly><br>
+                <label>Telefone:</label>
+                <input type="text" value="${responsavel.telefone}" readonly><br>
+            </div>
+            <div class="align">
+                <input class="submit-btt green-color" type="submit" value="Salvar Informações">
+            </div>
+        </form>
+        <form action="/cadastromunicipal/controleuser?acao=authenticacao" method="POST">
+            <button type="submit">Excluir conta</button>
+        </form>
 
-                <!-- Grau de Deficiência -->
-                <div class="ordem-formulario">
-                    <label for="grauDeficiencia">Grau de Deficiência:</label>
-                    <input type="text" name="grauDeficiencia" id="grauDeficiencia" value="${usuario.grauDeficiencia}"
-                        readonly>
-                </div>
-
-                <!-- Data de Nascimento e Telefone -->
-                <div>
-                    <div class="ordem-formulario">
-                        <label for="dataNascimento">Data de Nascimento:</label>
-                        <label for="telefone">Telefone:</label>
-                    </div>
-                    <div class="ordem-formulario">
-                        <input type="date" name="dataNascimento" id="dataNascimento" value="${usuario.dataNascimento}"
-                            readonly>
-                        <input type="tel" name="telefone" id="telefone" value="${usuario.telefone}" readonly>
-                    </div>
-                </div>
-
-                <!-- Endereço -->
-                <div class="ordem-formulario">
-                    <label for="endereco">Endereço:</label>
-                    <input type="text" name="endereco" id="endereco" value="${usuario.endereco}" readonly>
-                </div>
-
-                <!-- Ocupação -->
-                <div class="ordem-formulario">
-                    <label for="ocupacao">Ocupação:</label>
-                    <input type="text" name="ocupacao" id="ocupacao" value="${usuario.ocupacao}" readonly>
-                </div>
-
-                <!-- Nível de Escolaridade -->
-                <div class="ordem-formulario">
-                    <label for="nivelEscolaridade">Nível de escolaridade:</label>
-                    <input type="text" name="nivelEscolaridade" id="nivelEscolaridade"
-                        value="${usuario.nivelEscolaridade}" readonly>
-                </div>
-
-                <!-- Gênero -->
-                <div class="ordem-formulario">
-                    <label for="genero">Gênero:</label>
-                    <input type="text" name="genero" id="genero" value="${usuario.genero}" readonly>
-                </div>
-
-                <!-- Estado Civil -->
-                <div class="ordem-formulario">
-                    <label for="estadoCivil">Estado Civil:</label>
-                    <input type="text" name="estadoCivil" id="estadoCivil" value="${usuario.estadocivil}" readonly>
-                </div>
-
-                <!-- Renda Familiar -->
-                <div class="ordem-formulario">
-                    <label for="rendaFamiliarPCapita">Renda Familiar per Capita:</label>
-                    <input type="text" name="rendaFamiliarPCapita" id="rendaFamiliarPCapita"
-                        value="${usuario.rendaFamiliarPCapita}" readonly>
-                </div>
-
-                <!-- Necessidades Específicas -->
-                <div class="ordem-formulario">
-                    <label for="necessidadeAcompanhante">Necessita de acompanhante/responsável:</label>
-                    <input type="text" name="necessidadeAcompanhante" id="necessidadeAcompanhante"
-                        value="${usuario.necessidadeAcompanhante ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="necessidadeEquipamento">Necessita de equipamento:</label>
-                    <input type="text" name="necessidadeEquipamento" id="necessidadeEquipamento"
-                        value="${usuario.necessidadeEquipamento ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="necessidadeTransporteAdaptado">Necessita de transporte adaptado:</label>
-                    <input type="text" name="necessidadeTransporteAdaptado" id="necessidadeTransporteAdaptado"
-                        value="${usuario.necessidadeTransporteAdaptado ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="necessidadeAdaptacaoLocalAtendimento">Necessita de adaptação no local de
-                        atendimento:</label>
-                    <input type="text" name="necessidadeAdaptacaoLocalAtendimento"
-                        id="necessidadeAdaptacaoLocalAtendimento"
-                        value="${usuario.necessidadeAdaptacaoLocalAtendimento ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="necessidadeApoioEducacional">Necessita de apoio educacional:</label>
-                    <input type="text" name="necessidadeApoioEducacional" id="necessidadeApoioEducacional"
-                        value="${usuario.necessidadeApoioEducacional ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="usoMedicacao">Faz uso de medicação:</label>
-                    <input type="text" name="usoMedicacao" id="usoMedicacao"
-                        value="${usuario.usoMedicacao ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="participaCentroApoio">Participa de algum centro de apoio:</label>
-                    <input type="text" name="participaCentroApoio" id="participaCentroApoio"
-                        value="${usuario.participaCentroApoio ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <div class="ordem-formulario">
-                    <label for="fazAtendimentoEspecialista">Faz atendimento com especialista:</label>
-                    <input type="text" name="fazAtendimentoEspecialista" id="fazAtendimentoEspecialista"
-                        value="${usuario.atendimentoEspecialista ? 'Sim' : 'Não'}" readonly>
-                </div>
-
-                <!-- Histórico Médico -->
-                <div class="ordem-formulario">
-                    <label for="historicoMedico">Histórico Médico Relevante:</label>
-                    <textarea name="historicoMedico" id="historicoMedico" rows="4"
-                        readonly>${usuario.historicoMedicoRelevante}</textarea>
-                </div>
-
-                <div class="align">
-                    <input class="submit-btt green-color" type="submit" value="Salvar">
-                </div>
-
-            </form>
-        </div>
     </section>
-
     <footer class="green-color align">
-        <div></div>
+
+        <div>
+
+        </div>
         <div>
             <ul>
                 <li>Instagram</li>
@@ -191,9 +134,9 @@
                 <li>etc...</li>
             </ul>
         </div>
-    </footer>
 
+
+    </footer>
 </body>
-<script src="inicial.js"></script>
 
 </html>

@@ -12,7 +12,7 @@
     <header>
         <div class="ordem-header">
             <div class="primeiro-header">
-                <a class="align">Lorem ipsum dolor</a>
+                <a href="/cadastromunicipal/inicial.jsp" class="align">Lorem ipsum dolor</a>
             </div>
         </div>
 
@@ -24,14 +24,14 @@
 
             <div class="section-cadastro">
                 <span class="text-cadastro">Possui Cadastro</span>
-                <a href="/cadastromunicipal/controle?acao=cadastro">Cadastrar-se</a>
+                <a href="/cadastromunicipal/pagina/cadastro.jsp">Cadastrar-se</a>
 
             </div>
         </div>
 
         <div class="section-template align">
             <h2>Login</h2>
-            <form class="align" action="/cadastromunicipal/controlebd?acao=fazer-login" method="POST">
+            <form class="align" action="/cadastromunicipal/controleuser?acao=fazer-login" method="POST">
                 <div class="formulario">
                     <div class="ordem-formulario align">
                         <label for="email">email</label>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="ordem-formulario align">
                         <input type="text" name="email" id="email" required autofocus>
-                        <input type="password" name="senha " id="senha" required minlength="8">
+                        <input type="password" name="senha" id="senha" required minlength="8">
                     </div>
                     <div></div>
                     <button id="btt-esquecersenha">esqueceu a senha</button>

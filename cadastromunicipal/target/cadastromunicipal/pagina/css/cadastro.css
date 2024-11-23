@@ -78,7 +78,7 @@ footer {
 
 section {
     display: grid;
-    grid-template-rows: 5% 95%;
+    grid-template-rows: 2% 98%;
 }
 
 
@@ -140,7 +140,8 @@ select {
     border-radius: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .submit-btt:hover {
@@ -151,7 +152,7 @@ select {
     display: grid;
     width: 95%;
     height: 100%;
-    gap: 8px;
+    gap: 20px;
 
 }
 

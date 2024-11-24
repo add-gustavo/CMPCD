@@ -71,7 +71,9 @@ public class ResponsavelDAO {
 
     // Método para atualizar os dados de um responsável
     public void atualizarResponsavel(Responsavel responsavel) throws SQLException {
-        String sql = "UPDATE Usuarios_Pcd_Responsavel SET nomeCompleto = ?, telefone = ?, email = ?, endereco = ? WHERE id = ?";
+        System.out.println(responsavel.getEmail() + responsavel.getNomeCompleto() + responsavel.getEndereco()
+                + responsavel.getCodigoUsuario());
+        String sql = "UPDATE Usuarios_Pcd_Responsavel SET nomeCompleto = ?, telefone = ?, email = ?, endereco = ? WHERE codigo_usuario = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -79,7 +81,7 @@ public class ResponsavelDAO {
             stmt.setString(2, responsavel.getTelefone());
             stmt.setString(3, responsavel.getEmail());
             stmt.setString(4, responsavel.getEndereco());
-            stmt.setInt(5, responsavel.getId());
+            stmt.setInt(5, responsavel.getCodigoUsuario());
 
             stmt.executeUpdate();
             Desconectar();

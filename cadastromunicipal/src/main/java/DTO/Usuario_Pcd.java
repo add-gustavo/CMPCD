@@ -36,6 +36,19 @@ public class Usuario_Pcd {
         this.email = email;
     }
 
+    public Usuario_Pcd(int codigo, String nomeCompleto, String cpf, java.sql.Date dataNascimento, String sexo,
+            String estadoCivil,
+            String nomeLogin) {
+
+        this.codigo = codigo;
+        this.nomeCompleto = nomeCompleto;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.estadoCivil = estadoCivil;
+        this.nomeLogin = nomeLogin;
+    }
+
     public Usuario_Pcd(String email, String senha) {
         this.email = email;
         this.senha = senha;

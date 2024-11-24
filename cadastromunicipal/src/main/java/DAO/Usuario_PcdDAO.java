@@ -95,7 +95,9 @@ public class Usuario_PcdDAO {
 
     // Método para atualizar os dados de um usuário
     public void atualizarUsuarioPcd(Usuario_Pcd usuarioPcd) throws SQLException {
-        String sql = "UPDATE Usuarios_Pcd SET nomeCompleto = ?, cpf = ?, dataNascimento = ?, sexo = ?, estadoCivil = ?, senha = ?, email = ? WHERE nome_login = ?";
+        System.out.println("Método atualizarUsuarioPcd chamado para o usuário: " + usuarioPcd.getCodigo());
+
+        String sql = "UPDATE Usuarios_Pcd SET nomeCompleto = ?, cpf = ?, dataNascimento = ?, sexo = ?, estadoCivil = ?, nome_login = ? WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuarioPcd.getNomeCompleto());
@@ -103,13 +105,14 @@ public class Usuario_PcdDAO {
             stmt.setDate(3, usuarioPcd.getDataNascimento());
             stmt.setString(4, usuarioPcd.getSexo());
             stmt.setString(5, usuarioPcd.getEstadoCivil());
-            stmt.setString(6, usuarioPcd.getSenha());
-            stmt.setString(7, usuarioPcd.getEmail());
-            stmt.setString(8, usuarioPcd.getNomeLogin());
+            stmt.setString(6, usuarioPcd.getNomeLogin());
+            stmt.setInt(7, usuarioPcd.getCodigo());
             stmt.executeUpdate();
-            Desconectar();
+            System.out.println("Atualização realizada com sucesso!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Erro ao atualizar usuário: " + e.getMessage());
+        } finally {
+            Desconectar();
         }
     }
 

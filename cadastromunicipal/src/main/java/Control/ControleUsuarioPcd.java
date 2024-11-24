@@ -95,9 +95,9 @@ public class ControleUsuarioPcd {
         }
     }
 
-    public UsuarioPcdInfo InformaçoesUsuarioPcd(String usuario) throws SQLException {
+    public UsuarioPcdInfo InformacoesUsuarioPcd(Usuario_Pcd usuario) throws SQLException {
 
-        Usuario_Pcd usuario_Pcd = usuario_PcdDAO.buscarUsuarioPorNomeLogin(usuario);
+        Usuario_Pcd usuario_Pcd = usuario_PcdDAO.buscarUsuarioPorEmail(usuario.getEmail());
         int codigo_usuario = usuario_Pcd.getCodigo();
         Usuario_PcdContato contato = usuario_PcdContatoDAO.buscarContatoPorCodigoUsuario(codigo_usuario);
         Usuario_PcdDeficiencia deficiencia = usuario_PcdDeficienciaDAO

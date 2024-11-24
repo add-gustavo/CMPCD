@@ -17,6 +17,14 @@ public class Responsavel {
         this.endereco = endereco;
     }
 
+    public Responsavel(int codigoUsuario, String nomeCompleto, String telefone, String email, String endereco) {
+        this.codigoUsuario = codigoUsuario;
+        this.nomeCompleto = nomeCompleto;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+    }
+
     public Responsavel(String nomeCompleto, String telefone, String email, String endereco) {
         this.nomeCompleto = nomeCompleto;
         this.telefone = telefone;

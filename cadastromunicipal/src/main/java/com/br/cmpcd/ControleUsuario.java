@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Control.ControleUsuarioPcd;
+import DAO.ResponsavelDAO;
+import DAO.Usuario_PcdContatoDAO;
 import DAO.Usuario_PcdDAO;
+import DAO.Usuario_PcdDeficienciaDAO;
+import DAO.Usuario_PcdMedicoDAO;
+import DAO.Usuario_PcdSocialDAO;
 import DTO.Responsavel;
 import DTO.UsuarioPcdInfo;
 import DTO.Usuario_Pcd;
@@ -26,6 +31,25 @@ public class ControleUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String acao = request.getParameter("acao");
+        if (acao == null || acao.isEmpty()) {
+            response.sendRedirect("erro.html"); // ou redirecionar para uma página de erro ou login
+            return;
+        }
+        try {
+            switch (acao) {
+
+                case "atualizar-perfil":
+                    paginaPerfil(request, response);
+                    break;
+
+                default:
+                    break;
+            }
+        } catch (ServletException e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     };
 
     @Override
@@ -48,16 +72,26 @@ public class ControleUsuario extends HttpServlet {
                     novoUsuarioPCD(request, response);
                     break;
 
-                case "atualizar-perfil":
-                    paginaPerfil(request, response);
-                    break;
-
                 case "excluir-conta":
                     excluirConta(request, response);
                     break;
-
-                case "authenticacao":
-                    authenticacao(request, response);
+                case "atualizar-dadospessoais":
+                    AtualizarDadosUsuario_Pcd(request, response);
+                    break;
+                case "atualizar-dadoscontato":
+                    AtualizarDadosUsuario_PcdContato(request, response);
+                    break;
+                case "atualizar-dadosmedicos":
+                    AtualizarDadosUsuario_PcdMedico(request, response);
+                    break;
+                case "atualizar-dadosdeficiencia":
+                    AtualizarDadosUsuario_PcdDeficiencia(request, response);
+                    break;
+                case "atualizar-dadosreponsavel":
+                    AtualizarDadosUsuario_PcdResponsavel(request, response);
+                    break;
+                case "atualizar-dadossociais":
+                    AtualizarDadosUsuario_PcdSocial(request, response);
                     break;
                 default:
                     break;
@@ -68,28 +102,182 @@ public class ControleUsuario extends HttpServlet {
         }
     }
 
+    private void AtualizarDadosUsuario_Pcd(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato da data esperado no HTML
+            Date dataNascimento = null;
+            try {
+                java.util.Date utilDate = sdf.parse(request.getParameter("dataNascimento"));
+                dataNascimento = new java.sql.Date(utilDate.getTime());
+            } catch (ParseException e) {
+                System.out.println("Erro ao converter a data de nascimento: " + e.getMessage());
+            }
+
+            Usuario_Pcd usuario_Pcd = new Usuario_Pcd(Integer.parseInt(request.getParameter("codigo")),
+                    request.getParameter("nomecompleto"),
+                    request.getParameter("cpf"),
+                    dataNascimento,
+                    request.getParameter("sexo"),
+                    request.getParameter("estadoCivil"),
+                    request.getParameter("nomelogin"));
+            System.out.println(usuario_Pcd.codigo + usuario_Pcd.cpf + usuario_Pcd.dataNascimento + usuario_Pcd.sexo
+                    + usuario_Pcd.estadoCivil + usuario_Pcd.nomeLogin);
+
+            Usuario_PcdDAO usuario_PcdDAO = new Usuario_PcdDAO();
+            usuario_PcdDAO.atualizarUsuarioPcd(usuario_Pcd);
+            paginaPerfil(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o usuário: " + e.getMessage());
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
+        }
+
+    }
+
+    private void AtualizarDadosUsuario_PcdContato(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+
+            Usuario_PcdContato usuario_PcdContato = new Usuario_PcdContato(
+                    Integer.parseInt(request.getParameter("codigo")),
+                    request.getParameter("telefone"),
+                    request.getParameter("endereco"));
+            Usuario_PcdContatoDAO usuario_PcdContatoDAO = new Usuario_PcdContatoDAO();
+            usuario_PcdContatoDAO.atualizarContato(usuario_PcdContato);
+            System.out.println(usuario_PcdContato.getEndereco());
+            paginaPerfil(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o usuário: " + e.getMessage());
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
+        }
+
+    }
+
+    private void AtualizarDadosUsuario_PcdMedico(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            Usuario_PcdMedico usuario_PcdMedico = new Usuario_PcdMedico(
+                    Integer.parseInt(request.getParameter("codigo")),
+                    request.getParameter("historicoMedico"),
+                    Boolean.parseBoolean(request.getParameter("usoMedicacao")),
+                    request.getParameter("explicacaoUsoMedicacao"),
+                    Boolean.parseBoolean(request.getParameter("fazAtendimentoEspecialista")),
+                    request.getParameter("explicacaoAtendimentoEspecialista"),
+                    Boolean.parseBoolean(request.getParameter("participaCentroApoio")),
+                    request.getParameter("explicacaoParticipacaoCentroApoio"));
+            Usuario_PcdMedicoDAO usuario_PcdMedicoDAO = new Usuario_PcdMedicoDAO();
+            usuario_PcdMedicoDAO.atualizarHistoricoMedico(usuario_PcdMedico);
+            paginaPerfil(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o usuário: " + e.getMessage());
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
+        }
+
+    }
+
+    private void AtualizarDadosUsuario_PcdDeficiencia(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            Usuario_PcdDeficiencia usuario_PcdDeficiencia = new Usuario_PcdDeficiencia(
+                    Integer.parseInt(request.getParameter("codigo")),
+                    request.getParameter("tipoDeficiencia"),
+                    Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")), // Convertendo para boolean
+                    Boolean.parseBoolean(request.getParameter("necessidadeEquipamento")),
+                    request.getParameter("explicacaoNecessidadeEquipamento"),
+                    Boolean.parseBoolean(request.getParameter("necessidadeTransporteAdaptado")),
+                    request.getParameter("explicacaoNecessidadeAdaptacao"),
+                    Boolean.parseBoolean(request.getParameter("necessidadeAdaptacaoLocalAtendimento")),
+                    request.getParameter("explicacaoNecessidadeAdaptacaoLocalAtendimento"),
+                    Boolean.parseBoolean("necessidadeApoioEducacional"),
+                    request.getParameter("necessidadeEducacional"));
+
+            System.out.println("no servlet" + usuario_PcdDeficiencia.getNecessidadeEducacional());
+
+            Usuario_PcdDeficienciaDAO usuario_PcdDeficienciaDAO = new Usuario_PcdDeficienciaDAO();
+            usuario_PcdDeficienciaDAO.atualizarDeficiencia(usuario_PcdDeficiencia);
+            paginaPerfil(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o usuário: " + e.getMessage());
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
+        }
+
+    }
+
+    private void AtualizarDadosUsuario_PcdResponsavel(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            Responsavel responsavel = new Responsavel(Integer.parseInt(request.getParameter("codigo")),
+                    request.getParameter("nomecompletoResponsavel"),
+                    request.getParameter("telefoneResponsavel"),
+                    request.getParameter("emailResponsavel"),
+                    request.getParameter("enderecoResponsavel"));
+            System.out.println(responsavel.getEmail() + responsavel.getNomeCompleto() + responsavel.getEndereco());
+
+            ResponsavelDAO responsavelDAO = new ResponsavelDAO();
+            responsavelDAO.atualizarResponsavel(responsavel);
+            paginaPerfil(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o usuário: " + e.getMessage());
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
+        }
+
+    }
+
+    private void AtualizarDadosUsuario_PcdSocial(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            Usuario_PcdSocial usuario_PcdSocial = new Usuario_PcdSocial(
+                    Integer.parseInt(request.getParameter("codigo")),
+                    request.getParameter("ocupacao"),
+                    request.getParameter("nivelEscolaridade"),
+                    Double.parseDouble(request.getParameter("rendaFamiliarPCapita")), // Converte para double
+                    request.getParameter("programaAssistenciaSocial"));
+
+            Usuario_PcdSocialDAO usuario_PcdSocialDAO = new Usuario_PcdSocialDAO();
+            usuario_PcdSocialDAO.atualizarUsuarioPcdSocial(usuario_PcdSocial);
+            paginaPerfil(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o usuário: " + e.getMessage());
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
+        }
+
+    }
+
     private void fazerLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
         Usuario_Pcd usuario_Pcd = new Usuario_Pcd(request.getParameter("email"), request.getParameter("senha"));
-
         Usuario_PcdDAO usuario_PcdDAO = new Usuario_PcdDAO();
 
         Boolean acesso = usuario_PcdDAO.autentificacaoUsuario(usuario_Pcd);
         System.out.println(usuario_Pcd.getEmail() + usuario_Pcd.getSenha());
 
         if (acesso) {
-
+            // Verificar se o usuário existe no banco
             Usuario_Pcd usuario = usuario_PcdDAO.buscarUsuarioPorEmail(usuario_Pcd.getEmail());
-            System.out.println("Usuario" + usuario.getNomeLogin());
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect("/cadastromunicipal/pagina/principal.jsp");
+            if (usuario != null) {
+                System.out.println("Usuário: " + usuario.getNomeLogin());
+                HttpSession session = request.getSession();
+                session.setAttribute("usuarioPcd", usuario);
+                response.sendRedirect(request.getContextPath() + "/inicial.jsp");
+            } else {
+                // Se não encontrar o usuário, retorna erro
+                request.setAttribute("erro", "Erro ao buscar o usuário.");
+                request.getRequestDispatcher("/pagina/login.jsp").forward(request, response);
+            }
         } else {
-
-            request.setAttribute("erro", "Email ou senha inválidos");
+            request.setAttribute("erro", "Email ou senha inválidos.");
             request.getRequestDispatcher("/pagina/login.jsp").forward(request, response);
-
         }
     }
 
@@ -98,13 +286,6 @@ public class ControleUsuario extends HttpServlet {
 
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-
-        // Validações básicas de entrada
-        if (email == null || senha == null || email.isEmpty() || senha.isEmpty()) {
-            request.setAttribute("erro", "Preencha todos os campos");
-            request.getRequestDispatcher("/pagina/authenticacao.jsp").forward(request, response);
-            return;
-        }
 
         Usuario_Pcd usuario_Pcd = new Usuario_Pcd(email, senha);
         Usuario_PcdDAO usuario_PcdDAO = new Usuario_PcdDAO();
@@ -138,43 +319,56 @@ public class ControleUsuario extends HttpServlet {
         }
     }
 
-    private void authenticacao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("/pagina/authenticacao.jsp").forward(request, response);
-    }
-
     private void paginaPerfil(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
         ControleUsuarioPcd controleUsuarioPcd = new ControleUsuarioPcd();
-        String usuario = request.getParameter("usuario.nomeLogin");
-        System.out.println("Pagina Perfil: ");
-        System.out.println(usuario);
-        UsuarioPcdInfo info = controleUsuarioPcd.InformaçoesUsuarioPcd(usuario);
 
-        Usuario_Pcd usuarioPcd = info.getUsuarioPcd();
+        // Obtém o nome de login do usuário (pode vir da URL, do formulário ou da
+        // sessão)
+        HttpSession session = request.getSession();
+        Usuario_Pcd usuarioPcd = (Usuario_Pcd) session.getAttribute("usuarioPcd"); // Caso esteja armazenado na sessão
+
+        // Chama o método para obter as informações do usuário
+        UsuarioPcdInfo info = controleUsuarioPcd.InformacoesUsuarioPcd(usuarioPcd);
+
+        // Obtém os dados do perfil
+        Usuario_Pcd usuarioPcdData = info.getUsuarioPcd();
         Usuario_PcdContato contato = info.getContato();
         Usuario_PcdDeficiencia deficiencia = info.getDeficiencia();
         Usuario_PcdMedico medico = info.getMedico();
         Usuario_PcdSocial social = info.getSocial();
         Responsavel responsavel = info.getResponsavel();
 
-        System.out.println(usuarioPcd.getCodigo() + " " + contato.getCodigoUsuario() + " "
+        System.out.println(deficiencia.getNecessidadeEducacional());
+
+        System.out.println(usuarioPcd.getSexo() + usuarioPcdData.getCodigo() + " " + contato.getCodigoUsuario() + " "
                 + deficiencia.getCodigoUsuario() + " " + medico.getCodigoUsuario() + " " + social.getCodigoUsuario()
                 + " " + responsavel.getCodigoUsuario());
-        // Adicionar os dados como atributos na request
-        HttpSession session = request.getSession();
-        session.setAttribute("usuarioPcd", usuarioPcd);
-        session.setAttribute("contato", contato);
-        session.setAttribute("deficiencia", deficiencia);
-        session.setAttribute("medico", medico);
-        session.setAttribute("social", social);
-        session.setAttribute("responsavel", responsavel);
+        System.out.println(responsavel.getEmail() + responsavel.getNomeCompleto() + responsavel.getEndereco()
+                + responsavel.getTelefone());
+        // Verifica se os objetos não são nulos antes de adicionar à sessão
+        if (usuarioPcdData != null) {
+            session.setAttribute("usuarioPcd", usuarioPcdData);
+        }
+        if (contato != null) {
+            session.setAttribute("contato", contato);
+        }
+        if (deficiencia != null) {
+            session.setAttribute("deficiencia", deficiencia);
+        }
+        if (medico != null) {
+            session.setAttribute("medico", medico);
+        }
+        if (social != null) {
+            session.setAttribute("social", social);
+        }
+        if (responsavel != null) {
+            session.setAttribute("responsavel", responsavel);
+        }
 
-        // Redirecionar para a página JSP de perfil
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina//perfil.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagina/perfil.jsp");
         dispatcher.forward(request, response);
-
     }
 
     private void novoUsuarioPCD(HttpServletRequest request, HttpServletResponse response)
@@ -219,7 +413,8 @@ public class ControleUsuario extends HttpServlet {
                     request.getParameter("explicacaoNecessidadeAdaptacao"),
                     Boolean.parseBoolean(request.getParameter("necessidadeAdaptacaoLocalAtendimento")),
                     request.getParameter("explicacaoNecessidadeAdaptacaoLocalAtendimento"),
-                    request.getParameter("necessidadeApoioEducacional"));
+                    Boolean.parseBoolean("necessidadeApoioEducacional"),
+                    request.getParameter("necessidadeEducacional"));
 
             Usuario_PcdMedico usuario_PcdMedico = new Usuario_PcdMedico(
                     request.getParameter("historicoMedico"),
@@ -247,9 +442,7 @@ public class ControleUsuario extends HttpServlet {
             // Registre o erro e mostre uma mensagem ao usuário
             e.printStackTrace();
             request.setAttribute("errorMessage", "Ocorreu um erro ao cadastrar o usuário: " + e.getMessage());
-            request.getRequestDispatcher("erro.jsp").forward(request, response);
-        } finally {
-            // Certifique-se de que a conexão será fechada
+            request.getRequestDispatcher("inicial.jsp").forward(request, response);
         }
     }
 

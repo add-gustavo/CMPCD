@@ -25,7 +25,7 @@ public class Usuario_PcdDeficienciaDAO {
 
     // Método para inserir a deficiência de um usuário no banco de dados
     public void inserirDeficiencia(Usuario_PcdDeficiencia deficiencia) throws SQLException {
-        String sql = "INSERT INTO Usuarios_Pcd_Deficiencia (codigo_usuario, tipoDeficiencia, necessidadeAcompanhante, necessidadeEquipamento, explicacao_necessidade_equipamento, necessidadeAdaptacao, explicacao_necessidade_adaptacao, necessidadeAdaptacaoLocalAtendimento, explicacao_necessidade_adaptacao_local_atendimento, necessidadeEducacional) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Usuarios_Pcd_Deficiencia (codigo_usuario, tipoDeficiencia, necessidadeAcompanhante, necessidadeEquipamento, explicacao_necessidade_equipamento, necessidadeAdaptacao, explicacao_necessidade_adaptacao, necessidadeAdaptacaoLocalAtendimento, explicacao_necessidade_adaptacao_local_atendimento, necessidadeEducacional, explicacao_necessidade_Educacional) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -38,7 +38,8 @@ public class Usuario_PcdDeficienciaDAO {
             stmt.setString(7, deficiencia.getExplicacaoNecessidadeAdaptacao());
             stmt.setBoolean(8, deficiencia.isNecessidadeAdaptacaoLocalAtendimento());
             stmt.setString(9, deficiencia.getExplicacaoNecessidadeAdaptacaoLocalAtendimento());
-            stmt.setString(10, deficiencia.getNecessidadeEducacional());
+            stmt.setBoolean(10, deficiencia.getNecessidadeEducacional());
+            stmt.setString(11, deficiencia.getExplicacaonecessidadeEducacional());
 
             stmt.executeUpdate();
             Desconectar();
@@ -67,7 +68,8 @@ public class Usuario_PcdDeficienciaDAO {
                         rs.getString("explicacao_necessidade_adaptacao"),
                         rs.getBoolean("necessidadeAdaptacaoLocalAtendimento"),
                         rs.getString("explicacao_necessidade_adaptacao_local_atendimento"),
-                        rs.getString("necessidadeEducacional"));
+                        rs.getBoolean("necessidadeEducacional"),
+                        rs.getString("explicacao_necessidade_Educacional"));
             }
             Desconectar();
         } catch (SQLException e) {
@@ -78,8 +80,9 @@ public class Usuario_PcdDeficienciaDAO {
 
     // Método para atualizar os dados da deficiência de um usuário
     public void atualizarDeficiencia(Usuario_PcdDeficiencia deficiencia) throws SQLException {
-        String sql = "UPDATE usuario_pcd_deficiencia SET tipoDeficiencia = ?, necessidadeAcompanhante = ?, necessidadeEquipamento = ?, explicacao_necessidade_equipamento = ?, necessidadeAdaptacao = ?, explicacao_necessidade_adaptacao = ?, necessidadeAdaptacaoLocalAtendimento = ?, explicacao_necessidade_adaptacao_local_atendimento = ?, necessidadeEducacional = ? WHERE codigo_usuario = ?";
+        String sql = "UPDATE Usuarios_Pcd_Deficiencia SET tipoDeficiencia = ?, necessidadeAcompanhante = ?, necessidadeEquipamento = ?, explicacao_necessidade_equipamento = ?, necessidadeAdaptacao = ?, explicacao_necessidade_adaptacao = ?, necessidadeAdaptacaoLocalAtendimento = ?, explicacao_necessidade_adaptacao_local_atendimento = ?, necessidadeEducacional = ?, explicacao_necessidade_Educacional = ? WHERE codigo_usuario = ?";
         Conectar();
+        System.out.println(deficiencia.getNecessidadeEducacional());
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, deficiencia.getTipoDeficiencia());
@@ -90,8 +93,9 @@ public class Usuario_PcdDeficienciaDAO {
             stmt.setString(6, deficiencia.getExplicacaoNecessidadeAdaptacao());
             stmt.setBoolean(7, deficiencia.isNecessidadeAdaptacaoLocalAtendimento());
             stmt.setString(8, deficiencia.getExplicacaoNecessidadeAdaptacaoLocalAtendimento());
-            stmt.setString(9, deficiencia.getNecessidadeEducacional());
-            stmt.setInt(10, deficiencia.getCodigoUsuario());
+            stmt.setBoolean(9, deficiencia.getNecessidadeEducacional());
+            stmt.setString(10, deficiencia.getExplicacaonecessidadeEducacional());
+            stmt.setInt(11, deficiencia.getCodigoUsuario());
 
             stmt.executeUpdate();
             Desconectar();

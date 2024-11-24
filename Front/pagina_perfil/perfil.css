@@ -78,7 +78,8 @@ footer {
 
 section {
     display: grid;
-    grid-template-rows: 5% 95%;
+    grid-row: auto;
+    gap: 20px
 }
 
 
@@ -119,10 +120,17 @@ select {
     width: 60%;
 }
 
-.Titulo-login {
+.Titulo-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+    gap: 7px;
+    margin-bottom: 20px;
+}
+
+.radio {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 .section-template {
@@ -140,7 +148,8 @@ select {
     border-radius: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .submit-btt:hover {
@@ -151,7 +160,7 @@ select {
     display: grid;
     width: 95%;
     height: 100%;
-    gap: 8px;
+    gap: 20px;
 
 }
 
@@ -162,12 +171,40 @@ select {
 }
 
 .ordem-formulario {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    display: flex;
+    gap: 3px;
+    margin-bottom: 10px;
 }
+
+.ordem-formulario label {
+    width: 50%;
+    /* Ajuste o tamanho do label *
+    /* Distância entre o label e o input */
+}
+
+.ordem-formulario input:not([type="radio"]) {
+    width: 50%;
+}
+
+
+.ordem-formulario select {
+    width: 50%;
+}
+
+.ordem-formulario textarea {
+    width: 50%;
+}
+
+.edit-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #007BFF;
+}
+
+.edit-icon:hover {
+    color: #0056b3;
+}
+
 
 .justify {
     text-align: justify;

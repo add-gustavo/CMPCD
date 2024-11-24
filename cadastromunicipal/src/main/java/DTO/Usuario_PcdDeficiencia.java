@@ -10,13 +10,15 @@ public class Usuario_PcdDeficiencia {
     public String explicacaoNecessidadeAdaptacao;
     public boolean necessidadeAdaptacaoLocalAtendimento;
     public String explicacaoNecessidadeAdaptacaoLocalAtendimento;
-    public String necessidadeEducacional;
+    public boolean necessidadeEducacional;
+    public String explicacaonecessidadeEducacional;
 
     public Usuario_PcdDeficiencia(int codigoUsuario, String tipoDeficiencia, boolean necessidadeAcompanhante,
             boolean necessidadeEquipamento,
             String explicacaoNecessidadeEquipamento, boolean necessidadeAdaptacao,
             String explicacaoNecessidadeAdaptacao, boolean necessidadeAdaptacaoLocalAtendimento,
-            String explicacaoNecessidadeAdaptacaoLocalAtendimento, String necessidadeEducacional) {
+            String explicacaoNecessidadeAdaptacaoLocalAtendimento, boolean necessidadeEducacional,
+            String explicacaonecessidadeEducacional) {
         this.codigoUsuario = codigoUsuario;
         this.tipoDeficiencia = tipoDeficiencia;
         this.necessidadeAcompanhante = necessidadeAcompanhante;
@@ -27,13 +29,15 @@ public class Usuario_PcdDeficiencia {
         this.necessidadeAdaptacaoLocalAtendimento = necessidadeAdaptacaoLocalAtendimento;
         this.explicacaoNecessidadeAdaptacaoLocalAtendimento = explicacaoNecessidadeAdaptacaoLocalAtendimento;
         this.necessidadeEducacional = necessidadeEducacional;
+        this.explicacaonecessidadeEducacional = explicacaonecessidadeEducacional;
     }
 
     public Usuario_PcdDeficiencia(String tipoDeficiencia, boolean necessidadeAcompanhante,
             boolean necessidadeEquipamento,
             String explicacaoNecessidadeEquipamento, boolean necessidadeAdaptacao,
             String explicacaoNecessidadeAdaptacao, boolean necessidadeAdaptacaoLocalAtendimento,
-            String explicacaoNecessidadeAdaptacaoLocalAtendimento, String necessidadeEducacional) {
+            String explicacaoNecessidadeAdaptacaoLocalAtendimento, boolean necessidadeEducacional,
+            String explicacaonecessidadeEducacional) {
 
         this.tipoDeficiencia = tipoDeficiencia;
         this.necessidadeAcompanhante = necessidadeAcompanhante;
@@ -44,6 +48,7 @@ public class Usuario_PcdDeficiencia {
         this.necessidadeAdaptacaoLocalAtendimento = necessidadeAdaptacaoLocalAtendimento;
         this.explicacaoNecessidadeAdaptacaoLocalAtendimento = explicacaoNecessidadeAdaptacaoLocalAtendimento;
         this.necessidadeEducacional = necessidadeEducacional;
+        this.explicacaonecessidadeEducacional = explicacaonecessidadeEducacional;
 
     }
 
@@ -121,11 +126,19 @@ public class Usuario_PcdDeficiencia {
         this.explicacaoNecessidadeAdaptacaoLocalAtendimento = explicacaoNecessidadeAdaptacaoLocalAtendimento;
     }
 
-    public String getNecessidadeEducacional() {
+    public boolean getNecessidadeEducacional() {
         return necessidadeEducacional;
     }
 
-    public void setNecessidadeEducacional(String necessidadeEducacional) {
+    public void setNecessidadeEducacional(boolean necessidadeEducacional) {
         this.necessidadeEducacional = necessidadeEducacional;
+    }
+
+    public String getExplicacaonecessidadeEducacional() {
+        return explicacaonecessidadeEducacional;
+    }
+
+    public void setExplicacaonecessidadeEducacional(String explicacaonecessidadeEducacional) {
+        this.explicacaonecessidadeEducacional = explicacaonecessidadeEducacional;
     }
 }

@@ -53,4 +53,13 @@
     <url-pattern>/page</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>controleRelatorio</servlet-name>
+    <servlet-class>com.br.cmpcd.ControleRelatorio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>controleRelatorio</servlet-name>
+    <url-pattern>/relatorio</url-pattern>
+  </servlet-mapping>
+
 </web-app>

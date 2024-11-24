@@ -389,15 +389,15 @@
                             <label for="necessidadeApoioEducacional">Necessita de apoio educacional:</label>
                             <div class="radio align">
                                 <div class="ordem-formulario">
-                                    <input disabled required type="radio" name="necessidadeApoioEducacional"
+                                    <input disabled type="radio" name="necessidadeApoioEducacional"
                                         id="necessidadeApoioEducacional-sim" value="true" <c:if
                                         test="${deficiencia.necessidadeEducacional == true}">checked</c:if>>
                                     <label for="necessidadeApoioEducacional-sim">Sim</label>
                                 </div>
                                 <div class="ordem-formulario">
-                                    <input disabled required type="radio" name="necessidadeApoioEducacional"
+                                    <input disabled type="radio" name="necessidadeApoioEducacional"
                                         id="necessidadeApoioEducacional-nao" value="false" <c:if
-                                        test="${deficiencia.necessidadeEducacional == true}">checked</c:if>>
+                                        test="${deficiencia.necessidadeEducacional == false}">checked</c:if>>
                                     <label for="necessidadeApoioEducacional-nao">Não</label>
                                 </div>
                             </div>

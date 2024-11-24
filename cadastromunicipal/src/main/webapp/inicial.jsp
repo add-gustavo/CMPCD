@@ -43,7 +43,7 @@
                     </div>
                     <div class="green-color segunda-header align">
                         <div class="ordem-template-header align">
-                            <a class="header-button">Sobre o projeto</a>
+                            <a href="/cadastromunicipal/page?pagina=relatorio" class="header-button">Relatorio</a>
                             <a class="header-button">Sobre Nós</a>
                             <a class="header-button">Ajuda</a>
                         </div>

@@ -1,0 +1,101 @@
+/* Reset geral */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f3f3f3;
+    font-family: 'Inter';
+}
+
+/* Header */
+header {
+    padding: 1rem;
+    background-color: white;
+    display: flex; /* Garante que o header organize os itens internos */
+    justify-content: space-between; /* Alinha os elementos do header */
+    align-items: center; /* Centraliza verticalmente */
+    border-bottom: 2px solid #eaeaea; /* Apenas para separação visual */
+}
+
+header > a{
+    text-decoration: none;
+    color: #264653;
+}
+
+/* Nav */
+nav {
+    background-color: #5a9b71;
+    display: flex;
+    justify-content: center; /* Centraliza o menu */
+    align-items: center;
+    padding: 0.5rem;
+}
+
+nav > ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.listanav > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem;
+    display: block;
+    font-size: 1rem;
+}
+
+/* Container geral para os gráficos */
+.container-geral {
+    display: flex; /* Usando flexbox para alinhar os itens lado a lado */
+    justify-content: space-between; /* Espaça os itens igualmente */
+    align-items: flex-start; /* Alinha os itens no topo */
+    gap: 20px; /* Espaço entre os gráficos */
+    width: 100%;
+    padding: 20px;
+}
+
+/* Contêiner para os gráficos de pizza à esquerda */
+.container-pizza {
+    display: flex;
+    flex-direction: column; /* Organiza os gráficos de pizza na vertical */
+    gap: 20px; /* Espaço entre os gráficos de pizza */
+    width: 30%; /* Controla a largura do container de gráficos de pizza */
+}
+
+/* Para os gráficos de pizza */
+.container-pizza canvas {
+    width: 100%; /* Faz o gráfico ocupar toda a largura do contêiner */
+    height: auto; /* Mantém a proporção */
+    max-width: 200px; /* Limita o tamanho máximo do gráfico */
+    max-height: 200px; /* Limita a altura máxima do gráfico */
+}
+
+/* Gráfico principal (gráfico grande) */
+#lineChart {
+    width: 55%; /* Reduz a largura do gráfico principal */
+    height: 300px; /* Ajusta a altura do gráfico principal */
+    max-width: 100%; /* Garante que o gráfico se ajuste ao contêiner */
+}
+
+/* Ajuste dos gráficos de pizza na container-pizza */
+#pieChart1, #pieChart2 {
+    max-width: 100%;
+    max-height: 200px; /* Limita a altura máxima para os gráficos de pizza */
+}
+
+footer {
+    margin-top: auto;
+    background-color: #264653;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}

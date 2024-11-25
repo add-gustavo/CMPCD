@@ -51,7 +51,7 @@ public class ControleUsuarioPcd {
 
             // Insere o usuário PCD e captura o código gerado
             usuario_PcdDAO.inserirUsuarioPcd(usuario_Pcd);
-            Usuario_Pcd usuario_PcdWcodigo = usuario_PcdDAO.buscarUsuarioPorNomeLogin(usuario_Pcd.getNomeLogin());
+            Usuario_Pcd usuario_PcdWcodigo = usuario_PcdDAO.buscarUsuarioPorEmail(usuario_Pcd.getEmail());
 
             // Agora, insere os dados nas tabelas dependentes passando o código do usuário
             usuario_PcdContato.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());

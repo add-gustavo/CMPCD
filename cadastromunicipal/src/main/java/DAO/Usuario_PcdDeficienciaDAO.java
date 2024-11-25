@@ -81,25 +81,51 @@ public class Usuario_PcdDeficienciaDAO {
     public void atualizarDeficiencia(Usuario_PcdDeficiencia deficiencia) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Deficiencia SET tipoDeficiencia = ?, necessidadeAcompanhante = ?, necessidadeEquipamento = ?, explicacao_necessidade_equipamento = ?, necessidadeAdaptacao = ?, explicacao_necessidade_adaptacao = ?, necessidadeAdaptacaoLocalAtendimento = ?, explicacao_necessidade_adaptacao_local_atendimento = ?, necessidadeEducacional = ?, explicacao_necessidade_Educacional = ? WHERE codigo_usuario = ?";
         Conectar();
-        System.out.println(deficiencia.getNecessidadeEducacional());
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            // Inicia uma transação
+            conn.setAutoCommit(false);
 
-            stmt.setString(1, deficiencia.getTipoDeficiencia());
-            stmt.setBoolean(2, deficiencia.isNecessidadeAcompanhante());
-            stmt.setBoolean(3, deficiencia.isNecessidadeEquipamento());
-            stmt.setString(4, deficiencia.getExplicacaoNecessidadeEquipamento());
-            stmt.setBoolean(5, deficiencia.isNecessidadeAdaptacao());
-            stmt.setString(6, deficiencia.getExplicacaoNecessidadeAdaptacao());
-            stmt.setBoolean(7, deficiencia.isNecessidadeAdaptacaoLocalAtendimento());
-            stmt.setString(8, deficiencia.getExplicacaoNecessidadeAdaptacaoLocalAtendimento());
-            stmt.setBoolean(9, deficiencia.getNecessidadeEducacional());
-            stmt.setString(10, deficiencia.getExplicacaonecessidadeEducacional());
-            stmt.setInt(11, deficiencia.getCodigoUsuario());
+            // Verifica se o código do usuário existe na tabela pai
+            String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
+                checkStmt.setInt(1, deficiencia.getCodigoUsuario());
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    throw new SQLException("Usuário não encontrado.");
+                }
+            }
 
-            stmt.executeUpdate();
-            Desconectar();
+            // Atualiza os dados na tabela filha
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, deficiencia.getTipoDeficiencia());
+                stmt.setBoolean(2, deficiencia.isNecessidadeAcompanhante());
+                stmt.setBoolean(3, deficiencia.isNecessidadeEquipamento());
+                stmt.setString(4, deficiencia.getExplicacaoNecessidadeEquipamento());
+                stmt.setBoolean(5, deficiencia.isNecessidadeAdaptacao());
+                stmt.setString(6, deficiencia.getExplicacaoNecessidadeAdaptacao());
+                stmt.setBoolean(7, deficiencia.isNecessidadeAdaptacaoLocalAtendimento());
+                stmt.setString(8, deficiencia.getExplicacaoNecessidadeAdaptacaoLocalAtendimento());
+                stmt.setBoolean(9, deficiencia.getNecessidadeEducacional());
+                stmt.setString(10, deficiencia.getExplicacaonecessidadeEducacional());
+                stmt.setInt(11, deficiencia.getCodigoUsuario());
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    // Commit da transação
+                    conn.commit();
+                } else {
+                    throw new SQLException("Nenhuma linha afetada.");
+                }
+            } catch (SQLException e) {
+                conn.rollback(); // Rollback em caso de erro
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+                Desconectar();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

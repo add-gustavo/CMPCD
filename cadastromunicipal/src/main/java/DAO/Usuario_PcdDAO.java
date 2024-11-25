@@ -40,31 +40,52 @@ public class Usuario_PcdDAO {
         }
     }
 
-    // Método para buscar um usuário pelo nome de login
-    public Usuario_Pcd buscarUsuarioPorNomeLogin(String nomeLogin) throws SQLException {
-        String sql = "SELECT * FROM Usuarios_Pcd WHERE nome_login = ?";
+    public boolean atualizarEmail(int codigo, String novoEmail) throws SQLException {
+        String sql = "UPDATE Usuarios_Pcd SET email = ? WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nomeLogin);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                int codigo = rs.getInt("codigo");
-                String nomeCompleto = rs.getString("nomeCompleto");
-                String cpf = rs.getString("cpf");
-                Date dataNascimento = rs.getDate("dataNascimento");
-                String sexo = rs.getString("sexo");
-                String estadoCivil = rs.getString("estadoCivil");
-                String senha = rs.getString("senha");
-                String email = rs.getString("email");
+            // Define os parâmetros da consulta
+            stmt.setString(1, novoEmail); // Define o novo e-mail
+            stmt.setInt(2, codigo); // Define o nome de login para identificar o usuário
 
-                Desconectar();
-                return new Usuario_Pcd(codigo, nomeCompleto, cpf, dataNascimento, sexo, estadoCivil, nomeLogin, senha,
-                        email);
+            // Verifica se a atualização foi bem-sucedida
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Se pelo menos uma linha foi afetada, a atualização foi bem-sucedida
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            // Certifica-se de desconectar após a operação
+            Desconectar();
         }
-        return null; // Retorna null se o usuário não for encontrado
+        return false; // Retorna false se a atualização não foi bem-sucedida
+    }
+
+    public boolean atualizarSenha(int codigo, String novaSenha) throws SQLException {
+        String sql = "UPDATE Usuarios_Pcd SET senha = ? WHERE codigo = ?";
+        Conectar();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            // Define os parâmetros da consulta
+            stmt.setString(1, novaSenha); // Define a nova senha
+            stmt.setInt(2, codigo); // Define o código do usuário para identificar
+
+            // Verifica se a atualização foi bem-sucedida
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Se pelo menos uma linha foi afetada, a atualização foi bem-sucedida
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Certifica-se de desconectar após a operação
+            Desconectar();
+        }
+        return false; // Retorna false se a atualização não foi bem-sucedida
     }
 
     public Usuario_Pcd buscarUsuarioPorEmail(String email) throws SQLException {
@@ -117,11 +138,11 @@ public class Usuario_PcdDAO {
     }
 
     // Método para excluir um usuário
-    public Boolean excluirUsuarioPcd(String email) throws SQLException {
-        String sql = "DELETE FROM Usuarios_Pcd WHERE email = ?";
+    public Boolean excluirUsuarioPcd(int codigo) throws SQLException {
+        String sql = "DELETE FROM Usuarios_Pcd WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, email);
+            stmt.setInt(1, codigo);
             stmt.executeUpdate();
             Desconectar();
             return true;
@@ -151,6 +172,52 @@ public class Usuario_PcdDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean verificarNomeLogin(String nomeLogin) throws SQLException {
+        boolean existe = false;
+        Conectar();
+        try (CallableStatement stmt = conn.prepareCall("{? = call verificar_nome_login(?)}")) {
+
+            // Define o tipo de retorno da função
+            stmt.registerOutParameter(1, Types.BOOLEAN);
+            stmt.setString(2, nomeLogin);
+
+            // Executa a função
+            stmt.execute();
+
+            // Recupera o valor de retorno
+            existe = stmt.getBoolean(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Desconectar();
+        }
+
+        return existe;
+    }
+
+    public boolean verificarEmail(String email) throws SQLException {
+        boolean existe = false;
+        Conectar();
+        try (CallableStatement stmt = conn.prepareCall("{? = call verificar_email(?)}")) {
+
+            // Define o tipo de retorno da função
+            stmt.registerOutParameter(1, Types.BOOLEAN);
+            stmt.setString(2, email);
+
+            // Executa a função
+            stmt.execute();
+
+            // Recupera o valor de retorno
+            existe = stmt.getBoolean(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Desconectar();
+        }
+
+        return existe;
     }
 
 }

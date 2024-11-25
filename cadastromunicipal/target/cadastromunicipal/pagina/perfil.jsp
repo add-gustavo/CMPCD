@@ -463,8 +463,14 @@
                         </div>
                     </form>
                 </div>
-
-                <a href="/cadastromunicipal/page?pagina=authenticacao">Excluir conta</a>
+                <form action="/cadastromunicipal/authentificacao" method="GET">
+                    <button type="submit" name="acao" value="excluir-conta"
+                        class="btt-section-template align red-color">Excluir Conta</button>
+                    <button type="submit" name="acao" value="atualizar-senha"
+                        class="btt-section-template align green-color">Atualizar Senha</button>
+                    <button type="submit" name="acao" value="atualizar-email"
+                        class="btt-section-template align blue-color">Atualizar Email</button>
+                </form>
 
 
             </section>

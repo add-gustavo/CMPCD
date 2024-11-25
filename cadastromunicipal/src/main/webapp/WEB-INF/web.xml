@@ -45,12 +45,39 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>NomeLoginServlet</servlet-name>
+    <servlet-class>com.br.cmpcd.VerificarNomeLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NomeLoginServlet</servlet-name>
+    <url-pattern>/controlenomelogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EmailServlet</servlet-name>
+    <servlet-class>com.br.cmpcd.VerificarEmailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmailServlet</servlet-name>
+    <url-pattern>/controleemail</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>controlePage</servlet-name>
     <servlet-class>com.br.cmpcd.ControlePage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>controlePage</servlet-name>
     <url-pattern>/page</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Authenticacao</servlet-name>
+    <servlet-class>com.br.cmpcd.ControleAuthenticacao</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Authenticacao</servlet-name>
+    <url-pattern>/authentificacao</url-pattern>
   </servlet-mapping>
 
   <servlet>

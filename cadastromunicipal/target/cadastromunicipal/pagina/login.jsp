@@ -31,24 +31,23 @@
                     </div>
                 </div>
 
-                <div class="section-template align">
-                    <h2>Login</h2>
-                    <form class="align" action="/cadastromunicipal/controleuser?acao=fazer-login" method="POST">
-                        <div class="formulario">
-                            <div class="ordem-formulario align">
-                                <label for="email">email</label>
-                                <label for="senha">senha</label>
-                            </div>
-                            <div class="ordem-formulario align">
-                                <input type="text" name="email" id="email" required autofocus>
-                                <input type="password" name="senha" id="senha" required minlength="8">
-                            </div>
-                            <div></div>
-                            <button id="btt-esquecersenha">esqueceu a senha</button>
 
+                <form class="section-template align" action="/cadastromunicipal/controleuser?acao=fazer-login"
+                    method="POST">
+                    <h2>Login</h2>
+                    <div class="formulario align">
+                        <div class="ordem-formulario align">
+                            <label for="email">email</label>
+                            <label for="senha">senha</label>
                         </div>
-                        <button type="submit" class="btt-section-template align green-color">Entrar</button>
-                    </form>
+                        <div class="ordem-formulario align">
+                            <input type="text" name="email" id="email" required autofocus>
+                            <input type="password" name="senha" id="senha" required minlength="8">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btt-section-template align green-color">Entrar</button>
+                </form>
 
 
 

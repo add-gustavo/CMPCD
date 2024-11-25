@@ -352,7 +352,9 @@
 
 
                     <div class="align">
-                        <input class="submit-btt green-color" type="submit" value="Cadastrar">
+                        <button type="submit" class="submit-btt green-color" id="submitButton">Cadastrar</button>
+                        <span id="nomeLoginError" style="display: none; color: red;">Este nome de login já está em
+                            uso.</span>
                     </div>
 
                 </form>
@@ -375,6 +377,6 @@
             </footer>
 
         </body>
-        <script src="inicial.js"></script>
+        <script src="/cadastromunicipal/pagina/js/cadastro.js"></script>
 
         </html>

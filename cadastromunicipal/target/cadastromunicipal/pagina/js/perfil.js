@@ -79,3 +79,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+document.getElementById('nomelogin').addEventListener('blur', function () {
+    var nomeLogin = document.getElementById('nomelogin').value;
+
+    // Fazer a checagem assíncrona (AJAX)
+    fetch('/cadastromunicipal/controleuser/checar-nome-login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nomeLogin: nomeLogin })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                document.getElementById('nomeLoginError').style.display = 'inline';
+            } else {
+                document.getElementById('nomeLoginError').style.display = 'none';
+            }
+        })
+        .catch(error => console.error('Erro:', error));
+});

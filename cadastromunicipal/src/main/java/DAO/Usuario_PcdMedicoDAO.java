@@ -79,18 +79,45 @@ public class Usuario_PcdMedicoDAO {
     public void atualizarHistoricoMedico(Usuario_PcdMedico medico) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Medico SET historicoMedicoRelevante = ?, usoMedicacao = ?, explicacao_uso_medicacao = ?, atendimentoEspecialista = ?, explicacao_atendimento_especialista = ?, participacaoCentroApoio = ?, explicacao_participacao_centro_apoio = ? WHERE codigo_usuario = ?";
         Conectar();
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, medico.getHistoricoMedicoRelevante());
-            stmt.setBoolean(2, medico.isUsoMedicacao());
-            stmt.setString(3, medico.getExplicacaoUsoMedicacao());
-            stmt.setBoolean(4, medico.isAtendimentoEspecialista());
-            stmt.setString(5, medico.getExplicacaoAtendimentoEspecialista());
-            stmt.setBoolean(6, medico.isParticipacaoCentroApoio());
-            stmt.setString(7, medico.getExplicacaoParticipacaoCentroApoio());
-            stmt.setInt(8, medico.getCodigoUsuario());
+        try {
+            // Inicia uma transação
+            conn.setAutoCommit(false);
 
-            stmt.executeUpdate();
-            Desconectar();
+            // Verifica se o código do usuário existe na tabela pai
+            String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
+                checkStmt.setInt(1, medico.getCodigoUsuario());
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    throw new SQLException("Usuário não encontrado.");
+                }
+            }
+
+            // Atualiza os dados na tabela filha
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, medico.getHistoricoMedicoRelevante());
+                stmt.setBoolean(2, medico.isUsoMedicacao());
+                stmt.setString(3, medico.getExplicacaoUsoMedicacao());
+                stmt.setBoolean(4, medico.isAtendimentoEspecialista());
+                stmt.setString(5, medico.getExplicacaoAtendimentoEspecialista());
+                stmt.setBoolean(6, medico.isParticipacaoCentroApoio());
+                stmt.setString(7, medico.getExplicacaoParticipacaoCentroApoio());
+                stmt.setInt(8, medico.getCodigoUsuario());
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    // Commit da transação
+                    conn.commit();
+                } else {
+                    throw new SQLException("Nenhuma linha afetada.");
+                }
+            } catch (SQLException e) {
+                conn.rollback(); // Roolback em caso de erro
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+                Desconectar();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

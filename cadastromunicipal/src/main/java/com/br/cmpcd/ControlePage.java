@@ -34,10 +34,6 @@ public class ControlePage extends HttpServlet {
                     Inicial(request, response);
                     break;
 
-                case "authenticacao":
-                    pageAuthenticacao(request, response);
-                    break;
-
                 case "relatorio":
                     pageRelatorio(request, response);
                     break;
@@ -47,11 +43,6 @@ public class ControlePage extends HttpServlet {
         } catch (ServletException e) {
         }
     };
-
-    private void pageAuthenticacao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("/pagina/authenticacao.jsp").forward(request, response);
-    }
 
     private void Login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

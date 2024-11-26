@@ -35,9 +35,11 @@ public class Usuario_PcdSocialDAO {
             stmt.setString(5, usuarioPcdSocial.getProgramaAssistenciaSocial());
 
             stmt.executeUpdate();
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -58,9 +60,11 @@ public class Usuario_PcdSocialDAO {
                         rs.getString("rendaFamiliarPcapita"),
                         rs.getString("programaAssistenciaSocial"));
             }
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
         return usuarioPcdSocial;
     }

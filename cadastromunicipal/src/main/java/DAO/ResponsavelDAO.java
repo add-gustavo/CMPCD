@@ -36,9 +36,11 @@ public class ResponsavelDAO {
             stmt.setString(5, responsavel.getEndereco());
 
             stmt.executeUpdate();
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -60,9 +62,10 @@ public class ResponsavelDAO {
                         rs.getString("email"),
                         rs.getString("endereco"));
             }
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
         }
         return responsavel;
     }

@@ -40,9 +40,11 @@ public class Usuario_PcdMedicoDAO {
             stmt.setString(8, medico.getExplicacaoParticipacaoCentroApoio());
 
             stmt.executeUpdate();
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -66,9 +68,11 @@ public class Usuario_PcdMedicoDAO {
                         rs.getBoolean("participacaoCentroApoio"),
                         rs.getString("explicacao_participacao_centro_apoio"));
             }
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
         return medico;
     }

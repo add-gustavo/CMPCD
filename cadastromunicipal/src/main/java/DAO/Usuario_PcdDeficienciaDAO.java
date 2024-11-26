@@ -40,9 +40,11 @@ public class Usuario_PcdDeficienciaDAO {
             stmt.setString(11, deficiencia.getExplicacaonecessidadeEducacional());
 
             stmt.executeUpdate();
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -68,9 +70,11 @@ public class Usuario_PcdDeficienciaDAO {
                         rs.getBoolean("necessidadeEducacional"),
                         rs.getString("explicacao_necessidade_Educacional"));
             }
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
         return deficiencia;
     }

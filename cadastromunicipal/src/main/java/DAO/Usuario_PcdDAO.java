@@ -33,9 +33,11 @@ public class Usuario_PcdDAO {
             stmt.setString(7, usuarioPcd.getSenha());
             stmt.setString(8, usuarioPcd.getEmail());
             stmt.executeUpdate();
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -95,12 +97,14 @@ public class Usuario_PcdDAO {
                 String senha = rs.getString("senha");
                 String nomeLogin = rs.getString("nome_login");
 
-                Desconectar();
                 return new Usuario_Pcd(codigo, nomeCompleto, cpf, dataNascimento, sexo, estadoCivil, nomeLogin, senha,
                         email);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
         return null;
     }
@@ -133,11 +137,13 @@ public class Usuario_PcdDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, codigo);
             stmt.executeUpdate();
-            Desconectar();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -149,7 +155,6 @@ public class Usuario_PcdDAO {
             stmt.setString(2, usuario_Pcd.getSenha());
 
             ResultSet rs = stmt.executeQuery();
-            Desconectar();
             if (rs.next()) {
                 return true;
             } else {
@@ -160,6 +165,9 @@ public class Usuario_PcdDAO {
             System.out.println("Erro ao realizar autenticação: " + e.getMessage());
             e.printStackTrace();
             return false;
+        } finally {
+            Desconectar();
+
         }
     }
 

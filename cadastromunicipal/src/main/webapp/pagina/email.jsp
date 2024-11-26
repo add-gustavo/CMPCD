@@ -56,7 +56,9 @@
 
     </footer>
 
+    <script src="/cadastromunicipal/pagina/js/cadastro.js"></script>
+
+
 </body>
-<script src="inicial.js"></script>
 
 </html>

@@ -62,17 +62,13 @@ public class ControlePage extends HttpServlet {
     private void Inicial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Recupera a sessão, sem criar uma nova se não existir
         HttpSession session = request.getSession(false);
 
-        // Verifica se o usuário está logado (para outras páginas que exigem login)
         if (session != null && session.getAttribute("usuarioPcd") != null) {
-            // Se o usuário estiver logado, permite o acesso à página inicial
+
             request.getRequestDispatcher("inicial.jsp").forward(request, response);
         } else {
-            // Aqui, estamos permitindo que o usuário não logado acesse a página inicial
-            // A verificação do login pode ser necessária em outras páginas ou ao tentar
-            // acessar recursos específicos
+
             request.getRequestDispatcher("inicial.jsp").forward(request, response);
         }
     }

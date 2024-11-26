@@ -18,7 +18,7 @@ public class ControleAuthenticacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String acao = request.getParameter("acao"); // Preserva o parâmetro da ação
+        String acao = request.getParameter("acao");
         System.out.println("Ação recebida: " + acao);
         request.setAttribute("acao", acao);
         request.getRequestDispatcher("/pagina/authenticacao.jsp").forward(request, response);
@@ -33,7 +33,7 @@ public class ControleAuthenticacao extends HttpServlet {
             String acao = request.getParameter("acao");
             String senhahash = Criptografia.conversterParaMD5(request.getParameter("senha"));
             Usuario_Pcd usuario_Pcd = new Usuario_Pcd(email, senhahash);
-            // Aqui você verifica se o usuário é válido (autenticação)
+
             Usuario_PcdDAO usuarioPcdDAO = new Usuario_PcdDAO();
             Boolean acesso;
             try {
@@ -76,17 +76,15 @@ public class ControleAuthenticacao extends HttpServlet {
             throws IOException, SQLException, ServletException {
         Usuario_PcdDAO usuario_PcdDAO = new Usuario_PcdDAO();
 
-        // Lógica para excluir a conta (com base no código do usuário)
         boolean excluido = usuario_PcdDAO.excluirUsuarioPcd(usuario.getCodigo());
 
         if (excluido) {
-            // Excluir a sessão ativa (logout implícito)
+
             HttpSession session = request.getSession(false);
             if (session != null) {
-                session.invalidate(); // Invalida a sessão atual
+                session.invalidate();
             }
 
-            // Criar uma nova sessão e adicionar mensagem de sucesso
             HttpSession novaSessao = request.getSession(true);
             novaSessao.setAttribute("sucesso", "Conta excluída com sucesso!");
 

@@ -41,32 +41,35 @@ public class ControleUsuarioPcd {
         }
     }
 
-    public void cadastrarUsuarioPcd(Responsavel responsavel, Usuario_Pcd usuario_Pcd,
-            Usuario_PcdContato usuario_PcdContato, Usuario_PcdDeficiencia usuario_PcdDeficiencia,
-            Usuario_PcdMedico usuario_PcdMedico, Usuario_PcdSocial usuario_PcdSocial) throws SQLException {
+    public void cadastrarUsuarioPcd(UsuarioPcdInfo usuarioPcdInfo) throws SQLException {
 
         Conectar();
         try {
             conn.setAutoCommit(false); // Desabilita o commit automático
 
             // Insere o usuário PCD e captura o código gerado
-            usuario_PcdDAO.inserirUsuarioPcd(usuario_Pcd);
-            Usuario_Pcd usuario_PcdWcodigo = usuario_PcdDAO.buscarUsuarioPorEmail(usuario_Pcd.getEmail());
+            usuario_PcdDAO.inserirUsuarioPcd(usuarioPcdInfo.getUsuarioPcd());
+            Usuario_Pcd usuario_PcdWcodigo = usuario_PcdDAO
+                    .buscarUsuarioPorEmail(usuarioPcdInfo.getUsuarioPcd().getEmail());
 
             // Agora, insere os dados nas tabelas dependentes passando o código do usuário
+            Usuario_PcdContato usuario_PcdContato = usuarioPcdInfo.getContato();
             usuario_PcdContato.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());
             usuario_PcdContatoDAO.inserirContato(usuario_PcdContato);
 
+            Usuario_PcdDeficiencia usuario_PcdDeficiencia = usuarioPcdInfo.getDeficiencia();
             usuario_PcdDeficiencia.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());
             usuario_PcdDeficienciaDAO.inserirDeficiencia(usuario_PcdDeficiencia);
 
+            Usuario_PcdMedico usuario_PcdMedico = usuarioPcdInfo.getMedico();
             usuario_PcdMedico.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());
             usuario_PcdMedicoDAO.inserirHistoricoMedico(usuario_PcdMedico);
 
+            Usuario_PcdSocial usuario_PcdSocial = usuarioPcdInfo.getSocial();
             usuario_PcdSocial.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());
             usuario_PcdSocialDAO.inserirUsuarioPcdSocial(usuario_PcdSocial);
 
-            // Insere o responsável do usuário PCD
+            Responsavel responsavel = usuarioPcdInfo.getResponsavel();
             responsavel.setCodigoUsuario(usuario_PcdWcodigo.getCodigo()); // Associa o código do usuário ao responsável
             responsavelDAO.inserirResponsavel(responsavel);
 

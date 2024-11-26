@@ -62,6 +62,5 @@
             </footer>
 
         </body>
-        <script src="inicial.js"></script>
 
         </html>

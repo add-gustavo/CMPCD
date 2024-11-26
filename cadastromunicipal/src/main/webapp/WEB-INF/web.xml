@@ -14,13 +14,12 @@
 
   <filter>
     <filter-name>CharsetEncodingFilter</filter-name>
-    <filter-class>com.br.cmpcd.CharsetEncodingFilter</filter-class> <!-- Substitua com o pacote
-    correto -->
+    <filter-class>com.br.cmpcd.CharsetEncodingFilter</filter-class>
   </filter>
 
   <filter-mapping>
     <filter-name>CharsetEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>  <!-- Aplica a todos os URLs -->
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 
 

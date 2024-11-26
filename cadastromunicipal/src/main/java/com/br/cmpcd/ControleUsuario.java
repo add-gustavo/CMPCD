@@ -34,10 +34,6 @@ public class ControleUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao == null || acao.isEmpty()) {
-            response.sendRedirect("erro.html"); // ou redirecionar para uma página de erro ou login
-            return;
-        }
         try {
             switch (acao) {
 
@@ -58,10 +54,6 @@ public class ControleUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acao = request.getParameter("acao");
-        if (acao == null || acao.isEmpty()) {
-            response.sendRedirect("erro.html"); // ou redirecionar para uma página de erro ou login
-            return;
-        }
 
         try {
             switch (acao) {
@@ -111,62 +103,51 @@ public class ControleUsuario extends HttpServlet {
     private void Atualizar_email(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
-            // Criação de instância do DAO
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
 
-            // Pega o código e novo e-mail da requisição
-            int codigo = Integer.parseInt(request.getParameter("codigo")); // Verifique se está no formato correto
-            String novoEmail = request.getParameter("email"); // Verifique se o novo e-mail foi enviado
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
+            String novoEmail = request.getParameter("email");
 
-            // Chama o método do DAO para realizar a atualização
             Boolean atualizado = usuario_Pcd.atualizarEmail(codigo, novoEmail);
 
-            // Se a atualização for bem-sucedida, faz login
             if (atualizado) {
-                fazerLogin(request, response); // Método de login (precisa ser definido)
+                request.getRequestDispatcher("/pagina/login.jsp").forward(request, response);
             } else {
-                // Se falhar na atualização, redireciona para o perfil
                 request.setAttribute("errorMessage", "Não foi possível atualizar o e-mail.");
                 request.getRequestDispatcher("/pagina/perfil.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            // Tratamento de exceções
+
             e.printStackTrace();
             request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar o e-mail: " + e.getMessage());
-            request.getRequestDispatcher("/inicial.jsp").forward(request, response); // Redireciona para a página
-                                                                                     // inicial com erro
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
         }
     }
 
     private void Atualizar_senha(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
-            // Criação de instância do DAO
+
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
 
-            // Pega o código e novo e-mail da requisição
-            int codigo = Integer.parseInt(request.getParameter("codigo")); // Verifique se está no formato correto
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
             String novaSenha = Criptografia.conversterParaMD5(request.getParameter("senha"));
 
             System.out.println(codigo + novaSenha);
 
-            // Chama o método do DAO para realizar a atualização
             Boolean atualizado = usuario_Pcd.atualizarSenha(codigo, novaSenha);
 
-            // Se a atualização for bem-sucedida, faz login
             if (atualizado) {
-                fazerLogin(request, response); // Método de login (precisa ser definido)
+                request.getRequestDispatcher("/pagina/login.jsp").forward(request, response);
             } else {
-                // Se falhar na atualização, redireciona para o perfil
                 request.setAttribute("errorMessage", "Não foi possível atualizar a senha.");
-                request.getRequestDispatcher("/perfil.jsp").forward(request, response);
+                request.getRequestDispatcher("/pagina/perfil.jsp").forward(request, response);
             }
         } catch (Exception e) {
             // Tratamento de exceções
             e.printStackTrace();
             request.setAttribute("errorMessage", "Ocorreu um erro ao atualizar a senha: " + e.getMessage());
-            request.getRequestDispatcher("/inicial.jsp").forward(request, response); // Redireciona para a página
-                                                                                     // inicial com erro
+            request.getRequestDispatcher("/inicial.jsp").forward(request, response);
         }
     }
 
@@ -174,7 +155,7 @@ public class ControleUsuario extends HttpServlet {
             throws ServletException, IOException, SQLException {
 
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato da data esperado no HTML
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date dataNascimento = null;
             try {
                 java.util.Date utilDate = sdf.parse(request.getParameter("dataNascimento"));
@@ -255,7 +236,7 @@ public class ControleUsuario extends HttpServlet {
             Usuario_PcdDeficiencia usuario_PcdDeficiencia = new Usuario_PcdDeficiencia(
                     Integer.parseInt(request.getParameter("codigo")),
                     request.getParameter("tipoDeficiencia"),
-                    Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")), // Convertendo para boolean
+                    Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")),
                     Boolean.parseBoolean(request.getParameter("necessidadeEquipamento")),
                     request.getParameter("explicacaoNecessidadeEquipamento"),
                     Boolean.parseBoolean(request.getParameter("necessidadeTransporteAdaptado")),
@@ -306,7 +287,7 @@ public class ControleUsuario extends HttpServlet {
                     Integer.parseInt(request.getParameter("codigo")),
                     request.getParameter("ocupacao"),
                     request.getParameter("nivelEscolaridade"),
-                    Double.parseDouble(request.getParameter("rendaFamiliarPCapita")), // Converte para double
+                    Double.parseDouble(request.getParameter("rendaFamiliarPCapita")),
                     request.getParameter("programaAssistenciaSocial"));
 
             Usuario_PcdSocialDAO usuario_PcdSocialDAO = new Usuario_PcdSocialDAO();
@@ -332,7 +313,7 @@ public class ControleUsuario extends HttpServlet {
         Boolean acesso = usuario_PcdDAO.autentificacaoUsuario(usuario_Pcd);
 
         if (acesso) {
-            // Verificar se o usuário existe no banco
+
             Usuario_Pcd usuario = usuario_PcdDAO.buscarUsuarioPorEmail(usuario_Pcd.getEmail());
             if (usuario != null) {
                 System.out.println("Usuário: " + usuario.getNomeLogin());
@@ -340,7 +321,6 @@ public class ControleUsuario extends HttpServlet {
                 session.setAttribute("usuarioPcd", usuario);
                 response.sendRedirect(request.getContextPath() + "/inicial.jsp");
             } else {
-                // Se não encontrar o usuário, retorna erro
                 request.setAttribute("erro", "Erro ao buscar o usuário.");
                 request.getRequestDispatcher("/pagina/login.jsp").forward(request, response);
             }
@@ -355,15 +335,11 @@ public class ControleUsuario extends HttpServlet {
 
         ControleUsuarioPcd controleUsuarioPcd = new ControleUsuarioPcd();
 
-        // Obtém o nome de login do usuário (pode vir da URL, do formulário ou da
-        // sessão)
         HttpSession session = request.getSession();
-        Usuario_Pcd usuarioPcd = (Usuario_Pcd) session.getAttribute("usuarioPcd"); // Caso esteja armazenado na sessão
+        Usuario_Pcd usuarioPcd = (Usuario_Pcd) session.getAttribute("usuarioPcd");
 
-        // Chama o método para obter as informações do usuário
         UsuarioPcdInfo info = controleUsuarioPcd.InformacoesUsuarioPcd(usuarioPcd);
 
-        // Obtém os dados do perfil
         Usuario_Pcd usuarioPcdData = info.getUsuarioPcd();
         Usuario_PcdContato contato = info.getContato();
         Usuario_PcdDeficiencia deficiencia = info.getDeficiencia();
@@ -378,7 +354,7 @@ public class ControleUsuario extends HttpServlet {
                 + " " + responsavel.getCodigoUsuario());
         System.out.println(responsavel.getEmail() + responsavel.getNomeCompleto() + responsavel.getEndereco()
                 + responsavel.getTelefone());
-        // Verifica se os objetos não são nulos antes de adicionar à sessão
+
         if (usuarioPcdData != null) {
             session.setAttribute("usuarioPcd", usuarioPcdData);
         }
@@ -406,7 +382,7 @@ public class ControleUsuario extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato da data esperado no HTML
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date dataNascimento = null;
             try {
                 java.util.Date utilDate = sdf.parse(request.getParameter("dataNascimento"));
@@ -417,7 +393,7 @@ public class ControleUsuario extends HttpServlet {
 
             String senhaCripto = Criptografia.conversterParaMD5(request.getParameter("senha"));
 
-            Usuario_Pcd usuario_Pcd = new Usuario_Pcd(
+            UsuarioPcdInfo Usuarioinfo = new UsuarioPcdInfo(new Usuario_Pcd(
                     request.getParameter("nomecompleto"),
                     request.getParameter("cpf"),
                     dataNascimento,
@@ -425,49 +401,43 @@ public class ControleUsuario extends HttpServlet {
                     request.getParameter("estadoCivil"),
                     request.getParameter("nomelogin"),
                     senhaCripto,
-                    request.getParameter("email"));
-
-            Usuario_PcdContato usuario_PcdContato = new Usuario_PcdContato(
-                    request.getParameter("telefone"),
-                    request.getParameter("endereco"));
-
-            Usuario_PcdSocial usuario_PcdSocial = new Usuario_PcdSocial(
-                    request.getParameter("ocupacao"),
-                    request.getParameter("nivelEscolaridade"),
-                    Double.parseDouble(request.getParameter("rendaFamiliarPCapita")), // Converte para double
-                    request.getParameter("programaAssistenciaSocial"));
-
-            Usuario_PcdDeficiencia usuario_PcdDeficiencia = new Usuario_PcdDeficiencia(
-                    Integer.parseInt(request.getParameter("codigo")),
-                    request.getParameter("tipoDeficiencia"),
-                    Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")), // Convertendo para boolean
-                    Boolean.parseBoolean(request.getParameter("necessidadeEquipamento")),
-                    request.getParameter("explicacaoNecessidadeEquipamento"),
-                    Boolean.parseBoolean(request.getParameter("necessidadeTransporteAdaptado")),
-                    request.getParameter("explicacaoNecessidadeAdaptacao"),
-                    Boolean.parseBoolean(request.getParameter("necessidadeAdaptacaoLocalAtendimento")),
-                    request.getParameter("explicacaoNecessidadeAdaptacaoLocalAtendimento"),
-                    Boolean.parseBoolean(request.getParameter("necessidadeApoioEducacional")),
-                    request.getParameter("necessidadeEducacional"));
-
-            Usuario_PcdMedico usuario_PcdMedico = new Usuario_PcdMedico(
-                    request.getParameter("historicoMedico"),
-                    Boolean.parseBoolean(request.getParameter("usoMedicacao")),
-                    request.getParameter("explicacaoUsoMedicacao"),
-                    Boolean.parseBoolean(request.getParameter("fazAtendimentoEspecialista")),
-                    request.getParameter("explicacaoAtendimentoEspecialista"),
-                    Boolean.parseBoolean(request.getParameter("participaCentroApoio")),
-                    request.getParameter("explicacaoParticipacaoCentroApoio"));
-
-            Responsavel responsavel = new Responsavel(
-                    request.getParameter("nomecompletoResponsavel"),
-                    request.getParameter("telefoneResponsavel"),
-                    request.getParameter("emailResponsavel"),
-                    request.getParameter("enderecoResponsavel"));
+                    request.getParameter("email")),
+                    new Usuario_PcdContato(
+                            request.getParameter("telefone"),
+                            request.getParameter("endereco")),
+                    new Usuario_PcdDeficiencia(
+                            request.getParameter("tipoDeficiencia"),
+                            Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")), // Convertendo para
+                                                                                                   // boolean
+                            Boolean.parseBoolean(request.getParameter("necessidadeEquipamento")),
+                            request.getParameter("explicacaoNecessidadeEquipamento"),
+                            Boolean.parseBoolean(request.getParameter("necessidadeTransporteAdaptado")),
+                            request.getParameter("explicacaoNecessidadeAdaptacao"),
+                            Boolean.parseBoolean(request.getParameter("necessidadeAdaptacaoLocalAtendimento")),
+                            request.getParameter("explicacaoNecessidadeAdaptacaoLocalAtendimento"),
+                            Boolean.parseBoolean(request.getParameter("necessidadeApoioEducacional")),
+                            request.getParameter("necessidadeEducacional")),
+                    new Usuario_PcdMedico(
+                            request.getParameter("historicoMedico"),
+                            Boolean.parseBoolean(request.getParameter("usoMedicacao")),
+                            request.getParameter("explicacaoUsoMedicacao"),
+                            Boolean.parseBoolean(request.getParameter("fazAtendimentoEspecialista")),
+                            request.getParameter("explicacaoAtendimentoEspecialista"),
+                            Boolean.parseBoolean(request.getParameter("participaCentroApoio")),
+                            request.getParameter("explicacaoParticipacaoCentroApoio")),
+                    new Usuario_PcdSocial(
+                            request.getParameter("ocupacao"),
+                            request.getParameter("nivelEscolaridade"),
+                            Double.parseDouble(request.getParameter("rendaFamiliarPCapita")), // Converte para double
+                            request.getParameter("programaAssistenciaSocial")),
+                    new Responsavel(
+                            request.getParameter("nomecompletoResponsavel"),
+                            request.getParameter("telefoneResponsavel"),
+                            request.getParameter("emailResponsavel"),
+                            request.getParameter("enderecoResponsavel")));
 
             ControleUsuarioPcd controleUsuarioPcd = new ControleUsuarioPcd();
-            controleUsuarioPcd.cadastrarUsuarioPcd(responsavel, usuario_Pcd, usuario_PcdContato,
-                    usuario_PcdDeficiencia, usuario_PcdMedico, usuario_PcdSocial);
+            controleUsuarioPcd.cadastrarUsuarioPcd(Usuarioinfo);
 
             // Realiza o login do usuário após o cadastro
             fazerLogin(request, response);

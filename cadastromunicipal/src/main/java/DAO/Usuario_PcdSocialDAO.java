@@ -23,7 +23,6 @@ public class Usuario_PcdSocialDAO {
         }
     }
 
-    // Método para inserir os dados sociais do usuário no banco de dados
     public void inserirUsuarioPcdSocial(Usuario_PcdSocial usuarioPcdSocial) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd_Social (codigo_usuario, ocupacao, nivelEscolaridade, rendaFamiliarPcapita, programaAssistenciaSocial) VALUES (?, ?, ?, ?, ?)";
         Conectar();
@@ -32,7 +31,7 @@ public class Usuario_PcdSocialDAO {
             stmt.setInt(1, usuarioPcdSocial.getCodigoUsuario());
             stmt.setString(2, usuarioPcdSocial.getOcupacao());
             stmt.setString(3, usuarioPcdSocial.getNivelEscolaridade());
-            stmt.setDouble(4, usuarioPcdSocial.getRendaFamiliarPcapita());
+            stmt.setString(4, usuarioPcdSocial.getRendaFamiliarPcapita());
             stmt.setString(5, usuarioPcdSocial.getProgramaAssistenciaSocial());
 
             stmt.executeUpdate();
@@ -42,7 +41,6 @@ public class Usuario_PcdSocialDAO {
         }
     }
 
-    // Método para buscar os dados sociais do usuário pelo código de usuário
     public Usuario_PcdSocial buscarUsuarioPcdSocialPorCodigoUsuario(int codigoUsuario) throws SQLException {
         String sql = "SELECT * FROM Usuarios_Pcd_Social WHERE codigo_usuario = ?";
         Usuario_PcdSocial usuarioPcdSocial = null;
@@ -57,7 +55,7 @@ public class Usuario_PcdSocialDAO {
                         rs.getInt("codigo_usuario"),
                         rs.getString("ocupacao"),
                         rs.getString("nivelEscolaridade"),
-                        rs.getDouble("rendaFamiliarPcapita"),
+                        rs.getString("rendaFamiliarPcapita"),
                         rs.getString("programaAssistenciaSocial"));
             }
             Desconectar();
@@ -67,15 +65,12 @@ public class Usuario_PcdSocialDAO {
         return usuarioPcdSocial;
     }
 
-    // Método para atualizar os dados sociais de um usuário
     public void atualizarUsuarioPcdSocial(Usuario_PcdSocial usuarioPcdSocial) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Social SET ocupacao = ?, nivelEscolaridade = ?, rendaFamiliarPcapita = ?, programaAssistenciaSocial = ? WHERE codigo_usuario = ?";
         Conectar();
         try {
-            // Inicia uma transação
             conn.setAutoCommit(false);
 
-            // Verifica se o código do usuário existe na tabela pai
             String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
                 checkStmt.setInt(1, usuarioPcdSocial.getCodigoUsuario());
@@ -85,23 +80,21 @@ public class Usuario_PcdSocialDAO {
                 }
             }
 
-            // Atualiza os dados na tabela filha
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, usuarioPcdSocial.getOcupacao());
                 stmt.setString(2, usuarioPcdSocial.getNivelEscolaridade());
-                stmt.setDouble(3, usuarioPcdSocial.getRendaFamiliarPcapita());
+                stmt.setString(3, usuarioPcdSocial.getRendaFamiliarPcapita());
                 stmt.setString(4, usuarioPcdSocial.getProgramaAssistenciaSocial());
                 stmt.setInt(5, usuarioPcdSocial.getCodigoUsuario());
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
-                    // Commit da transação
                     conn.commit();
                 } else {
                     throw new SQLException("Nenhuma linha afetada.");
                 }
             } catch (SQLException e) {
-                conn.rollback(); // Rollback em caso de erro
+                conn.rollback();
                 throw e;
             } finally {
                 conn.setAutoCommit(true);

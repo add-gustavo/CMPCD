@@ -25,7 +25,6 @@ public class Usuario_PcdContatoDAO {
         }
     }
 
-    // Método para inserir um contato de usuário no banco de dados
     public void inserirContato(Usuario_PcdContato contato) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd_Contato (codigo_usuario, telefone, endereco) VALUES (?, ?, ?)";
         Conectar();
@@ -41,7 +40,6 @@ public class Usuario_PcdContatoDAO {
         }
     }
 
-    // Método para buscar um contato de usuário pelo código do usuário
     public Usuario_PcdContato buscarContatoPorCodigoUsuario(int codigoUsuario) throws SQLException {
         String sql = "SELECT * FROM Usuarios_Pcd_Contato WHERE codigo_usuario = ?";
         Usuario_PcdContato contato = null;
@@ -64,15 +62,12 @@ public class Usuario_PcdContatoDAO {
         return contato;
     }
 
-    // Método para atualizar os dados de contato de um usuário
     public void atualizarContato(Usuario_PcdContato contato) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Contato SET telefone = ?, endereco = ? WHERE codigo_usuario = ?";
         Conectar();
         try {
-            // Inicia uma transação
             conn.setAutoCommit(false);
 
-            // Verifica se o código do usuário existe na tabela pai
             String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
                 checkStmt.setInt(1, contato.getCodigoUsuario());
@@ -82,7 +77,6 @@ public class Usuario_PcdContatoDAO {
                 }
             }
 
-            // Atualiza os dados na tabela filha
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, contato.getTelefone());
                 stmt.setString(2, contato.getEndereco());
@@ -90,13 +84,12 @@ public class Usuario_PcdContatoDAO {
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
-                    // Commit da transação
                     conn.commit();
                 } else {
                     throw new SQLException("Nenhuma linha afetada.");
                 }
             } catch (SQLException e) {
-                conn.rollback(); // Rollback em caso de erro
+                conn.rollback();
                 throw e;
             } finally {
                 conn.setAutoCommit(true);
@@ -107,5 +100,4 @@ public class Usuario_PcdContatoDAO {
         }
     }
 
-    // Método para excluir um contato de usuário
 }

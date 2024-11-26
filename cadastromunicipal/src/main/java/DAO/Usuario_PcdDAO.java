@@ -20,7 +20,6 @@ public class Usuario_PcdDAO {
         }
     }
 
-    // Método para inserir um usuário
     public void inserirUsuarioPcd(Usuario_Pcd usuarioPcd) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd (nomeCompleto, cpf, dataNascimento, sexo, estadoCivil, nome_login, senha, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Conectar();
@@ -44,48 +43,40 @@ public class Usuario_PcdDAO {
         String sql = "UPDATE Usuarios_Pcd SET email = ? WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            // Define os parâmetros da consulta
-            stmt.setString(1, novoEmail); // Define o novo e-mail
-            stmt.setInt(2, codigo); // Define o nome de login para identificar o usuário
+            stmt.setString(1, novoEmail);
+            stmt.setInt(2, codigo);
 
-            // Verifica se a atualização foi bem-sucedida
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                // Se pelo menos uma linha foi afetada, a atualização foi bem-sucedida
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            // Certifica-se de desconectar após a operação
             Desconectar();
         }
-        return false; // Retorna false se a atualização não foi bem-sucedida
+        return false;
     }
 
     public boolean atualizarSenha(int codigo, String novaSenha) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd SET senha = ? WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            // Define os parâmetros da consulta
-            stmt.setString(1, novaSenha); // Define a nova senha
-            stmt.setInt(2, codigo); // Define o código do usuário para identificar
+            stmt.setString(1, novaSenha);
+            stmt.setInt(2, codigo);
 
-            // Verifica se a atualização foi bem-sucedida
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                // Se pelo menos uma linha foi afetada, a atualização foi bem-sucedida
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            // Certifica-se de desconectar após a operação
             Desconectar();
         }
-        return false; // Retorna false se a atualização não foi bem-sucedida
+        return false;
     }
 
     public Usuario_Pcd buscarUsuarioPorEmail(String email) throws SQLException {
@@ -111,10 +102,9 @@ public class Usuario_PcdDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // Retorna null se o usuário não for encontrado
+        return null;
     }
 
-    // Método para atualizar os dados de um usuário
     public void atualizarUsuarioPcd(Usuario_Pcd usuarioPcd) throws SQLException {
         System.out.println("Método atualizarUsuarioPcd chamado para o usuário: " + usuarioPcd.getCodigo());
 
@@ -137,7 +127,6 @@ public class Usuario_PcdDAO {
         }
     }
 
-    // Método para excluir um usuário
     public Boolean excluirUsuarioPcd(int codigo) throws SQLException {
         String sql = "DELETE FROM Usuarios_Pcd WHERE codigo = ?";
         Conectar();
@@ -179,14 +168,11 @@ public class Usuario_PcdDAO {
         Conectar();
         try (CallableStatement stmt = conn.prepareCall("{? = call verificar_nome_login(?)}")) {
 
-            // Define o tipo de retorno da função
             stmt.registerOutParameter(1, Types.BOOLEAN);
             stmt.setString(2, nomeLogin);
 
-            // Executa a função
             stmt.execute();
 
-            // Recupera o valor de retorno
             existe = stmt.getBoolean(1);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,14 +188,11 @@ public class Usuario_PcdDAO {
         Conectar();
         try (CallableStatement stmt = conn.prepareCall("{? = call verificar_email(?)}")) {
 
-            // Define o tipo de retorno da função
             stmt.registerOutParameter(1, Types.BOOLEAN);
             stmt.setString(2, email);
 
-            // Executa a função
             stmt.execute();
 
-            // Recupera o valor de retorno
             existe = stmt.getBoolean(1);
         } catch (SQLException e) {
             e.printStackTrace();

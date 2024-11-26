@@ -102,6 +102,11 @@ public class ControleUsuario extends HttpServlet {
 
     private void Atualizar_email(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+
+        if (request.getParameter("email") != request.getParameter("confirmaremail")) {
+            request.setAttribute("errorMessage", "email diferente de confirmar email.");
+            request.getRequestDispatcher("/pagina/email.jsp").forward(request, response);
+        }
         try {
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
 
@@ -126,6 +131,11 @@ public class ControleUsuario extends HttpServlet {
 
     private void Atualizar_senha(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+
+        if (request.getParameter("senha") != request.getParameter("confirmarsenha")) {
+            request.setAttribute("errorMessage", "senha diferente de confirmar senha.");
+            request.getRequestDispatcher("/pagina/senha.jsp").forward(request, response);
+        }
         try {
 
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
@@ -287,7 +297,7 @@ public class ControleUsuario extends HttpServlet {
                     Integer.parseInt(request.getParameter("codigo")),
                     request.getParameter("ocupacao"),
                     request.getParameter("nivelEscolaridade"),
-                    Double.parseDouble(request.getParameter("rendaFamiliarPCapita")),
+                    request.getParameter("rendaFamiliarPCapita"),
                     request.getParameter("programaAssistenciaSocial"));
 
             Usuario_PcdSocialDAO usuario_PcdSocialDAO = new Usuario_PcdSocialDAO();
@@ -428,7 +438,7 @@ public class ControleUsuario extends HttpServlet {
                     new Usuario_PcdSocial(
                             request.getParameter("ocupacao"),
                             request.getParameter("nivelEscolaridade"),
-                            Double.parseDouble(request.getParameter("rendaFamiliarPCapita")), // Converte para double
+                            request.getParameter("rendaFamiliarPCapita"), // Converte para double
                             request.getParameter("programaAssistenciaSocial")),
                     new Responsavel(
                             request.getParameter("nomecompletoResponsavel"),

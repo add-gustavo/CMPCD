@@ -22,7 +22,6 @@ public class Usuario_PcdDeficienciaDAO {
         }
     }
 
-    // Método para inserir a deficiência de um usuário no banco de dados
     public void inserirDeficiencia(Usuario_PcdDeficiencia deficiencia) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd_Deficiencia (codigo_usuario, tipoDeficiencia, necessidadeAcompanhante, necessidadeEquipamento, explicacao_necessidade_equipamento, necessidadeAdaptacao, explicacao_necessidade_adaptacao, necessidadeAdaptacaoLocalAtendimento, explicacao_necessidade_adaptacao_local_atendimento, necessidadeEducacional, explicacao_necessidade_Educacional) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Conectar();
@@ -47,7 +46,6 @@ public class Usuario_PcdDeficienciaDAO {
         }
     }
 
-    // Método para buscar a deficiência de um usuário pelo código do usuário
     public Usuario_PcdDeficiencia buscarDeficienciaPorCodigoUsuario(int codigoUsuario) throws SQLException {
         String sql = "SELECT * FROM Usuarios_Pcd_Deficiencia WHERE codigo_usuario = ?";
         Usuario_PcdDeficiencia deficiencia = null;
@@ -77,15 +75,12 @@ public class Usuario_PcdDeficienciaDAO {
         return deficiencia;
     }
 
-    // Método para atualizar os dados da deficiência de um usuário
     public void atualizarDeficiencia(Usuario_PcdDeficiencia deficiencia) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Deficiencia SET tipoDeficiencia = ?, necessidadeAcompanhante = ?, necessidadeEquipamento = ?, explicacao_necessidade_equipamento = ?, necessidadeAdaptacao = ?, explicacao_necessidade_adaptacao = ?, necessidadeAdaptacaoLocalAtendimento = ?, explicacao_necessidade_adaptacao_local_atendimento = ?, necessidadeEducacional = ?, explicacao_necessidade_Educacional = ? WHERE codigo_usuario = ?";
         Conectar();
         try {
-            // Inicia uma transação
             conn.setAutoCommit(false);
 
-            // Verifica se o código do usuário existe na tabela pai
             String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
                 checkStmt.setInt(1, deficiencia.getCodigoUsuario());
@@ -95,7 +90,6 @@ public class Usuario_PcdDeficienciaDAO {
                 }
             }
 
-            // Atualiza os dados na tabela filha
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, deficiencia.getTipoDeficiencia());
                 stmt.setBoolean(2, deficiencia.isNecessidadeAcompanhante());
@@ -111,13 +105,12 @@ public class Usuario_PcdDeficienciaDAO {
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
-                    // Commit da transação
                     conn.commit();
                 } else {
                     throw new SQLException("Nenhuma linha afetada.");
                 }
             } catch (SQLException e) {
-                conn.rollback(); // Rollback em caso de erro
+                conn.rollback();
                 throw e;
             } finally {
                 conn.setAutoCommit(true);

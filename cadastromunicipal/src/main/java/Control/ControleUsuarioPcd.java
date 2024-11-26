@@ -45,14 +45,12 @@ public class ControleUsuarioPcd {
 
         Conectar();
         try {
-            conn.setAutoCommit(false); // Desabilita o commit automático
+            conn.setAutoCommit(false);
 
-            // Insere o usuário PCD e captura o código gerado
             usuario_PcdDAO.inserirUsuarioPcd(usuarioPcdInfo.getUsuarioPcd());
             Usuario_Pcd usuario_PcdWcodigo = usuario_PcdDAO
                     .buscarUsuarioPorEmail(usuarioPcdInfo.getUsuarioPcd().getEmail());
 
-            // Agora, insere os dados nas tabelas dependentes passando o código do usuário
             Usuario_PcdContato usuario_PcdContato = usuarioPcdInfo.getContato();
             usuario_PcdContato.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());
             usuario_PcdContatoDAO.inserirContato(usuario_PcdContato);
@@ -70,14 +68,11 @@ public class ControleUsuarioPcd {
             usuario_PcdSocialDAO.inserirUsuarioPcdSocial(usuario_PcdSocial);
 
             Responsavel responsavel = usuarioPcdInfo.getResponsavel();
-            responsavel.setCodigoUsuario(usuario_PcdWcodigo.getCodigo()); // Associa o código do usuário ao responsável
+            responsavel.setCodigoUsuario(usuario_PcdWcodigo.getCodigo());
             responsavelDAO.inserirResponsavel(responsavel);
 
-            // Se tudo ocorreu bem, realiza o commit
             conn.commit();
-            Desconectar();
         } catch (SQLException e) {
-            // Se ocorrer qualquer erro, faz rollback das ações realizadas
             try {
                 if (conn != null) {
                     conn.rollback();
@@ -86,15 +81,14 @@ public class ControleUsuarioPcd {
             } catch (SQLException rollbackEx) {
                 System.out.println("Erro ao realizar rollback: " + rollbackEx.getMessage());
             }
-            // Exibe o erro que ocorreu durante a transação
             System.out.println("Erro durante a transação: " + e.getMessage());
         } finally {
             try {
-                // Restaura o commit automático
                 conn.setAutoCommit(true);
             } catch (SQLException e) {
                 System.out.println("Erro ao restaurar commit automático: " + e.getMessage());
             }
+            Desconectar();
         }
     }
 

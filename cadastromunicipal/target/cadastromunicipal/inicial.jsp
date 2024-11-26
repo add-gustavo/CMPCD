@@ -11,6 +11,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="inicialGlobal.css">
             <link rel="stylesheet" type="text/css" href="inicial.css">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         </head>
 
         <body>
@@ -40,13 +41,6 @@
                             </c:choose>
                         </div>
 
-                    </div>
-                    <div class="green-color segunda-header align">
-                        <div class="ordem-template-header align">
-                            <a href="/cadastromunicipal/page?pagina=relatorio" class="header-button">Relatorio</a>
-                            <a class="header-button">Sobre Nós</a>
-                            <a class="header-button">Ajuda</a>
-                        </div>
                     </div>
                 </div>
             </header>

@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class ControlePage extends HttpServlet {
     @Override
@@ -14,10 +13,6 @@ public class ControlePage extends HttpServlet {
             throws ServletException, IOException {
 
         String acao = request.getParameter("pagina");
-        if (acao == null || acao.isEmpty()) {
-            response.sendRedirect("erro.html"); // ou redirecionar para uma página de erro ou login
-            return;
-        }
 
         try {
             switch (acao) {
@@ -37,6 +32,9 @@ public class ControlePage extends HttpServlet {
                 case "relatorio":
                     pageRelatorio(request, response);
                     break;
+
+                case "deslogar":
+                    Deslogar(request, response);
                 default:
                     break;
             }
@@ -47,6 +45,12 @@ public class ControlePage extends HttpServlet {
     private void Login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/pagina/login.jsp").forward(request, response);
+    }
+
+    private void Deslogar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("inicial.jsp");
     }
 
     private void Cadastro(HttpServletRequest request, HttpServletResponse response)
@@ -61,16 +65,8 @@ public class ControlePage extends HttpServlet {
 
     private void Inicial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("inicial.jsp").forward(request, response);
 
-        HttpSession session = request.getSession(false);
-
-        if (session != null && session.getAttribute("usuarioPcd") != null) {
-
-            request.getRequestDispatcher("inicial.jsp").forward(request, response);
-        } else {
-
-            request.getRequestDispatcher("inicial.jsp").forward(request, response);
-        }
     }
 
 }

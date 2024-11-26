@@ -21,7 +21,6 @@ public class VerificarNomeLoginServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // Lê o corpo da requisição como JSON
         StringBuilder sb = new StringBuilder();
         String line;
         try (var reader = request.getReader()) {
@@ -33,10 +32,8 @@ public class VerificarNomeLoginServlet extends HttpServlet {
         String requestBody = sb.toString();
         System.out.println("Corpo da requisição: " + requestBody);
 
-        // Parseia o JSON recebido
         String nomeLogin = null;
         try {
-            // Usando a versão mais recente do Gson
             JsonObject jsonObject = JsonParser.parseString(requestBody).getAsJsonObject();
             nomeLogin = jsonObject.get("nomeLogin").getAsString();
         } catch (Exception e) {
@@ -47,7 +44,6 @@ public class VerificarNomeLoginServlet extends HttpServlet {
 
         System.out.println("Nome de Login: " + nomeLogin);
 
-        // Verifica o nome no banco de dados
         Usuario_PcdDAO dao = new Usuario_PcdDAO();
         boolean nomeExiste = false;
 
@@ -60,7 +56,6 @@ public class VerificarNomeLoginServlet extends HttpServlet {
             return;
         }
 
-        // Cria a resposta JSON
         String jsonResponse = "{\"exists\": " + nomeExiste + "}";
         response.getWriter().write(jsonResponse);
     }

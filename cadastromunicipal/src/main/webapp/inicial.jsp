@@ -46,12 +46,26 @@
             </header>
             <main>
 
+                <section>
+                    <div>
+
+                    </div>
+                </section>
+
                 <section class="section-template align">
                     <div>
                         <canvas id="tipo"></canvas>
                     </div>
                     <div>
                         <canvas id="sexo"></canvas>
+                    </div>
+                </section>
+                <section>
+                    <div>
+
+                    </div>
+                    <div>
+
                     </div>
                 </section>
 

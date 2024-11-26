@@ -55,30 +55,3 @@ document.getElementById('email').addEventListener('blur', function () {
         })
         .catch(error => console.error('Erro:', error));
 });
-
-function validarSenhas() {
-    var senha = document.getElementById('senha').value;
-    var confirmarSenha = document.getElementById('confirmarsenha').value;
-    var submitButton = document.getElementById('submitButton'); // Obtendo o botão de envio
-
-    if (senha !== confirmarSenha) {
-        alert("As senhas não coincidem. Tente novamente.");
-        submitButton.disabled = true; // Desabilitar o botão de envio
-        return false; // Impede o envio do formulário
-    } else {
-        submitButton.disabled = false; // Habilitar o botão de envio se as senhas coincidirem
-    }
-
-    // Se as senhas coincidirem, o formulário será enviado
-    return true;
-}
-
-// Captura o evento de clique no botão de envio
-document.getElementById('submitButton').addEventListener('click', function () {
-    // Antes de submeter o formulário, valida as senhas
-    if (validarSenhas()) {
-        // Se as senhas coincidirem, submete o formulário
-        document.querySelector('form').submit();
-    }
-});
-

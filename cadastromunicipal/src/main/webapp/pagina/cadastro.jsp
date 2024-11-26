@@ -43,40 +43,40 @@
                     <div class="section-template">
                         <!-- Nome Completo -->
                         <div class="ordem-formulario">
-                            <label id="nomecompleto" for="nomecompleto">Nome Completo:</label>
+                            <label for="nomecompleto">Nome Completo:</label>
                             <input type="text" name="nomecompleto" id="nomecompleto"
                                 placeholder="Digite seu nome completo" required>
                         </div>
                         <!-- Nome login -->
                         <div class="ordem-formulario">
-                            <label id="nomelogin" for="nomelogin">Nome Login:</label>
+                            <label for="nomelogin">Nome Login:</label>
                             <input type="text" name="nomelogin" id="nomelogin" placeholder="Digite seu nome de login..."
                                 required>
                         </div>
                         <!-- Senha -->
                         <div class="ordem-formulario">
-                            <label id="senha" for="senha">Senha:</label>
+                            <label for="senha">Senha:</label>
                             <input type="password" name="senha" id="senha" placeholder="Digite uma senha..." required
                                 minlength="8" required>
                         </div>
                         <div class="ordem-formulario">
-                            <label id="confirmarsenha" for="senha">Confirmar Senha:</label>
+                            <label for="senha">Confirmar Senha:</label>
                             <input type="password" name="confirmarsenha" id="confirmarsenha"
                                 placeholder="Confirmar senha..." required minlength="8" required>
                         </div>
                         <div class="ordem-formulario">
-                            <label id="email" for="email">Email:</label>
+                            <label for="email">Email:</label>
                             <input type="text" name="email" id="email" placeholder="Digite seu email" required>
                         </div>
                         <!-- Estado Civil e Gênero -->
                         <div>
                             <div class="ordem-formulario">
                                 <label for="estadoCivil">Estado Civil:</label>
-                                <label id="estadoCivil" id="sexo" for="sexo">Sexo:</label>
+                                <label for="sexo">Sexo:</label>
                             </div>
 
                             <div class="ordem-formulario">
-                                <select required id="estadoCivil" name="estadoCivil">
+                                <select required name="estadoCivil">
                                     <option value="" disabled selected>Selecione seu estado civil</option>
                                     <option value="solteiro">Solteiro(a)</option>
                                     <option value="casado">Casado(a)</option>
@@ -87,7 +87,7 @@
                                     <option value="outros">Outros</option>
                                 </select>
 
-                                <select required id="sexo" name="sexo">
+                                <select required name="sexo">
                                     <option value="" disabled selected>Selecione seu sexo</option>
                                     <option value="feminino">Feminino</option>
                                     <option value="masculino">Masculino</option>
@@ -99,8 +99,8 @@
                         <!-- Data de Nascimento e CPF -->
                         <div>
                             <div class="ordem-formulario">
-                                <label id="dataNascimento" for="dataNascimento">Data de Nascimento:</label>
-                                <label id="cpf" for="cpf">CPF:</label>
+                                <label for="dataNascimento">Data de Nascimento:</label>
+                                <label for="cpf">CPF:</label>
                             </div>
                             <div class="ordem-formulario">
                                 <input type="date" name="dataNascimento" id="dataNascimento" required min="1924-01-01"
@@ -117,12 +117,12 @@
                     </div>
                     <div class="section-template">
                         <div class="ordem-formulario">
-                            <label id="endereco" for="endereco">Endereço:</label>
+                            <label for="endereco">Endereço:</label>
                             <input type="text" name="endereco" id="endereco" placeholder="Digite seu endereço completo"
                                 required>
                         </div>
                         <div class="ordem-formulario">
-                            <label id="telefone" for="telefone">Telefone:</label>
+                            <label for="telefone">Telefone:</label>
                             <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone com DDD"
                                 required minlength="11" maxlength="15">
                         </div>
@@ -133,7 +133,7 @@
                     <div class="section-template">
 
                         <div class="ordem-formulario">
-                            <label id="ocupacao" for="ocupacao">Ocupação:</label>
+                            <label for="ocupacao">Ocupação:</label>
                             <select required id="ocupacao" name="ocupacao">
                                 <option value="" disabled selected>Selecione sua ocupação</option>
                                 <option value="estudante">Estudante</option>
@@ -153,7 +153,7 @@
 
                         </div>
                         <div class="ordem-formulario">
-                            <label id="nivelEscolaridade" for="nivelEscolaridade">Nível de escolaridade:</label>
+                            <label for="nivelEscolaridade">Nível de escolaridade:</label>
                             <select required id="nivelEscolaridade" name="nivelEscolaridade">
                                 <option value="" disabled selected>Selecione seu nível de escolaridade</option>
                                 <option value="fundamental_incompleto">Fundamental Incompleto</option>
@@ -169,7 +169,7 @@
                             </select>
                         </div>
                         <div class="ordem-formulario">
-                            <label id="rendaFamiliarPCapita" for="rendaFamiliarPCapita">Renda Familiar per
+                            <label for="rendaFamiliarPCapita">Renda Familiar per
                                 Capita:</label>
                             <select required id="rendaFamiliarPCapita" name="rendaFamiliarPCapita">
                                 <option value="" disabled selected>Selecione sua renda</option>
@@ -186,7 +186,7 @@
                         </div>
 
                         <div class="ordem-formulario">
-                            <label id="programaAssistenciaSocial" for="programaAssistenciaSocial">Programa de
+                            <label for="programaAssistenciaSocial">Programa de
                                 assistência social:</label>
                             <select required id="programaAssistenciaSocial" name="programaAssistenciaSocial">
                                 <option value="" disabled selected>Selecione programa de assistência social</option>
@@ -269,7 +269,7 @@
                     </div>
                     <div class="section-template">
                         <div class="ordem-formulario">
-                            <label id="tipoDeficiencia" for="tipoDeficiencia">Deficiência / Necessidade
+                            <label for="tipoDeficiencia">Deficiência / Necessidade
                                 Especial:</label>
                             <select required id="tipoDeficiencia" name="tipoDeficiencia">
                                 <option value="" disabled selected>Selecione sua deficiência</option>
@@ -376,21 +376,21 @@
                     <div class="section-template">
 
                         <div class="ordem-formulario">
-                            <label id="nomecompletoResponsavel" for="nomecompletoResponsavel">Nome Completo:</label>
+                            <label for="nomecompletoResponsavel">Nome Completo:</label>
                             <input type="text" name="nomecompletoResponsavel" id="nomecompletoResponsavel"
                                 placeholder="Digite nome Completo do Responsável para mais informaçõe">
                         </div>
-                        <div id="emailResponsavel" class="ordem-formulario">
+                        <div class="ordem-formulario">
                             <label for="emailResponsavel">Email:</label>
                             <input type="text" name="emailResponsavel" id="emailResponsavel"
                                 placeholder="Digite email do responsável">
                         </div>
-                        <div id="enderecoResponsavel" class="ordem-formulario">
+                        <div class="ordem-formulario">
                             <label for="enderecoResponsavel">Endereço:</label>
                             <input type="text" name="enderecoResponsavel" id="enderecoResponsavel"
                                 placeholder="Digite seu endereço completo do responsável">
                         </div>
-                        <div id="telefoneResponsavel" class="ordem-formulario">
+                        <div class="ordem-formulario">
                             <label for="telefoneResponsavel">Telefone:</label>
                             <input type="tel" name="telefoneResponsavel" id="telefoneResponsavel"
                                 placeholder="Digite o telefone com DDD do responsável">

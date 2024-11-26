@@ -391,6 +391,9 @@ public class ControleUsuario extends HttpServlet {
     private void novoUsuarioPCD(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        if (request.getParameter("senha") != request.getParameter("confirmarsenha")) {
+            request.getRequestDispatcher("/pagina/cadastro.jsp").forward(request, response);
+        }
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date dataNascimento = null;

@@ -34,9 +34,11 @@ public class Usuario_PcdContatoDAO {
             stmt.setString(2, contato.getTelefone());
             stmt.setString(3, contato.getEndereco());
             stmt.executeUpdate();
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
     }
 
@@ -55,9 +57,11 @@ public class Usuario_PcdContatoDAO {
                         rs.getString("telefone"),
                         rs.getString("endereco"));
             }
-            Desconectar();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
+
         }
         return contato;
     }

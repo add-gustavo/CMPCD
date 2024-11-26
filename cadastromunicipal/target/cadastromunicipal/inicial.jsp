@@ -9,8 +9,8 @@
             <title>CMPCD</title>
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" type="text/css" href="inicialGlobal.css">
             <link rel="stylesheet" type="text/css" href="inicial.css">
+            <link rel="stylesheet" type="text/css" href="inicialGlobal.css">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         </head>
 
@@ -46,12 +46,26 @@
             </header>
             <main>
 
+                <section>
+                    <div>
+
+                    </div>
+                </section>
+
                 <section class="section-template align">
                     <div>
                         <canvas id="tipo"></canvas>
                     </div>
                     <div>
                         <canvas id="sexo"></canvas>
+                    </div>
+                </section>
+                <section>
+                    <div>
+
+                    </div>
+                    <div>
+
                     </div>
                 </section>
 

@@ -25,7 +25,6 @@ public class Usuario_PcdContatoDAO {
         }
     }
 
-    // Método para inserir um contato de usuário no banco de dados
     public void inserirContato(Usuario_PcdContato contato) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd_Contato (codigo_usuario, telefone, endereco) VALUES (?, ?, ?)";
         Conectar();
@@ -41,7 +40,6 @@ public class Usuario_PcdContatoDAO {
         }
     }
 
-    // Método para buscar um contato de usuário pelo código do usuário
     public Usuario_PcdContato buscarContatoPorCodigoUsuario(int codigoUsuario) throws SQLException {
         String sql = "SELECT * FROM Usuarios_Pcd_Contato WHERE codigo_usuario = ?";
         Usuario_PcdContato contato = null;
@@ -64,21 +62,42 @@ public class Usuario_PcdContatoDAO {
         return contato;
     }
 
-    // Método para atualizar os dados de contato de um usuário
     public void atualizarContato(Usuario_PcdContato contato) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Contato SET telefone = ?, endereco = ? WHERE codigo_usuario = ?";
         Conectar();
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            conn.setAutoCommit(false);
 
-            stmt.setString(1, contato.getTelefone());
-            stmt.setString(2, contato.getEndereco());
-            stmt.setInt(3, contato.getCodigoUsuario());
-            stmt.executeUpdate();
-            Desconectar();
+            String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
+                checkStmt.setInt(1, contato.getCodigoUsuario());
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    throw new SQLException("Usuário não encontrado.");
+                }
+            }
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, contato.getTelefone());
+                stmt.setString(2, contato.getEndereco());
+                stmt.setInt(3, contato.getCodigoUsuario());
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    conn.commit();
+                } else {
+                    throw new SQLException("Nenhuma linha afetada.");
+                }
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+                Desconectar();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Método para excluir um contato de usuário
 }

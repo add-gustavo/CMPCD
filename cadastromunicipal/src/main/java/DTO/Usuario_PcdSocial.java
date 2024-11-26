@@ -4,10 +4,10 @@ public class Usuario_PcdSocial {
     public int codigoUsuario;
     public String ocupacao;
     public String nivelEscolaridade;
-    public double rendaFamiliarPcapita;
+    public String rendaFamiliarPcapita;
     public String programaAssistenciaSocial;
 
-    public Usuario_PcdSocial(int codigoUsuario, String ocupacao, String nivelEscolaridade, double rendaFamiliarPcapita,
+    public Usuario_PcdSocial(int codigoUsuario, String ocupacao, String nivelEscolaridade, String rendaFamiliarPcapita,
             String programaAssistenciaSocial) {
         this.codigoUsuario = codigoUsuario;
         this.ocupacao = ocupacao;
@@ -16,7 +16,7 @@ public class Usuario_PcdSocial {
         this.programaAssistenciaSocial = programaAssistenciaSocial;
     }
 
-    public Usuario_PcdSocial(String ocupacao, String nivelEscolaridade, double rendaFamiliarPcapita,
+    public Usuario_PcdSocial(String ocupacao, String nivelEscolaridade, String rendaFamiliarPcapita,
             String programaAssistenciaSocial) {
         this.ocupacao = ocupacao;
         this.nivelEscolaridade = nivelEscolaridade;
@@ -49,11 +49,11 @@ public class Usuario_PcdSocial {
         this.nivelEscolaridade = nivelEscolaridade;
     }
 
-    public double getRendaFamiliarPcapita() {
+    public String getRendaFamiliarPcapita() {
         return rendaFamiliarPcapita;
     }
 
-    public void setRendaFamiliarPcapita(double rendaFamiliarPcapita) {
+    public void setRendaFamiliarPcapita(String rendaFamiliarPcapita) {
         this.rendaFamiliarPcapita = rendaFamiliarPcapita;
     }
 

@@ -82,10 +82,10 @@ section {
 
 .section-template {
     display: grid;
-    grid-template-rows: 20% 40% 20%;
+    grid-template-rows: 20% 50% 30%;
     gap: 10px;
-    width: 30%;
-    height: 70%;
+    width: 40%;
+    height: 60%;
     background-color: rgb(199, 199, 18);
     padding: 20px;
     border-radius: 10px;
@@ -101,9 +101,9 @@ input {
 
 .formulario {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 70%;
     gap: 10px;
-    width: 80%;
+    width: 100%;
 }
 
 #btt-esquecersenha {

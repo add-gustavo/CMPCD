@@ -25,7 +25,6 @@ public class Usuario_PcdMedicoDAO {
         }
     }
 
-    // Método para inserir o histórico médico de um usuário no banco de dados
     public void inserirHistoricoMedico(Usuario_PcdMedico medico) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd_Medico (codigo_usuario, historicoMedicoRelevante, usoMedicacao, explicacao_uso_medicacao, atendimentoEspecialista, explicacao_atendimento_especialista, participacaoCentroApoio, explicacao_participacao_centro_apoio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Conectar();
@@ -47,7 +46,6 @@ public class Usuario_PcdMedicoDAO {
         }
     }
 
-    // Método para buscar o histórico médico de um usuário pelo código do usuário
     public Usuario_PcdMedico buscarHistoricoMedicoPorCodigoUsuario(int codigoUsuario) throws SQLException {
         String sql = "SELECT * FROM Usuarios_Pcd_Medico WHERE codigo_usuario = ?";
         Usuario_PcdMedico medico = null;
@@ -75,22 +73,45 @@ public class Usuario_PcdMedicoDAO {
         return medico;
     }
 
-    // Método para atualizar o histórico médico de um usuário
     public void atualizarHistoricoMedico(Usuario_PcdMedico medico) throws SQLException {
         String sql = "UPDATE Usuarios_Pcd_Medico SET historicoMedicoRelevante = ?, usoMedicacao = ?, explicacao_uso_medicacao = ?, atendimentoEspecialista = ?, explicacao_atendimento_especialista = ?, participacaoCentroApoio = ?, explicacao_participacao_centro_apoio = ? WHERE codigo_usuario = ?";
         Conectar();
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, medico.getHistoricoMedicoRelevante());
-            stmt.setBoolean(2, medico.isUsoMedicacao());
-            stmt.setString(3, medico.getExplicacaoUsoMedicacao());
-            stmt.setBoolean(4, medico.isAtendimentoEspecialista());
-            stmt.setString(5, medico.getExplicacaoAtendimentoEspecialista());
-            stmt.setBoolean(6, medico.isParticipacaoCentroApoio());
-            stmt.setString(7, medico.getExplicacaoParticipacaoCentroApoio());
-            stmt.setInt(8, medico.getCodigoUsuario());
+        try {
 
-            stmt.executeUpdate();
-            Desconectar();
+            conn.setAutoCommit(false);
+
+            String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
+                checkStmt.setInt(1, medico.getCodigoUsuario());
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    throw new SQLException("Usuário não encontrado.");
+                }
+            }
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, medico.getHistoricoMedicoRelevante());
+                stmt.setBoolean(2, medico.isUsoMedicacao());
+                stmt.setString(3, medico.getExplicacaoUsoMedicacao());
+                stmt.setBoolean(4, medico.isAtendimentoEspecialista());
+                stmt.setString(5, medico.getExplicacaoAtendimentoEspecialista());
+                stmt.setBoolean(6, medico.isParticipacaoCentroApoio());
+                stmt.setString(7, medico.getExplicacaoParticipacaoCentroApoio());
+                stmt.setInt(8, medico.getCodigoUsuario());
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    conn.commit();
+                } else {
+                    throw new SQLException("Nenhuma linha afetada.");
+                }
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+                Desconectar();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

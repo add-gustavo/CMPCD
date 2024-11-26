@@ -20,7 +20,6 @@ public class Usuario_PcdDAO {
         }
     }
 
-    // Método para inserir um usuário
     public void inserirUsuarioPcd(Usuario_Pcd usuarioPcd) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd (nomeCompleto, cpf, dataNascimento, sexo, estadoCivil, nome_login, senha, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Conectar();
@@ -40,31 +39,44 @@ public class Usuario_PcdDAO {
         }
     }
 
-    // Método para buscar um usuário pelo nome de login
-    public Usuario_Pcd buscarUsuarioPorNomeLogin(String nomeLogin) throws SQLException {
-        String sql = "SELECT * FROM Usuarios_Pcd WHERE nome_login = ?";
+    public boolean atualizarEmail(int codigo, String novoEmail) throws SQLException {
+        String sql = "UPDATE Usuarios_Pcd SET email = ? WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nomeLogin);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                int codigo = rs.getInt("codigo");
-                String nomeCompleto = rs.getString("nomeCompleto");
-                String cpf = rs.getString("cpf");
-                Date dataNascimento = rs.getDate("dataNascimento");
-                String sexo = rs.getString("sexo");
-                String estadoCivil = rs.getString("estadoCivil");
-                String senha = rs.getString("senha");
-                String email = rs.getString("email");
+            stmt.setString(1, novoEmail);
+            stmt.setInt(2, codigo);
 
-                Desconectar();
-                return new Usuario_Pcd(codigo, nomeCompleto, cpf, dataNascimento, sexo, estadoCivil, nomeLogin, senha,
-                        email);
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Desconectar();
         }
-        return null; // Retorna null se o usuário não for encontrado
+        return false;
+    }
+
+    public boolean atualizarSenha(int codigo, String novaSenha) throws SQLException {
+        String sql = "UPDATE Usuarios_Pcd SET senha = ? WHERE codigo = ?";
+        Conectar();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, novaSenha);
+            stmt.setInt(2, codigo);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Desconectar();
+        }
+        return false;
     }
 
     public Usuario_Pcd buscarUsuarioPorEmail(String email) throws SQLException {
@@ -90,10 +102,9 @@ public class Usuario_PcdDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // Retorna null se o usuário não for encontrado
+        return null;
     }
 
-    // Método para atualizar os dados de um usuário
     public void atualizarUsuarioPcd(Usuario_Pcd usuarioPcd) throws SQLException {
         System.out.println("Método atualizarUsuarioPcd chamado para o usuário: " + usuarioPcd.getCodigo());
 
@@ -116,12 +127,11 @@ public class Usuario_PcdDAO {
         }
     }
 
-    // Método para excluir um usuário
-    public Boolean excluirUsuarioPcd(String email) throws SQLException {
-        String sql = "DELETE FROM Usuarios_Pcd WHERE email = ?";
+    public Boolean excluirUsuarioPcd(int codigo) throws SQLException {
+        String sql = "DELETE FROM Usuarios_Pcd WHERE codigo = ?";
         Conectar();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, email);
+            stmt.setInt(1, codigo);
             stmt.executeUpdate();
             Desconectar();
             return true;
@@ -151,6 +161,46 @@ public class Usuario_PcdDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean verificarNomeLogin(String nomeLogin) throws SQLException {
+        boolean existe = false;
+        Conectar();
+        try (CallableStatement stmt = conn.prepareCall("{? = call verificar_nome_login(?)}")) {
+
+            stmt.registerOutParameter(1, Types.BOOLEAN);
+            stmt.setString(2, nomeLogin);
+
+            stmt.execute();
+
+            existe = stmt.getBoolean(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Desconectar();
+        }
+
+        return existe;
+    }
+
+    public boolean verificarEmail(String email) throws SQLException {
+        boolean existe = false;
+        Conectar();
+        try (CallableStatement stmt = conn.prepareCall("{? = call verificar_email(?)}")) {
+
+            stmt.registerOutParameter(1, Types.BOOLEAN);
+            stmt.setString(2, email);
+
+            stmt.execute();
+
+            existe = stmt.getBoolean(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Desconectar();
+        }
+
+        return existe;
     }
 
 }

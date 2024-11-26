@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
         <!DOCTYPE html>
         <html lang="pt-br">
 
@@ -14,7 +15,13 @@
             <header>
                 <div class="ordem-header">
                     <div class="primeiro-header">
-                        <a href="/cadastromunicipal/page?pagina=inicial" class="align">Lorem ipsum dolor</a>
+                        <a href="/cadastromunicipal/page?pagina=inicial" class="logo align">
+                            <div>
+                                <span class="blue-text">C</span><span class="green-text">M</span><span
+                                    class="yellow-text">P</span><span class="orange-text">C</span><span
+                                    class="red-text">D</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -31,24 +38,23 @@
                     </div>
                 </div>
 
-                <div class="section-template align">
-                    <h2>Login</h2>
-                    <form class="align" action="/cadastromunicipal/controleuser?acao=fazer-login" method="POST">
-                        <div class="formulario">
-                            <div class="ordem-formulario align">
-                                <label for="email">email</label>
-                                <label for="senha">senha</label>
-                            </div>
-                            <div class="ordem-formulario align">
-                                <input type="text" name="email" id="email" required autofocus>
-                                <input type="password" name="senha" id="senha" required minlength="8">
-                            </div>
-                            <div></div>
-                            <button id="btt-esquecersenha">esqueceu a senha</button>
 
+                <form class="section-template align" action="/cadastromunicipal/controleuser?acao=fazer-login"
+                    method="POST">
+                    <h2>Login</h2>
+                    <div class="formulario align">
+                        <div class="ordem-formulario align">
+                            <label for="email">email</label>
+                            <label for="senha">senha</label>
                         </div>
-                        <button type="submit" class="btt-section-template align green-color">Entrar</button>
-                    </form>
+                        <div class="ordem-formulario align">
+                            <input type="text" name="email" id="email" required autofocus>
+                            <input type="password" name="senha" id="senha" required minlength="8">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btt-section-template align green-color">Entrar</button>
+                </form>
 
 
 
@@ -71,6 +77,5 @@
             </footer>
 
         </body>
-        <script src="inicial.js"></script>
 
         </html>

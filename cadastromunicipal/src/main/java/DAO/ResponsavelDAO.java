@@ -24,7 +24,6 @@ public class ResponsavelDAO {
         }
     }
 
-    // Método para inserir um responsável no banco de dados
     public void inserirResponsavel(Responsavel responsavel) throws SQLException {
         String sql = "INSERT INTO Usuarios_Pcd_Responsavel (codigo_usuario, nomeCompleto, telefone, email, endereco) VALUES (?, ?, ?, ?, ?)";
         Conectar();
@@ -43,7 +42,6 @@ public class ResponsavelDAO {
         }
     }
 
-    // Método para buscar um responsável pelo código de usuário
     public Responsavel buscarResponsavelPorCodigoUsuario(int codigoUsuario) throws SQLException {
         String sql = "SELECT * FROM Usuarios_Pcd_Responsavel WHERE codigo_usuario = ?";
         Responsavel responsavel = null;
@@ -69,22 +67,41 @@ public class ResponsavelDAO {
         return responsavel;
     }
 
-    // Método para atualizar os dados de um responsável
     public void atualizarResponsavel(Responsavel responsavel) throws SQLException {
-        System.out.println(responsavel.getEmail() + responsavel.getNomeCompleto() + responsavel.getEndereco()
-                + responsavel.getCodigoUsuario());
         String sql = "UPDATE Usuarios_Pcd_Responsavel SET nomeCompleto = ?, telefone = ?, email = ?, endereco = ? WHERE codigo_usuario = ?";
         Conectar();
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            conn.setAutoCommit(false);
 
-            stmt.setString(1, responsavel.getNomeCompleto());
-            stmt.setString(2, responsavel.getTelefone());
-            stmt.setString(3, responsavel.getEmail());
-            stmt.setString(4, responsavel.getEndereco());
-            stmt.setInt(5, responsavel.getCodigoUsuario());
+            String checkUserExistSql = "SELECT COUNT(*) FROM Usuarios_Pcd WHERE codigo = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkUserExistSql)) {
+                checkStmt.setInt(1, responsavel.getCodigoUsuario());
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    throw new SQLException("Usuário não encontrado.");
+                }
+            }
 
-            stmt.executeUpdate();
-            Desconectar();
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, responsavel.getNomeCompleto());
+                stmt.setString(2, responsavel.getTelefone());
+                stmt.setString(3, responsavel.getEmail());
+                stmt.setString(4, responsavel.getEndereco());
+                stmt.setInt(5, responsavel.getCodigoUsuario());
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    conn.commit();
+                } else {
+                    throw new SQLException("Nenhuma linha afetada.");
+                }
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+                Desconectar();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

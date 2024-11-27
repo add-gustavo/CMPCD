@@ -67,7 +67,6 @@
 
             </footer>
 
-            <script src="inicial.js"></script>
             <div vw class="enabled">
                 <div vw-access-button class="active"></div>
                 <div vw-plugin-wrapper>

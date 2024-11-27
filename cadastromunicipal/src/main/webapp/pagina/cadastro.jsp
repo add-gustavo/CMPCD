@@ -424,7 +424,8 @@
 
             </footer>
 
-            <script src="inicial.js"></script>
+
+            <script src="/cadastromunicipal/pagina/js/cadastro.js"></script>
             <div vw class="enabled">
                 <div vw-access-button class="active"></div>
                 <div vw-plugin-wrapper>
@@ -437,6 +438,5 @@
             </script>
 
         </body>
-        <script src="/cadastromunicipal/pagina/js/cadastro.js"></script>
 
         </html>

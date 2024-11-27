@@ -106,6 +106,7 @@ public class ControleUsuario extends HttpServlet {
         if (request.getParameter("email") != request.getParameter("confirmaremail")) {
             request.setAttribute("errorMessage", "email diferente de confirmar email.");
             request.getRequestDispatcher("/pagina/email.jsp").forward(request, response);
+            return;
         }
         try {
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
@@ -135,6 +136,7 @@ public class ControleUsuario extends HttpServlet {
         if (request.getParameter("senha") != request.getParameter("confirmarsenha")) {
             request.setAttribute("errorMessage", "senha diferente de confirmar senha.");
             request.getRequestDispatcher("/pagina/senha.jsp").forward(request, response);
+            return;
         }
         try {
 
@@ -393,6 +395,7 @@ public class ControleUsuario extends HttpServlet {
 
         if (request.getParameter("senha") != request.getParameter("confirmarsenha")) {
             request.getRequestDispatcher("/pagina/cadastro.jsp").forward(request, response);
+            return;
         }
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

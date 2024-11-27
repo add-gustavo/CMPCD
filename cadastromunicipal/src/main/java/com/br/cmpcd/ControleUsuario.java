@@ -103,11 +103,6 @@ public class ControleUsuario extends HttpServlet {
     private void Atualizar_email(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-        if (request.getParameter("email") != request.getParameter("confirmaremail")) {
-            request.setAttribute("errorMessage", "email diferente de confirmar email.");
-            request.getRequestDispatcher("/pagina/email.jsp").forward(request, response);
-            return;
-        }
         try {
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
 
@@ -133,11 +128,6 @@ public class ControleUsuario extends HttpServlet {
     private void Atualizar_senha(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-        if (request.getParameter("senha") != request.getParameter("confirmarsenha")) {
-            request.setAttribute("errorMessage", "senha diferente de confirmar senha.");
-            request.getRequestDispatcher("/pagina/senha.jsp").forward(request, response);
-            return;
-        }
         try {
 
             Usuario_PcdDAO usuario_Pcd = new Usuario_PcdDAO();
@@ -393,10 +383,6 @@ public class ControleUsuario extends HttpServlet {
     private void novoUsuarioPCD(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getParameter("senha") != request.getParameter("confirmarsenha")) {
-            request.getRequestDispatcher("/pagina/cadastro.jsp").forward(request, response);
-            return;
-        }
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date dataNascimento = null;
@@ -423,7 +409,8 @@ public class ControleUsuario extends HttpServlet {
                             request.getParameter("endereco")),
                     new Usuario_PcdDeficiencia(
                             request.getParameter("tipoDeficiencia"),
-                            Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")), // Convertendo para
+                            Boolean.parseBoolean(request.getParameter("necessidadeAcompanhante")), // Convertendo
+                                                                                                   // para
                                                                                                    // boolean
                             Boolean.parseBoolean(request.getParameter("necessidadeEquipamento")),
                             request.getParameter("explicacaoNecessidadeEquipamento"),
